@@ -1,0 +1,69 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://炮台算法/玩家.gd" type="Script" id=1]
+[ext_resource path="res://炮台算法/炮台.gd" type="Script" id=2]
+[ext_resource path="res://炮台算法/c01.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 157.189, 108.784 )
+
+[node name="Node2D" type="Node2D"]
+
+[node name="炮台" type="Node2D" parent="."]
+position = Vector2( 558.811, 290.784 )
+script = ExtResource( 2 )
+
+[node name="paotai" type="ColorRect" parent="炮台"]
+margin_left = -59.0
+margin_top = 68.0
+margin_right = 10.0
+margin_bottom = 83.0
+color = Color( 0.584314, 0.596078, 0.168627, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="炮台"]
+margin_left = -28.0987
+margin_top = 90.0
+margin_right = 11.9013
+margin_bottom = 104.0
+text = "paotai"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="炮台"]
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 3 )
+
+[node name="检测范围" type="Area2D" parent="炮台"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="炮台/检测范围"]
+shape = SubResource( 1 )
+
+[node name="玩家" type="ColorRect" parent="."]
+margin_left = 269.135
+margin_top = 315.353
+margin_right = 309.135
+margin_bottom = 355.353
+color = Color( 0.435294, 0.858824, 0.45098, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="玩家"]
+margin_left = 0.0764618
+margin_top = 47.7389
+margin_right = 40.0765
+margin_bottom = 61.7389
+text = "player"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pos" from="玩家" to="炮台" method="_on__pos"]
