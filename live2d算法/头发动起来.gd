@@ -47,7 +47,7 @@ func _input(event):
 	if event is InputEventMouseButton:
 		if event.is_pressed() and event.button_index==BUTTON_LEFT:
 			if edit_mode=="add ske":
-				var bone=Bone2D.new()
+				var bone=load("res://live2d算法/组件/骨骼.tscn").instance()
 				add_child(bone)
 				bone.position=event.position
 				
@@ -58,7 +58,7 @@ func _input(event):
 			pass
 		if event.button_index==BUTTON_RIGHT:
 			mouse_start_pos=event.position
-			print("视图移动",event.position)
+			#print("视图移动",event.position)
 			pass
 		if event.button_index==BUTTON_WHEEL_UP:
 			$Camera2D.zoom.x-=0.1

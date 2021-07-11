@@ -1,20 +1,12 @@
 extends Panel
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass 
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
-
 
 func _on_ske_pressed():
 	$ske_tree.show()
@@ -23,4 +15,32 @@ func _on_ske_pressed():
 
 func _on_animation_pressed():
 	$ske_tree.hide()
+	pass # Replace with function body.
+	
+#右键菜单
+# warning-ignore:unused_argument
+func _on_ske_tree_item_rmb_selected(position):
+	print("右键")
+	print(position)
+	$PopupMenu.popup()
+	pass # Replace with function body.
+
+
+func _on_ske_tree_cell_selected():
+	print("cell select")
+	pass # Replace with function body.
+
+
+func _on_ske_tree_item_rmb_edited():
+	pass # Replace with function body.
+
+
+func _on_PopupMenu_id_pressed(id):
+	if id==0:
+		print_debug("删除")
+	if id==1:
+		print_debug("删除所有(除root以外骨骼)")
+		var col=$ske_tree.get_edited_column()
+		print(col)
+		col.get_next()
 	pass # Replace with function body.

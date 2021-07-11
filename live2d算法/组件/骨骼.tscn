@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="Gradient" id=1]
+colors = PoolColorArray( 0.0745098, 0.341176, 0.909804, 1, 1, 1, 1, 1 )
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PoolVector2Array( 2.25742, 1.55469, 332.634, 0.805542 )
+default_color = Color( 1, 1, 1, 1 )
+gradient = SubResource( 1 )
+joint_mode = 1
+end_cap_mode = 2

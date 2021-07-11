@@ -149,10 +149,10 @@ __meta__ = {
 layer = -1
 
 [node name="Panel" type="Panel" parent="CanvasLayer"]
-margin_left = 745.034
-margin_top = 72.3171
-margin_right = 970.034
-margin_bottom = 430.317
+margin_left = 751.334
+margin_top = 64.7576
+margin_right = 976.334
+margin_bottom = 422.757
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -223,10 +223,26 @@ __meta__ = {
 margin_right = 39.0
 
 [node name="ske_tree" type="Tree" parent="CanvasLayer/Panel"]
-margin_left = 13.9899
-margin_top = 46.5051
-margin_right = 204.99
-margin_bottom = 322.505
+margin_left = 1.29895
+margin_top = 44.6174
+margin_right = 192.299
+margin_bottom = 320.617
+allow_rmb_select = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PopupMenu" type="PopupMenu" parent="CanvasLayer/Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -66.0
+margin_top = -35.0
+margin_right = 66.0
+margin_bottom = 35.0
+custom_fonts/font = ExtResource( 2 )
+items = [ "删除选中项", null, 0, false, false, 0, 0, null, "", false, "删除所有", null, 0, false, false, 1, 0, null, "", false ]
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -393,9 +409,9 @@ __meta__ = {
 
 [node name="anim_frame_panel" type="Panel" parent="CanvasLayer"]
 margin_left = 7.43539
-margin_top = 87.4319
+margin_top = 88.7668
 margin_right = 198.435
-margin_bottom = 421.432
+margin_bottom = 422.767
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -484,6 +500,8 @@ position = Vector2( 453.088, 190.273 )
 [connection signal="pressed" from="CanvasLayer/Panel/HBoxContainer/ske" to="CanvasLayer/Panel" method="_on_ske_pressed"]
 [connection signal="pressed" from="CanvasLayer/Panel/HBoxContainer/animation" to="CanvasLayer/Panel" method="_on_animation_pressed"]
 [connection signal="pressed" from="CanvasLayer/Panel/add" to="." method="_on_add_pressed"]
+[connection signal="item_rmb_selected" from="CanvasLayer/Panel/ske_tree" to="CanvasLayer/Panel" method="_on_ske_tree_item_rmb_selected"]
+[connection signal="id_pressed" from="CanvasLayer/Panel/PopupMenu" to="CanvasLayer/Panel" method="_on_PopupMenu_id_pressed"]
 [connection signal="pressed" from="CanvasLayer/tools/add_point" to="." method="_on_add_point_pressed"]
 [connection signal="pressed" from="CanvasLayer/tools/reset zoom" to="." method="_on_reset_zoom_pressed"]
 [connection signal="pressed" from="CanvasLayer/tools/add_ske" to="." method="_on_add_ske_pressed"]
