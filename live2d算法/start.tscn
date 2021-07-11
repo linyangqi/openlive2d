@@ -1,0 +1,86 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://live2d算法/openlive2d.jpg" type="Texture" id=1]
+[ext_resource path="res://live2d算法/start.gd" type="Script" id=2]
+[ext_resource path="res://live2d算法/Alibaba-PuHuiTi-Light.otf" type="DynamicFontData" id=3]
+[ext_resource path="res://live2d算法/icon.png" type="Texture" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 40
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 40
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 35
+font_data = ExtResource( 3 )
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 1026.0
+margin_bottom = 600.0
+color = Color( 0.901961, 0.65098, 0.462745, 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = 20.1422
+margin_top = 4.73987
+margin_right = 482.142
+margin_bottom = 398.74
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label" type="Label" parent="."]
+margin_left = 37.4261
+margin_top = 428.003
+margin_right = 441.426
+margin_bottom = 483.003
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "openlive2d editor beta"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="loading" type="RichTextLabel" parent="."]
+margin_left = 544.0
+margin_top = 153.0
+margin_right = 834.0
+margin_bottom = 218.0
+custom_fonts/normal_font = SubResource( 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "[wave]loading...[/wave]"
+text = "loading..."
+
+[node name="label2" type="Label" parent="."]
+margin_left = 9.3371
+margin_top = 530.59
+margin_right = 413.337
+margin_bottom = 585.59
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "powered by Godot "
+
+[node name="label3" type="Label" parent="."]
+margin_left = 630.78
+margin_top = 528.278
+margin_right = 993.78
+margin_bottom = 577.278
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "copyright:小沙盒工作室"
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 386, 556 )
+texture = ExtResource( 4 )

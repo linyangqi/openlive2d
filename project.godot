@@ -8,11 +8,21 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Reference",
+"class": "file_dialog",
+"language": "GDScript",
+"path": "res://live2d算法/class/FileDialog.gd"
+} ]
+_global_script_class_icons={
+"file_dialog": ""
+}
+
 [application]
 
-config/name="算法测试"
-run/main_scene="res://live2d算法/头发动起来.tscn"
-config/icon="res://icon.png"
+config/name="OpenLive2d editor"
+run/main_scene="res://live2d算法/start.tscn"
+config/icon="res://live2d算法/icon.png"
 
 [input]
 

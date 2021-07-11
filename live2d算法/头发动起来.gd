@@ -4,6 +4,14 @@ var points=[]
 var index=0
 var mouse_start_pos
 var mouse_move_speed=2
+var edit_mode=""
+#骨架数据
+var ske_data=[]
+var current_bone_index=0
+var tree
+var root
+#文件状态类
+var file_class
 func initMenuBar():
 	$CanvasLayer/MenuBar/language.add_item("Chinese")
 	$CanvasLayer/MenuBar/language.add_item("English")
@@ -11,7 +19,16 @@ func initMenuBar():
 	$CanvasLayer/MenuBar/language.text="language"
 	#
 func _ready():
+	tree = $CanvasLayer/Panel/ske_tree
+	root = tree.create_item()
+	root.set_text(0,"skeleton")
 	initMenuBar()
+	init_file_class()
+func init_file_class():
+	var file_Resource=load("res://live2d算法/class/FileDialog.gd")
+	file_class=file_Resource.new()
+	print(file_class)
+func init_ske_tree():
 	pass
 # warning-ignore:unused_argument
 func _process(delta):
@@ -29,7 +46,15 @@ func _process(delta):
 func _input(event):
 	if event is InputEventMouseButton:
 		if event.is_pressed() and event.button_index==BUTTON_LEFT:
-			#print_debug(event.position)
+			if edit_mode=="add ske":
+				var bone=Bone2D.new()
+				add_child(bone)
+				bone.position=event.position
+				
+				var child1 = tree.create_item(root)
+				child1.set_text(0,"bone"+str(current_bone_index))
+				print(event.position)
+				current_bone_index+=1
 			pass
 		if event.button_index==BUTTON_RIGHT:
 			mouse_start_pos=event.position
@@ -79,10 +104,10 @@ func _on_File_about_to_show():
 
 
 func _on_openfile_pressed():
-	$FileDialog.popup()
+	$CanvasLayer2/FileDialog.popup()
 	pass # Replace with function body.
 func _on_savefile_pressed():
-	$FileDialog.popup()
+	$CanvasLayer2/FileDialog.popup()
 	$FileDialog.mode=FileDialog.MODE_SAVE_FILE
 	pass # Replace with function body.
 
@@ -141,15 +166,52 @@ func _on_add_frame_pressed():
 	$CanvasLayer2/anim_name.hide()
 	pass # Replace with function body.
 func _on_about_pressed():
-	$about.popup()
+	$CanvasLayer2/about.popup()
 	pass # Replace with function body.
 
 
 func _on_openlive2d_pressed():
+# warning-ignore:return_value_discarded
 	OS.shell_open("https://gitee.com/open-live2d/OpenLive2d")
 	pass # Replace with function body.
 
 
 func _on_editor_pressed():
+# warning-ignore:return_value_discarded
 	OS.shell_open("https://gitee.com/small-sandbox/Godot_useful_codes")
+	pass # Replace with function body.
+
+
+func _on_add_ske_pressed():
+	edit_mode="add ske"
+	update_mode_tip("添加骨架")
+	$CanvasLayer/MenuBar/control_tip.text="操作提示："+"按下鼠标来添加骨骼"
+	pass # Replace with function body.
+#播放动画按钮
+func _on_play_pressed():
+	update_mode_tip("播放动画")
+	edit_mode="play anim"
+	pass # Replace with function body.
+#更新toolbar模式提示
+func update_mode_tip(text):
+	$CanvasLayer/MenuBar/edit_mode.text="当前模式:"+text
+
+#导入图片资源
+func _on_import_img_pressed():
+	update_file_state("导入图片")
+	$CanvasLayer2/FileDialog.mode=FileDialog.MODE_OPEN_ANY
+	$CanvasLayer2/FileDialog.popup()
+#更新文件状态
+func update_file_state(action):
+	file_class.FileAction=action
+func _on_FileDialog_file_selected(path):
+	if file_class.FileAction=="导入图片":
+		print("导图")
+		print_debug(path)
+		var texture_res=load(path)
+		print(texture_res)
+		var sprite=Sprite.new()
+		sprite.texture=texture_res
+		sprite.position=$Position2D.position
+		add_child(sprite)
 	pass # Replace with function body.
