@@ -1,14 +1,14 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://live2d算法/live2dEditor.gd" type="Script" id=1]
-[ext_resource path="res://live2d算法/font.tres" type="DynamicFont" id=2]
-[ext_resource path="res://live2d算法/Panel.gd" type="Script" id=3]
-[ext_resource path="res://live2d算法/panel_right.tres" type="ButtonGroup" id=4]
-[ext_resource path="res://live2d算法/中文字体主题.tres" type="Theme" id=5]
-[ext_resource path="res://live2d算法/tres/button_theme.tres" type="Theme" id=6]
+[ext_resource path="res://live2d算法/panel_right.tres" type="ButtonGroup" id=1]
+[ext_resource path="res://live2d算法/scene/live2dEditor.gd" type="Script" id=2]
+[ext_resource path="res://live2d算法/中文字体主题.tres" type="Theme" id=3]
+[ext_resource path="res://live2d算法/tres/button_theme.tres" type="Theme" id=4]
+[ext_resource path="res://live2d算法/Panel.gd" type="Script" id=5]
+[ext_resource path="res://live2d算法/font.tres" type="DynamicFont" id=6]
 
 [node name="Node2D" type="Node2D"]
-script = ExtResource( 1 )
+script = ExtResource( 2 )
 
 [node name="Line2D" type="Line2D" parent="."]
 visible = false
@@ -79,7 +79,7 @@ margin_left = 4.0
 margin_top = 4.0
 margin_right = 421.0
 margin_bottom = 27.0
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 6 )
 text = "OpenLive2d开源地址：（早期开发 c/opengl 主算法研究）"
 
 [node name="openlive2d" type="LinkButton" parent="CanvasLayer2/about/Panel"]
@@ -97,7 +97,7 @@ margin_left = 6.99661
 margin_top = 51.9458
 margin_right = 270.997
 margin_bottom = 74.9458
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 6 )
 text = "此项目地址（编辑器）："
 __meta__ = {
 "_edit_use_anchors_": false
@@ -116,7 +116,7 @@ margin_left = 9.51648
 margin_top = 104.863
 margin_right = 273.516
 margin_bottom = 127.863
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 6 )
 text = "点击外部关闭窗口"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -127,7 +127,7 @@ margin_left = 9.51648
 margin_top = 132.863
 margin_right = 273.516
 margin_bottom = 155.863
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 6 )
 text = "作者qq:2439905184 欢迎加入开发"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -138,7 +138,7 @@ margin_left = 154.708
 margin_top = 51.6721
 margin_right = 735.708
 margin_bottom = 486.672
-theme = ExtResource( 5 )
+theme = ExtResource( 3 )
 window_title = "打开文件"
 mode = 0
 access = 2
@@ -153,7 +153,7 @@ margin_left = 287.0
 margin_top = 215.0
 margin_right = 526.0
 margin_bottom = 291.0
-theme = ExtResource( 5 )
+theme = ExtResource( 3 )
 window_title = "请确认..."
 dialog_text = "确认删除吗"
 __meta__ = {
@@ -165,7 +165,7 @@ margin_left = 731.0
 margin_top = 450.0
 margin_right = 811.0
 margin_bottom = 475.0
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 6 )
 text = "选中的骨骼：null"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -179,7 +179,7 @@ margin_left = 751.0
 margin_top = 65.0
 margin_right = 1023.0
 margin_bottom = 423.0
-script = ExtResource( 3 )
+script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -203,40 +203,40 @@ __meta__ = {
 [node name="layer" type="Button" parent="CanvasLayer/Panel/tool_bar"]
 margin_right = 44.0
 margin_bottom = 40.0
-theme = ExtResource( 6 )
-custom_fonts/font = ExtResource( 2 )
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
 toggle_mode = true
-group = ExtResource( 4 )
+group = ExtResource( 1 )
 text = "图层"
 
 [node name="resource" type="Button" parent="CanvasLayer/Panel/tool_bar"]
 margin_left = 48.0
 margin_right = 92.0
 margin_bottom = 40.0
-theme = ExtResource( 6 )
-custom_fonts/font = ExtResource( 2 )
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
 toggle_mode = true
-group = ExtResource( 4 )
+group = ExtResource( 1 )
 text = "资源"
 
 [node name="ske" type="Button" parent="CanvasLayer/Panel/tool_bar"]
 margin_left = 96.0
 margin_right = 140.0
 margin_bottom = 40.0
-theme = ExtResource( 6 )
-custom_fonts/font = ExtResource( 2 )
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
 toggle_mode = true
-group = ExtResource( 4 )
+group = ExtResource( 1 )
 text = "骨架"
 
 [node name="animation" type="Button" parent="CanvasLayer/Panel/tool_bar"]
 margin_left = 144.0
 margin_right = 188.0
 margin_bottom = 40.0
-theme = ExtResource( 6 )
-custom_fonts/font = ExtResource( 2 )
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
 toggle_mode = true
-group = ExtResource( 4 )
+group = ExtResource( 1 )
 text = "动画"
 
 [node name="add" type="Button" parent="CanvasLayer/Panel"]
@@ -244,7 +244,7 @@ margin_left = 199.285
 margin_top = 4.33806
 margin_right = 227.285
 margin_bottom = 35.3381
-theme = ExtResource( 6 )
+theme = ExtResource( 4 )
 text = "+"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -255,8 +255,8 @@ margin_left = 227.5
 margin_top = -2.0
 margin_right = 270.5
 margin_bottom = 41.0
-theme = ExtResource( 6 )
-custom_fonts/font = ExtResource( 2 )
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
 text = "删除"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -294,7 +294,7 @@ margin_left = -66.0
 margin_top = -35.0
 margin_right = 66.0
 margin_bottom = 35.0
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 6 )
 items = [ "删除选中项", null, 0, false, false, 0, 0, null, "", false, "删除所有", null, 0, false, false, 1, 0, null, "", false ]
 __meta__ = {
 "_edit_use_anchors_": false
@@ -337,8 +337,8 @@ __meta__ = {
 [node name="add_point" type="Button" parent="CanvasLayer/tools"]
 margin_right = 141.0
 margin_bottom = 29.0
-theme = ExtResource( 6 )
-custom_fonts/font = ExtResource( 2 )
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
 text = "添加顶点"
 __meta__ = {
 "_edit_use_anchors_": true
@@ -348,8 +348,8 @@ __meta__ = {
 margin_top = 33.0
 margin_right = 141.0
 margin_bottom = 62.0
-theme = ExtResource( 6 )
-custom_fonts/font = ExtResource( 2 )
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
 text = "重置视图缩放"
 __meta__ = {
 "_edit_use_anchors_": true
@@ -359,8 +359,8 @@ __meta__ = {
 margin_top = 66.0
 margin_right = 141.0
 margin_bottom = 95.0
-theme = ExtResource( 6 )
-custom_fonts/font = ExtResource( 2 )
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
 text = "添加关键帧"
 __meta__ = {
 "_edit_use_anchors_": false,
@@ -371,8 +371,8 @@ __meta__ = {
 margin_top = 99.0
 margin_right = 141.0
 margin_bottom = 128.0
-theme = ExtResource( 6 )
-custom_fonts/font = ExtResource( 2 )
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
 text = "添加骨架"
 __meta__ = {
 "_edit_use_anchors_": false,
@@ -383,8 +383,8 @@ __meta__ = {
 margin_top = 132.0
 margin_right = 141.0
 margin_bottom = 161.0
-theme = ExtResource( 6 )
-custom_fonts/font = ExtResource( 2 )
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
 text = "编辑网格"
 __meta__ = {
 "_edit_use_anchors_": false,
@@ -414,24 +414,24 @@ __meta__ = {
 [node name="openfile" type="Button" parent="CanvasLayer/MenuBar"]
 margin_right = 76.0
 margin_bottom = 39.0
-theme = ExtResource( 6 )
-custom_fonts/font = ExtResource( 2 )
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
 text = "打开文件"
 
 [node name="import_img" type="Button" parent="CanvasLayer/MenuBar"]
 margin_left = 80.0
 margin_right = 188.0
 margin_bottom = 39.0
-theme = ExtResource( 6 )
-custom_fonts/font = ExtResource( 2 )
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
 text = "导入图片资源"
 
 [node name="savefile" type="Button" parent="CanvasLayer/MenuBar"]
 margin_left = 192.0
 margin_right = 268.0
 margin_bottom = 39.0
-theme = ExtResource( 6 )
-custom_fonts/font = ExtResource( 2 )
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
 text = "保存文件"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -441,7 +441,7 @@ __meta__ = {
 margin_left = 272.0
 margin_right = 333.0
 margin_bottom = 39.0
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 6 )
 text = "语言"
 
 [node name="zoom" type="Label" parent="CanvasLayer/MenuBar"]
@@ -455,8 +455,8 @@ text = "zoom:1"
 margin_left = 389.0
 margin_right = 433.0
 margin_bottom = 39.0
-theme = ExtResource( 6 )
-custom_fonts/font = ExtResource( 2 )
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
 text = "关于"
 
 [node name="edit_mode" type="Label" parent="CanvasLayer/MenuBar"]
@@ -464,7 +464,7 @@ margin_left = 437.0
 margin_top = 8.0
 margin_right = 549.0
 margin_bottom = 31.0
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 6 )
 text = "当前模式：预览"
 
 [node name="control_tip" type="Label" parent="CanvasLayer/MenuBar"]
@@ -472,15 +472,15 @@ margin_left = 553.0
 margin_top = 8.0
 margin_right = 633.0
 margin_bottom = 31.0
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 6 )
 text = "操作提示："
 
 [node name="window" type="OptionButton" parent="CanvasLayer/MenuBar"]
 margin_left = 637.0
 margin_right = 730.0
 margin_bottom = 39.0
-theme = ExtResource( 5 )
-custom_fonts/font = ExtResource( 2 )
+theme = ExtResource( 3 )
+custom_fonts/font = ExtResource( 6 )
 text = "窗口开关"
 items = [ "窗口开关", null, false, 0, null, "底部控制条", null, false, 1, null, "动画帧编辑器", null, false, 2, null, "资源编辑器", null, false, 3, null ]
 selected = 0
@@ -489,7 +489,7 @@ selected = 0
 margin_left = 734.0
 margin_right = 810.0
 margin_bottom = 39.0
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 6 )
 text = "窗口开关"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -534,32 +534,32 @@ __meta__ = {
 [node name="play" type="Button" parent="CanvasLayer/tool_bar"]
 margin_right = 76.0
 margin_bottom = 40.0
-theme = ExtResource( 6 )
-custom_fonts/font = ExtResource( 2 )
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
 text = "播放动画"
 
 [node name="set_time" type="Button" parent="CanvasLayer/tool_bar"]
 margin_left = 80.0
 margin_right = 188.0
 margin_bottom = 40.0
-theme = ExtResource( 6 )
-custom_fonts/font = ExtResource( 2 )
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
 text = "设置时间补间"
 
 [node name="set_bone" type="Button" parent="CanvasLayer/tool_bar"]
 margin_left = 192.0
 margin_right = 268.0
 margin_bottom = 40.0
-theme = ExtResource( 6 )
-custom_fonts/font = ExtResource( 2 )
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
 text = "骨骼控制"
 
 [node name="set_mesh" type="Button" parent="CanvasLayer/tool_bar"]
 margin_left = 272.0
 margin_right = 348.0
 margin_bottom = 40.0
-theme = ExtResource( 6 )
-custom_fonts/font = ExtResource( 2 )
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
 text = "网格控制"
 
 [node name="Position2D" type="Position2D" parent="."]

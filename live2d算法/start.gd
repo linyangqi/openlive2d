@@ -9,7 +9,7 @@ extends Node2D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	yield(get_tree().create_timer(2.0),"timeout")
-	var editor=load("res://live2d算法/头发动起来.tscn")
+	var editor=load("res://live2d算法/scene/Live2dEditor.tscn")
 	get_tree().change_scene_to(editor)
 	pass # Replace with function body.
 
