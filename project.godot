@@ -12,12 +12,12 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "file_dialog",
 "language": "GDScript",
-"path": "res://live2d算法/class/FileDialog.gd"
+"path": "res://live2d/class/FileDialog.gd"
 }, {
 "base": "Reference",
 "class": "mesh_point",
 "language": "GDScript",
-"path": "res://live2d算法/class/meshPoint.gd"
+"path": "res://live2d/class/meshPoint.gd"
 } ]
 _global_script_class_icons={
 "file_dialog": "",
@@ -27,7 +27,7 @@ _global_script_class_icons={
 [application]
 
 config/name="OpenLive2d editor"
-run/main_scene="res://live2d算法/start.tscn"
+run/main_scene="res://live2d/start.tscn"
 config/icon="res://live2d算法/icon.png"
 
 [input]
