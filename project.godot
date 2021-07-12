@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "file_dialog",
 "language": "GDScript",
 "path": "res://live2d算法/class/FileDialog.gd"
+}, {
+"base": "Reference",
+"class": "mesh_point",
+"language": "GDScript",
+"path": "res://live2d算法/class/meshPoint.gd"
 } ]
 _global_script_class_icons={
-"file_dialog": ""
+"file_dialog": "",
+"mesh_point": ""
 }
 
 [application]

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://live2d算法/头发动起来.gd" type="Script" id=1]
+[ext_resource path="res://live2d算法/live2dEditor.gd" type="Script" id=1]
 [ext_resource path="res://live2d算法/font.tres" type="DynamicFont" id=2]
 [ext_resource path="res://live2d算法/Panel.gd" type="Script" id=3]
 [ext_resource path="res://live2d算法/panel_right.tres" type="ButtonGroup" id=4]
 [ext_resource path="res://live2d算法/中文字体主题.tres" type="Theme" id=5]
+[ext_resource path="res://live2d算法/tres/button_theme.tres" type="Theme" id=6]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
@@ -147,6 +148,29 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="confirmDel" type="ConfirmationDialog" parent="CanvasLayer2"]
+margin_left = 287.0
+margin_top = 215.0
+margin_right = 526.0
+margin_bottom = 291.0
+theme = ExtResource( 5 )
+window_title = "请确认..."
+dialog_text = "确认删除吗"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="selected_bone" type="Label" parent="CanvasLayer2"]
+margin_left = 731.0
+margin_top = 450.0
+margin_right = 811.0
+margin_bottom = 475.0
+custom_fonts/font = ExtResource( 2 )
+text = "选中的骨骼：null"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
 
@@ -179,6 +203,7 @@ __meta__ = {
 [node name="layer" type="Button" parent="CanvasLayer/Panel/tool_bar"]
 margin_right = 44.0
 margin_bottom = 40.0
+theme = ExtResource( 6 )
 custom_fonts/font = ExtResource( 2 )
 toggle_mode = true
 group = ExtResource( 4 )
@@ -188,6 +213,7 @@ text = "图层"
 margin_left = 48.0
 margin_right = 92.0
 margin_bottom = 40.0
+theme = ExtResource( 6 )
 custom_fonts/font = ExtResource( 2 )
 toggle_mode = true
 group = ExtResource( 4 )
@@ -197,6 +223,7 @@ text = "资源"
 margin_left = 96.0
 margin_right = 140.0
 margin_bottom = 40.0
+theme = ExtResource( 6 )
 custom_fonts/font = ExtResource( 2 )
 toggle_mode = true
 group = ExtResource( 4 )
@@ -206,6 +233,7 @@ text = "骨架"
 margin_left = 144.0
 margin_right = 188.0
 margin_bottom = 40.0
+theme = ExtResource( 6 )
 custom_fonts/font = ExtResource( 2 )
 toggle_mode = true
 group = ExtResource( 4 )
@@ -216,18 +244,23 @@ margin_left = 199.285
 margin_top = 4.33806
 margin_right = 227.285
 margin_bottom = 35.3381
+theme = ExtResource( 6 )
 text = "+"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureButton" type="Button" parent="CanvasLayer/Panel"]
+[node name="del" type="Button" parent="CanvasLayer/Panel"]
 margin_left = 227.5
 margin_top = -2.0
 margin_right = 270.5
 margin_bottom = 41.0
+theme = ExtResource( 6 )
 custom_fonts/font = ExtResource( 2 )
 text = "删除"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="animes" type="VBoxContainer" parent="CanvasLayer/Panel"]
 margin_left = 2.37842
@@ -304,6 +337,7 @@ __meta__ = {
 [node name="add_point" type="Button" parent="CanvasLayer/tools"]
 margin_right = 141.0
 margin_bottom = 29.0
+theme = ExtResource( 6 )
 custom_fonts/font = ExtResource( 2 )
 text = "添加顶点"
 __meta__ = {
@@ -314,6 +348,7 @@ __meta__ = {
 margin_top = 33.0
 margin_right = 141.0
 margin_bottom = 62.0
+theme = ExtResource( 6 )
 custom_fonts/font = ExtResource( 2 )
 text = "重置视图缩放"
 __meta__ = {
@@ -324,6 +359,7 @@ __meta__ = {
 margin_top = 66.0
 margin_right = 141.0
 margin_bottom = 95.0
+theme = ExtResource( 6 )
 custom_fonts/font = ExtResource( 2 )
 text = "添加关键帧"
 __meta__ = {
@@ -335,6 +371,7 @@ __meta__ = {
 margin_top = 99.0
 margin_right = 141.0
 margin_bottom = 128.0
+theme = ExtResource( 6 )
 custom_fonts/font = ExtResource( 2 )
 text = "添加骨架"
 __meta__ = {
@@ -346,6 +383,7 @@ __meta__ = {
 margin_top = 132.0
 margin_right = 141.0
 margin_bottom = 161.0
+theme = ExtResource( 6 )
 custom_fonts/font = ExtResource( 2 )
 text = "编辑网格"
 __meta__ = {
@@ -376,6 +414,7 @@ __meta__ = {
 [node name="openfile" type="Button" parent="CanvasLayer/MenuBar"]
 margin_right = 76.0
 margin_bottom = 39.0
+theme = ExtResource( 6 )
 custom_fonts/font = ExtResource( 2 )
 text = "打开文件"
 
@@ -383,6 +422,7 @@ text = "打开文件"
 margin_left = 80.0
 margin_right = 188.0
 margin_bottom = 39.0
+theme = ExtResource( 6 )
 custom_fonts/font = ExtResource( 2 )
 text = "导入图片资源"
 
@@ -390,6 +430,7 @@ text = "导入图片资源"
 margin_left = 192.0
 margin_right = 268.0
 margin_bottom = 39.0
+theme = ExtResource( 6 )
 custom_fonts/font = ExtResource( 2 )
 text = "保存文件"
 __meta__ = {
@@ -414,6 +455,7 @@ text = "zoom:1"
 margin_left = 389.0
 margin_right = 433.0
 margin_bottom = 39.0
+theme = ExtResource( 6 )
 custom_fonts/font = ExtResource( 2 )
 text = "关于"
 
@@ -492,6 +534,7 @@ __meta__ = {
 [node name="play" type="Button" parent="CanvasLayer/tool_bar"]
 margin_right = 76.0
 margin_bottom = 40.0
+theme = ExtResource( 6 )
 custom_fonts/font = ExtResource( 2 )
 text = "播放动画"
 
@@ -499,6 +542,7 @@ text = "播放动画"
 margin_left = 80.0
 margin_right = 188.0
 margin_bottom = 40.0
+theme = ExtResource( 6 )
 custom_fonts/font = ExtResource( 2 )
 text = "设置时间补间"
 
@@ -506,6 +550,7 @@ text = "设置时间补间"
 margin_left = 192.0
 margin_right = 268.0
 margin_bottom = 40.0
+theme = ExtResource( 6 )
 custom_fonts/font = ExtResource( 2 )
 text = "骨骼控制"
 
@@ -513,6 +558,7 @@ text = "骨骼控制"
 margin_left = 272.0
 margin_right = 348.0
 margin_bottom = 40.0
+theme = ExtResource( 6 )
 custom_fonts/font = ExtResource( 2 )
 text = "网格控制"
 
@@ -544,9 +590,12 @@ position = Vector2( 453.088, 190.273 )
 [connection signal="pressed" from="CanvasLayer2/about/Panel/editor" to="." method="_on_editor_pressed"]
 [connection signal="file_selected" from="CanvasLayer2/FileDialog" to="." method="_on_FileDialog_file_selected"]
 [connection signal="popup_hide" from="CanvasLayer2/FileDialog" to="." method="_on_FileDialog_popup_hide"]
+[connection signal="confirmed" from="CanvasLayer2/confirmDel" to="." method="_on_confirmDel_confirmed"]
+[connection signal="pressed" from="CanvasLayer/Panel/tool_bar/resource" to="CanvasLayer/Panel" method="_on_resource_pressed"]
 [connection signal="pressed" from="CanvasLayer/Panel/tool_bar/ske" to="CanvasLayer/Panel" method="_on_ske_pressed"]
 [connection signal="pressed" from="CanvasLayer/Panel/tool_bar/animation" to="CanvasLayer/Panel" method="_on_animation_pressed"]
 [connection signal="pressed" from="CanvasLayer/Panel/add" to="." method="_on_add_pressed"]
+[connection signal="pressed" from="CanvasLayer/Panel/del" to="." method="_on_del_pressed"]
 [connection signal="item_rmb_selected" from="CanvasLayer/Panel/ske_tree" to="CanvasLayer/Panel" method="_on_ske_tree_item_rmb_selected"]
 [connection signal="id_pressed" from="CanvasLayer/Panel/PopupMenu" to="CanvasLayer/Panel" method="_on_PopupMenu_id_pressed"]
 [connection signal="pressed" from="CanvasLayer/tools/add_point" to="." method="_on_add_point_pressed"]

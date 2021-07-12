@@ -13,18 +13,21 @@ var root
 #文件状态类
 var file_class
 var FileAction
+#选中的图片 按钮 骨骼 网格顶点
+var selected_image:Sprite
+var selected_btn:Button
+var selected_bone:Node2D
+var selected_mesh_point
 func initMenuBar():
 	$CanvasLayer/MenuBar/language.add_item("Chinese")
 	$CanvasLayer/MenuBar/language.add_item("English")
 	$CanvasLayer/MenuBar/language.add_item("Japanese")
 	$CanvasLayer/MenuBar/language.text="language"
-	#
 func _ready():
 	tree = $CanvasLayer/Panel/ske_tree
 	root = tree.create_item()
 	root.set_text(0,"skeleton")
 	initMenuBar()
-	#init_file_class()
 func init_file_class():
 	#var file_res=load("res://live2d算法/class/FileDialog.gd")
 	#file_class=file_res.new()
@@ -52,7 +55,9 @@ func _input(event):
 				var bone=load("res://live2d算法/组件/骨骼.tscn").instance()
 				add_child(bone)
 				bone.position=event.position
-				
+				#print(bone)
+				bone.connect("select_bone",self,"update_selected_bone",[bone])
+				#同步创建gui信息
 				var child1 = tree.create_item(root)
 				child1.set_text(0,"bone"+str(current_bone_index))
 				print(event.position)
@@ -212,6 +217,10 @@ func update_mode_tip(text:String):
 	$CanvasLayer/MenuBar/edit_mode.text="当前模式:"+text
 	edit_mode=text
 	print("模式:"+text)
+func update_selected_bone(bone:Node2D):
+	selected_bone=bone
+	print_debug("同步信息：选中的骨骼",bone)
+	$CanvasLayer2/selected_bone.text="选中的骨骼："+bone.name
 #加载外部文件
 func load_external_image(filepath:String):
 	var f=File.new()
@@ -236,20 +245,45 @@ func load_external_image(filepath:String):
 	return texture
 func _on_FileDialog_file_selected(path):
 	if FileAction=="导入图片":
-		print("导图")
 		print_debug(path)
 		var texture=load_external_image(path)
 		var sprite=Sprite.new()
 		sprite.texture=texture
 		sprite.position=$Position2D.position
+		sprite.name=path.get_basename()
 		add_child(sprite)
+		#print(sprite.name)
 		#更新gui
 		var button=Button.new()
 		button.text=path.get_file()
 		button.set("custom_fonts/font",load("res://live2d算法/font.tres"))
+		button.connect("pressed",self,"select_image",[sprite.name,button])
 		$CanvasLayer/Panel/res_content/res_layer.add_child(button)
 	pass
+#sprite button
+func select_image(image_name:String,button:Button):
+	selected_image=get_node(image_name)
+	selected_btn=button
+	print_debug("删除对象：",selected_image)
 #取消文件选择
 func _on_FileDialog_popup_hide():
 	print("取消文件选择")
 	update_mode_tip("预览")
+#资源管理删除按钮 弹出确认窗口
+func _on_del_pressed():
+	print("要删除的对象",selected_image)
+	#如果有任意选中的对象
+	if selected_image!=null or selected_btn!=null or selected_bone!=null:
+		$CanvasLayer2/confirmDel.popup()
+	else:
+		OS.alert("错误，没有选中要删除的对象")
+	pass 
+#确认删除
+func _on_confirmDel_confirmed():
+	if selected_bone!=null:
+		selected_bone.queue_free()
+	if selected_image!=null:
+		selected_image.queue_free()
+	if selected_btn!=null:
+		selected_btn.queue_free()
+	pass 
