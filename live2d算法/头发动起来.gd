@@ -12,6 +12,7 @@ var tree
 var root
 #文件状态类
 var file_class
+var FileAction
 func initMenuBar():
 	$CanvasLayer/MenuBar/language.add_item("Chinese")
 	$CanvasLayer/MenuBar/language.add_item("English")
@@ -23,11 +24,12 @@ func _ready():
 	root = tree.create_item()
 	root.set_text(0,"skeleton")
 	initMenuBar()
-	init_file_class()
+	#init_file_class()
 func init_file_class():
-	var file_Resource=load("res://live2d算法/class/FileDialog.gd")
-	file_class=file_Resource.new()
-	print(file_class)
+	#var file_res=load("res://live2d算法/class/FileDialog.gd")
+	#file_class=file_res.new()
+	#print(file_class)
+	pass
 func init_ske_tree():
 	pass
 # warning-ignore:unused_argument
@@ -202,7 +204,9 @@ func _on_import_img_pressed():
 	$CanvasLayer2/FileDialog.popup()
 #更新文件状态
 func update_file_state(action):
-	file_class.FileAction=action
+	FileAction=action
+	#file_class.FileAction=action
+	pass
 #更新toolbar模式提示
 func update_mode_tip(text:String):
 	$CanvasLayer/MenuBar/edit_mode.text="当前模式:"+text
@@ -231,7 +235,7 @@ func load_external_image(filepath:String):
 	f.close()
 	return texture
 func _on_FileDialog_file_selected(path):
-	if file_class.FileAction=="导入图片":
+	if FileAction=="导入图片":
 		print("导图")
 		print_debug(path)
 		var texture=load_external_image(path)

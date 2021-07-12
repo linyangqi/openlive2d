@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://live2d算法/头发动起来.gd" type="Script" id=1]
 [ext_resource path="res://live2d算法/font.tres" type="DynamicFont" id=2]
 [ext_resource path="res://live2d算法/Panel.gd" type="Script" id=3]
 [ext_resource path="res://live2d算法/panel_right.tres" type="ButtonGroup" id=4]
 [ext_resource path="res://live2d算法/中文字体主题.tres" type="Theme" id=5]
-[ext_resource path="res://live2d算法/删 除  (1).png" type="Texture" id=6]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
@@ -222,16 +221,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureButton" type="TextureButton" parent="CanvasLayer/Panel"]
+[node name="TextureButton" type="Button" parent="CanvasLayer/Panel"]
 margin_left = 227.5
 margin_top = -2.0
 margin_right = 270.5
 margin_bottom = 41.0
-texture_normal = ExtResource( 6 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+custom_fonts/font = ExtResource( 2 )
+text = "删除"
 
 [node name="animes" type="VBoxContainer" parent="CanvasLayer/Panel"]
 margin_left = 2.37842
@@ -441,6 +437,7 @@ text = "操作提示："
 margin_left = 637.0
 margin_right = 730.0
 margin_bottom = 39.0
+theme = ExtResource( 5 )
 custom_fonts/font = ExtResource( 2 )
 text = "窗口开关"
 items = [ "窗口开关", null, false, 0, null, "底部控制条", null, false, 1, null, "动画帧编辑器", null, false, 2, null, "资源编辑器", null, false, 3, null ]
