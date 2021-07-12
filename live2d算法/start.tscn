@@ -9,11 +9,11 @@
 size = 40
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 size = 40
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 size = 35
 font_data = ExtResource( 3 )
 
@@ -57,7 +57,7 @@ margin_left = 544.0
 margin_top = 153.0
 margin_right = 834.0
 margin_bottom = 218.0
-custom_fonts/normal_font = SubResource( 3 )
+custom_fonts/normal_font = SubResource( 2 )
 custom_colors/default_color = Color( 0, 0, 0, 1 )
 bbcode_enabled = true
 bbcode_text = "[wave]loading...[/wave]"
@@ -77,7 +77,7 @@ margin_left = 630.78
 margin_top = 528.278
 margin_right = 993.78
 margin_bottom = 577.278
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "copyright:小沙盒工作室"
 

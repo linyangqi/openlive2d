@@ -46,7 +46,7 @@ func _process(delta):
 func _input(event):
 	if event is InputEventMouseButton:
 		if event.is_pressed() and event.button_index==BUTTON_LEFT:
-			if edit_mode=="add ske":
+			if edit_mode=="添加骨架":
 				var bone=load("res://live2d算法/组件/骨骼.tscn").instance()
 				add_child(bone)
 				bone.position=event.position
@@ -60,12 +60,12 @@ func _input(event):
 			mouse_start_pos=event.position
 			#print("视图移动",event.position)
 			pass
-		if event.button_index==BUTTON_WHEEL_UP:
+		if event.button_index==BUTTON_WHEEL_UP and edit_mode!="导入图片" and edit_mode!="打开文件" and edit_mode!="保存文件":
 			$Camera2D.zoom.x-=0.1
 			$Camera2D.zoom.y-=0.1
 			print("zoom",$Camera2D.zoom)
 			$CanvasLayer/MenuBar/zoom.text="zoom:"+str($Camera2D.zoom.x)
-		if event.button_index==BUTTON_WHEEL_DOWN:
+		if event.button_index==BUTTON_WHEEL_DOWN and edit_mode!="导入图片" and edit_mode!="打开文件" and edit_mode!="保存文件":
 			print("zoom",$Camera2D.zoom)
 			$CanvasLayer/MenuBar/zoom.text="zoom:"+str($Camera2D.zoom.x)
 			$Camera2D.zoom.x+=0.1
@@ -104,11 +104,13 @@ func _on_File_about_to_show():
 
 
 func _on_openfile_pressed():
+	update_mode_tip("打开文件")
 	$CanvasLayer2/FileDialog.popup()
 	pass # Replace with function body.
 func _on_savefile_pressed():
 	$CanvasLayer2/FileDialog.popup()
-	$FileDialog.mode=FileDialog.MODE_SAVE_FILE
+	$CanvasLayer2/FileDialog.mode=FileDialog.MODE_SAVE_FILE
+	update_mode_tip("保存文件")
 	pass # Replace with function body.
 
 #添加动画id名称
@@ -183,7 +185,6 @@ func _on_editor_pressed():
 
 
 func _on_add_ske_pressed():
-	edit_mode="add ske"
 	update_mode_tip("添加骨架")
 	$CanvasLayer/MenuBar/control_tip.text="操作提示："+"按下鼠标来添加骨骼"
 	pass # Replace with function body.
@@ -192,26 +193,59 @@ func _on_play_pressed():
 	update_mode_tip("播放动画")
 	edit_mode="play anim"
 	pass # Replace with function body.
-#更新toolbar模式提示
-func update_mode_tip(text):
-	$CanvasLayer/MenuBar/edit_mode.text="当前模式:"+text
 
 #导入图片资源
 func _on_import_img_pressed():
 	update_file_state("导入图片")
+	update_mode_tip("导入图片")
 	$CanvasLayer2/FileDialog.mode=FileDialog.MODE_OPEN_ANY
 	$CanvasLayer2/FileDialog.popup()
 #更新文件状态
 func update_file_state(action):
 	file_class.FileAction=action
+#更新toolbar模式提示
+func update_mode_tip(text:String):
+	$CanvasLayer/MenuBar/edit_mode.text="当前模式:"+text
+	edit_mode=text
+	print("模式:"+text)
+#加载外部文件
+func load_external_image(filepath:String):
+	var f=File.new()
+	f.open(filepath,File.READ)
+	var buffer=f.get_buffer(f.get_len())
+	var image=Image.new()
+	var texture=ImageTexture.new()
+	if filepath.ends_with("jpg"):
+		image.load_jpg_from_buffer(buffer)
+	if filepath.ends_with("png"):
+		image.load_png_from_buffer(buffer)
+	if filepath.ends_with("tga"):
+		image.load_tga_from_buffer(buffer)
+	if filepath.ends_with("webp"):
+		image.load_webp_from_buffer(buffer)
+	if filepath.ends_with("bmp"):
+		image.load_jpg_from_buffer(buffer)
+	else:
+		print_debug("错误，不支持的文件类型")
+	texture.create_from_image(image)
+	f.close()
+	return texture
 func _on_FileDialog_file_selected(path):
 	if file_class.FileAction=="导入图片":
 		print("导图")
 		print_debug(path)
-		var texture_res=load(path)
-		print(texture_res)
+		var texture=load_external_image(path)
 		var sprite=Sprite.new()
-		sprite.texture=texture_res
+		sprite.texture=texture
 		sprite.position=$Position2D.position
 		add_child(sprite)
-	pass # Replace with function body.
+		#更新gui
+		var button=Button.new()
+		button.text=path.get_file()
+		button.set("custom_fonts/font",load("res://live2d算法/font.tres"))
+		$CanvasLayer/Panel/res_content/res_layer.add_child(button)
+	pass
+#取消文件选择
+func _on_FileDialog_popup_hide():
+	print("取消文件选择")
+	update_mode_tip("预览")

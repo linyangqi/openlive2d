@@ -40,7 +40,4 @@ func _on_PopupMenu_id_pressed(id):
 		print_debug("删除")
 	if id==1:
 		print_debug("删除所有(除root以外骨骼)")
-		var col=$ske_tree.get_edited_column()
-		print(col)
-		col.get_next()
 	pass # Replace with function body.

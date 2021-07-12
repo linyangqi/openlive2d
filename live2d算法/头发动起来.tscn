@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://live2d算法/头发动起来.gd" type="Script" id=1]
 [ext_resource path="res://live2d算法/font.tres" type="DynamicFont" id=2]
 [ext_resource path="res://live2d算法/Panel.gd" type="Script" id=3]
 [ext_resource path="res://live2d算法/panel_right.tres" type="ButtonGroup" id=4]
+[ext_resource path="res://live2d算法/中文字体主题.tres" type="Theme" id=5]
+[ext_resource path="res://live2d算法/删 除  (1).png" type="Texture" id=6]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
@@ -136,11 +138,12 @@ margin_left = 154.708
 margin_top = 51.6721
 margin_right = 735.708
 margin_bottom = 486.672
+theme = ExtResource( 5 )
 window_title = "打开文件"
 mode = 0
 access = 2
-current_dir = "/Users/11111/Documents/GitHub/Godot_useful_codes"
-current_path = "/Users/11111/Documents/GitHub/Godot_useful_codes/"
+current_dir = "/整理/000工作台/算法测试"
+current_path = "/整理/000工作台/算法测试/"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -149,23 +152,32 @@ __meta__ = {
 layer = -1
 
 [node name="Panel" type="Panel" parent="CanvasLayer"]
-margin_left = 751.334
-margin_top = 64.7576
-margin_right = 976.334
-margin_bottom = 422.757
+margin_left = 751.0
+margin_top = 65.0
+margin_right = 1023.0
+margin_bottom = 423.0
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Panel"]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Panel"]
+margin_left = 1.0
+margin_top = -2.0
+margin_right = 270.0
+margin_bottom = 41.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="tool_bar" type="HBoxContainer" parent="CanvasLayer/Panel"]
 margin_right = 40.0
 margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="layer" type="Button" parent="CanvasLayer/Panel/HBoxContainer"]
+[node name="layer" type="Button" parent="CanvasLayer/Panel/tool_bar"]
 margin_right = 44.0
 margin_bottom = 40.0
 custom_fonts/font = ExtResource( 2 )
@@ -173,7 +185,7 @@ toggle_mode = true
 group = ExtResource( 4 )
 text = "图层"
 
-[node name="resource" type="Button" parent="CanvasLayer/Panel/HBoxContainer"]
+[node name="resource" type="Button" parent="CanvasLayer/Panel/tool_bar"]
 margin_left = 48.0
 margin_right = 92.0
 margin_bottom = 40.0
@@ -182,7 +194,7 @@ toggle_mode = true
 group = ExtResource( 4 )
 text = "资源"
 
-[node name="ske" type="Button" parent="CanvasLayer/Panel/HBoxContainer"]
+[node name="ske" type="Button" parent="CanvasLayer/Panel/tool_bar"]
 margin_left = 96.0
 margin_right = 140.0
 margin_bottom = 40.0
@@ -191,7 +203,7 @@ toggle_mode = true
 group = ExtResource( 4 )
 text = "骨架"
 
-[node name="animation" type="Button" parent="CanvasLayer/Panel/HBoxContainer"]
+[node name="animation" type="Button" parent="CanvasLayer/Panel/tool_bar"]
 margin_left = 144.0
 margin_right = 188.0
 margin_bottom = 40.0
@@ -210,6 +222,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="TextureButton" type="TextureButton" parent="CanvasLayer/Panel"]
+margin_left = 227.5
+margin_top = -2.0
+margin_right = 270.5
+margin_bottom = 41.0
+texture_normal = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="animes" type="VBoxContainer" parent="CanvasLayer/Panel"]
 margin_left = 2.37842
 margin_top = 47.5683
@@ -223,6 +246,7 @@ __meta__ = {
 margin_right = 39.0
 
 [node name="ske_tree" type="Tree" parent="CanvasLayer/Panel"]
+visible = false
 margin_left = 1.29895
 margin_top = 44.6174
 margin_right = 192.299
@@ -247,11 +271,36 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="layer" type="VBoxContainer" parent="CanvasLayer/Panel"]
+visible = false
+margin_left = 7.0
+margin_top = 48.0
+margin_right = 210.0
+margin_bottom = 342.0
+__meta__ = {
+"_editor_description_": "图层"
+}
+
+[node name="res_content" type="ScrollContainer" parent="CanvasLayer/Panel"]
+margin_left = 7.0
+margin_top = 48.0
+margin_right = 210.0
+margin_bottom = 352.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="res_layer" type="VBoxContainer" parent="CanvasLayer/Panel/res_content"]
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "资源"
+}
+
 [node name="tools" type="VBoxContainer" parent="CanvasLayer"]
 margin_left = 564.957
 margin_top = 127.318
 margin_right = 705.957
-margin_bottom = 259.318
+margin_bottom = 288.318
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -497,8 +546,9 @@ position = Vector2( 453.088, 190.273 )
 [connection signal="pressed" from="CanvasLayer2/about/Panel/openlive2d" to="." method="_on_openlive2d_pressed"]
 [connection signal="pressed" from="CanvasLayer2/about/Panel/editor" to="." method="_on_editor_pressed"]
 [connection signal="file_selected" from="CanvasLayer2/FileDialog" to="." method="_on_FileDialog_file_selected"]
-[connection signal="pressed" from="CanvasLayer/Panel/HBoxContainer/ske" to="CanvasLayer/Panel" method="_on_ske_pressed"]
-[connection signal="pressed" from="CanvasLayer/Panel/HBoxContainer/animation" to="CanvasLayer/Panel" method="_on_animation_pressed"]
+[connection signal="popup_hide" from="CanvasLayer2/FileDialog" to="." method="_on_FileDialog_popup_hide"]
+[connection signal="pressed" from="CanvasLayer/Panel/tool_bar/ske" to="CanvasLayer/Panel" method="_on_ske_pressed"]
+[connection signal="pressed" from="CanvasLayer/Panel/tool_bar/animation" to="CanvasLayer/Panel" method="_on_animation_pressed"]
 [connection signal="pressed" from="CanvasLayer/Panel/add" to="." method="_on_add_pressed"]
 [connection signal="item_rmb_selected" from="CanvasLayer/Panel/ske_tree" to="CanvasLayer/Panel" method="_on_ske_tree_item_rmb_selected"]
 [connection signal="id_pressed" from="CanvasLayer/Panel/PopupMenu" to="CanvasLayer/Panel" method="_on_PopupMenu_id_pressed"]
