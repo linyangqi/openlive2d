@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://live2d/panel_right.tres" type="ButtonGroup" id=1]
 [ext_resource path="res://live2d/scene/live2dEditor.gd" type="Script" id=2]
@@ -14,6 +14,8 @@
 [ext_resource path="res://live2d/scene/CanvasLayer.gd" type="Script" id=12]
 [ext_resource path="res://live2d/live2d.png" type="Texture" id=13]
 [ext_resource path="res://live2d/openlive2d.jpg" type="Texture" id=14]
+[ext_resource path="res://live2d/tres/新建动画.tres" type="Animation" id=15]
+[ext_resource path="res://live2d/tres/item_select.tres" type="StyleBox" id=16]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.498039, 0.666667, 0.733333, 1 )
@@ -604,24 +606,62 @@ custom_colors/font_color = Color( 0.482353, 0.819608, 0.266667, 1 )
 text = "操作提示："
 
 [node name="anim_frame_panel" type="Panel" parent="CanvasLayer"]
-margin_left = 7.43539
-margin_top = 88.7668
-margin_right = 198.435
-margin_bottom = 422.767
+margin_left = 7.0
+margin_top = 89.0
+margin_right = 336.0
+margin_bottom = 423.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="animes" type="ScrollContainer" parent="CanvasLayer/anim_frame_panel"]
 margin_left = 1.0
-margin_top = 28.0
-margin_right = 190.0
-margin_bottom = 288.0
+margin_top = 27.0
+margin_right = 302.0
+margin_bottom = 287.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/anim_frame_panel/animes"]
+margin_right = 300.0
+margin_bottom = 32.0
+
+[node name="Panel" type="Panel" parent="CanvasLayer/anim_frame_panel/animes/VBoxContainer"]
+margin_right = 300.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 300, 32 )
+custom_styles/panel = ExtResource( 16 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/anim_frame_panel/animes/VBoxContainer/Panel"]
+visible = false
+margin_left = 7.49487
+margin_top = 2.0
+margin_right = 242.495
+margin_bottom = 32.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button2" type="Button" parent="CanvasLayer/anim_frame_panel/animes/VBoxContainer/Panel/HBoxContainer"]
+margin_right = 90.0
+margin_bottom = 30.0
+custom_fonts/font = ExtResource( 6 )
+text = "旋转角度:0"
+
+[node name="Button3" type="Button" parent="CanvasLayer/anim_frame_panel/animes/VBoxContainer/Panel/HBoxContainer"]
+margin_left = 94.0
+margin_right = 184.0
+margin_bottom = 30.0
+custom_fonts/font = ExtResource( 6 )
+text = "旋转角度:0"
+
+[node name="Button4" type="Button" parent="CanvasLayer/anim_frame_panel/animes/VBoxContainer/Panel/HBoxContainer"]
+margin_left = 188.0
+margin_right = 278.0
+margin_bottom = 30.0
+custom_fonts/font = ExtResource( 6 )
+text = "旋转角度:0"
 
 [node name="Label" type="Label" parent="CanvasLayer/anim_frame_panel"]
 anchor_left = 0.5
@@ -632,6 +672,9 @@ margin_bottom = 23.0
 custom_fonts/font = ExtResource( 6 )
 text = "动画帧编辑器"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/anim_frame_panel"]
 margin_left = -3.0
@@ -819,22 +862,11 @@ margin_bottom = 53.3065
 custom_fonts/font = ExtResource( 6 )
 text = "旋转角度:0"
 
-[node name="selected_bone" type="Label" parent="control_layer"]
-margin_left = 361.136
-margin_top = 53.1498
-margin_right = 483.136
-margin_bottom = 78.1498
-custom_fonts/font = ExtResource( 6 )
-text = "选中的对象：null"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="tool_bar" type="HBoxContainer" parent="control_layer"]
-margin_left = 330.6
-margin_top = 494.71
-margin_right = 762.6
-margin_bottom = 534.71
+margin_left = 221.721
+margin_top = 508.18
+margin_right = 749.721
+margin_bottom = 548.18
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -857,29 +889,77 @@ theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 11 )
 text = "播放动画"
 
-[node name="set_time" type="Button" parent="control_layer/tool_bar"]
+[node name="reg_key" type="Button" parent="control_layer/tool_bar"]
 margin_left = 164.0
-margin_right = 272.0
+margin_right = 256.0
+margin_bottom = 40.0
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 11 )
+text = "注册关键帧"
+
+[node name="set_time" type="Button" parent="control_layer/tool_bar"]
+margin_left = 260.0
+margin_right = 368.0
 margin_bottom = 40.0
 theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 11 )
 text = "设置时间补间"
 
 [node name="set_bone" type="Button" parent="control_layer/tool_bar"]
-margin_left = 276.0
-margin_right = 352.0
+margin_left = 372.0
+margin_right = 448.0
 margin_bottom = 40.0
 theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 11 )
 text = "骨骼控制"
 
 [node name="set_mesh" type="Button" parent="control_layer/tool_bar"]
-margin_left = 356.0
-margin_right = 432.0
+margin_left = 452.0
+margin_right = 528.0
 margin_bottom = 40.0
 theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 11 )
 text = "网格控制"
+
+[node name="current_tip" type="HBoxContainer" parent="control_layer"]
+margin_left = 221.746
+margin_top = 52.9167
+margin_right = 490.746
+margin_bottom = 92.9167
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="selected_bone" type="Label" parent="control_layer/current_tip"]
+margin_top = 8.0
+margin_right = 122.0
+margin_bottom = 31.0
+custom_fonts/font = ExtResource( 6 )
+text = "选中的对象：null"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="edited_anim" type="Label" parent="control_layer/current_tip"]
+margin_left = 126.0
+margin_top = 8.0
+margin_right = 269.0
+margin_bottom = 31.0
+custom_fonts/font = ExtResource( 6 )
+text = "当前编辑的动画:null"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+"anims/新建动画" = ExtResource( 15 )
+
+[node name="test" type="ColorRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="pressed" from="CanvasLayer2/ask_add_anim/anim_name/add_anim" to="." method="_on_ok_pressed"]
 [connection signal="pressed" from="CanvasLayer2/ask_add_anim/anim_name/add_frame" to="." method="_on_add_frame_pressed"]
@@ -918,3 +998,4 @@ text = "网格控制"
 [connection signal="pressed" from="CanvasLayer/ask_rename/editbox/cancel" to="." method="_on_rename_cancel_pressed"]
 [connection signal="value_changed" from="control_layer/ProgressBar" to="." method="_on_ProgressBar_value_changed"]
 [connection signal="pressed" from="control_layer/tool_bar/play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="control_layer/tool_bar/reg_key" to="." method="_on_reg_key_pressed"]

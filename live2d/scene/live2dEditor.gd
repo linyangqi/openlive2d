@@ -25,23 +25,20 @@ var current_select
 var can_rotate=false
 var ResourceManager=load("res://live2d/class/ResourceManager.gd").new()
 var anim_data_gd=load("res://live2d/class/AnimData.gd")
-func initMenuBar():
-	$CanvasLayer/MenuBar/language.add_item("Chinese")
-	$CanvasLayer/MenuBar/language.add_item("English")
-	$CanvasLayer/MenuBar/language.add_item("Japanese")
-	$CanvasLayer/MenuBar/language.text="language"
+signal reg_key
 func _ready():
+	OS.window_borderless=false
 	Input.set_custom_mouse_cursor(load("res://live2d/img/arrow.png"))
 	tree = $CanvasLayer/Panel/ske_tree
 	root = tree.create_item()
 	root.set_text(0,"skeleton")
 	initMenuBar()
 	init_window_manager()
-func init_file_class():
-	#var file_res=load("res://live2d算法/class/FileDialog.gd")
-	#file_class=file_res.new()
-	#print(file_class)
-	pass
+func initMenuBar():
+	$CanvasLayer/MenuBar/language.add_item("Chinese")
+	$CanvasLayer/MenuBar/language.add_item("English")
+	$CanvasLayer/MenuBar/language.add_item("Japanese")
+	$CanvasLayer/MenuBar/language.text="language"
 func init_window_manager():
 	var window=$CanvasLayer/MenuBar/window
 	var popup=window.get_popup()
@@ -138,8 +135,9 @@ func _on_add_pressed():
 		print("切换到动画资源面板")
 		$CanvasLayer2/ask_add_anim.show()
 		$CanvasLayer2/ask_add_anim/anim_name/add_frame.disabled=true
-	pass # Replace with function body.
-#添加动画名称 
+		$CanvasLayer2/ask_add_anim/anim_name/add_anim.disabled=false
+	pass 
+#添加动画名称 资源管理器 右侧
 func _on_ok_pressed():
 	var anim_name=$CanvasLayer2/ask_add_anim/anim_name.text
 	var label=Button.new()
@@ -158,10 +156,11 @@ func _on_ok_pressed():
 	remove_btn.connect("pressed",self,"remove_anim",[remove_btn.get_parent()])
 	$CanvasLayer2/ask_add_anim.hide()
 	Global.bind_btn_font([label,rename_btn,remove_btn],Global.font)
-	#用来存动画数据
-	Global.anim_data=anim_data_gd.new()
-	Global.anim_data.anim_name=anim_name
-	print("动画数据",Global.anim_data)
+	#添加动画
+	Global.current_anim_data=anim_data_gd.new()
+	Global.current_anim_data.add_anim(anim_name)
+	print("动画数据对象>",Global.anim_data)
+	$control_layer/current_tip/edited_anim.text="当前编辑的动画:"+anim_name
 	pass 
 func rename_things(rename_btn):
 	Global.res_manager.current_select=rename_btn
@@ -185,8 +184,12 @@ func _on_anim_frame_add_pressed():
 	$CanvasLayer2/ask_add_anim/anim_name/add_anim.disabled=true
 	$CanvasLayer2/ask_add_anim/anim_name/add_frame.disabled=false
 	pass 
-#添加动画帧
+#添加动画帧 左侧 动画帧编辑器
 func _on_add_frame_pressed():
+	var line_panel=Panel.new()
+	#line_panel.set("custom_styles/panel",Global.tres_button_pressed)
+	line_panel.rect_min_size=Vector2(200,32)
+	$CanvasLayer/anim_frame_panel/animes/VBoxContainer.add_child(line_panel)
 	var frame_name=$CanvasLayer2/ask_add_anim/anim_name.text
 	var label=Button.new()
 	label.text=frame_name
@@ -194,10 +197,14 @@ func _on_add_frame_pressed():
 	var label_time=Label.new()
 	label_time.text="时间补间0ms"
 	var preline=HBoxContainer.new()
-	$CanvasLayer/anim_frame_panel/animes/VBoxContainer.add_child(preline)
+	var label_rotation=label_time.duplicate()
+	label_rotation.text="旋转角度:0asd aousd hiasopjpaj "
+	line_panel.add_child(preline)
 	preline.add_child(label)
 	preline.add_child(label_time)
-	Global.bind_btn_font([label,label_time],Global.font)
+	preline.add_child(label_rotation)
+	label.connect("pressed",Global.animFrameWindow,"frame_selected",[label.get_parent().get_parent(),label.text])
+	Global.bind_btn_font([label,label_time,label_rotation],Global.font)
 	$CanvasLayer2/ask_add_anim.hide()
 	pass 
 func _on_about_pressed():
@@ -207,8 +214,6 @@ func _on_openlive2d_pressed():
 # warning-ignore:return_value_discarded
 	OS.shell_open("https://gitee.com/open-live2d/OpenLive2d")
 	pass 
-
-
 func _on_editor_pressed():
 # warning-ignore:return_value_discarded
 	OS.shell_open("https://gitee.com/small-sandbox/Godot_useful_codes")
@@ -245,7 +250,7 @@ func update_selected_bone(bone:Node2D):
 	selected_bone=bone
 	current_select=selected_bone
 	print_debug("同步信息：选中的骨骼",bone)
-	$control_layer/selected_bone.text="选中的对象："+bone.name
+	$control_layer/current_tip/selected_bone.text="选中的对象："+bone.name
 #加载外部文件
 func load_external_image(filepath:String):
 	var f=File.new()
@@ -387,3 +392,11 @@ func _on_window_pressed():
 func _on_rename_cancel_pressed():
 	$CanvasLayer/ask_rename.hide()
 	pass
+#注册关键帧
+func _on_reg_key_pressed():
+	if current_select!=null:
+		var rotation=current_select.rotation_degrees
+		print("注册帧>对象:",current_select)
+		print("注册帧>旋转信息:",rotation)
+		Global.animFrameWindow.update_rotation(rotation)
+	pass 
