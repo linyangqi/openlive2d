@@ -24,5 +24,3 @@ func _process(delta):
 func _draw():
 	draw_rect(Rect2(draw_pos,Vector2(100,100)),Color.red,false,2.0)
 	pass
-func draw_rotate_tool():
-	pass

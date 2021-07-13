@@ -1,13 +1,7 @@
-extends Panel
+extends PanelContainer
 
 func _ready():
 	pass 
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
 func _on_ske_pressed():
 	$ske_tree.show()
 	$res_content.hide()
@@ -18,16 +12,6 @@ func _on_animation_pressed():
 	$ske_tree.hide()
 	$animes.show()
 	pass # Replace with function body.
-	
-#右键菜单
-# warning-ignore:unused_argument
-func _on_ske_tree_item_rmb_selected(position):
-	print("右键")
-	print(position)
-	$PopupMenu.popup()
-	pass # Replace with function body.
-
-
 func _on_ske_tree_cell_selected():
 	print("cell select")
 	pass # Replace with function body.

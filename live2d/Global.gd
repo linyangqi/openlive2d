@@ -11,6 +11,8 @@ var style_item_select=load("res://live2d/tres/item_select.tres")
 var current_anim_data
 #左侧 动画帧编辑器单利
 var animFrameWindow=load("res://live2d/class/AnimFrameWindow.gd").new()
+#拖动代码
+var drag=load("res://live2d/class/drag.gd").new()
 func _ready():
 	pass
 func bind_btn_font(button:Array,custom_font):
