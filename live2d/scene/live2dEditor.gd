@@ -28,7 +28,7 @@ var anim_data_gd=load("res://live2d/class/AnimData.gd")
 signal reg_key
 func _ready():
 	OS.window_borderless=false
-	Input.set_custom_mouse_cursor(load("res://live2d/img/arrow.png"))
+	#Input.set_custom_mouse_cursor(load("res://live2d/img/arrow.png"))
 	tree = $CanvasLayer/Panel/ske_tree
 	root = tree.create_item()
 	root.set_text(0,"skeleton")
@@ -189,7 +189,7 @@ func _on_add_frame_pressed():
 	var line_panel=Panel.new()
 	#line_panel.set("custom_styles/panel",Global.tres_button_pressed)
 	line_panel.rect_min_size=Vector2(200,32)
-	$CanvasLayer/anim_frame_panel/animes/VBoxContainer.add_child(line_panel)
+	$CanvasLayer/anim_split/anim_frame_panel/animes/VBoxContainer.add_child(line_panel)
 	var frame_name=$CanvasLayer2/ask_add_anim/anim_name.text
 	var label=Button.new()
 	label.text=frame_name
@@ -198,7 +198,7 @@ func _on_add_frame_pressed():
 	label_time.text="时间补间0ms"
 	var preline=HBoxContainer.new()
 	var label_rotation=label_time.duplicate()
-	label_rotation.text="旋转角度:0asd aousd hiasopjpaj "
+	label_rotation.text="旋转角度:0"
 	line_panel.add_child(preline)
 	preline.add_child(label)
 	preline.add_child(label_time)
@@ -359,7 +359,7 @@ func window_control(index,popup:PopupMenu):
 	if not check0:
 		popup.set_item_checked(index,true)
 		if index==0:
-			$CanvasLayer/anim_frame_panel.show()
+			$CanvasLayer/anim_split.show()
 		if index==1:
 			$control_layer/tool_bar.show()
 		if index==2:
@@ -369,7 +369,7 @@ func window_control(index,popup:PopupMenu):
 	if check0:
 		popup.set_item_checked(index,false)
 		if index==0:
-			$CanvasLayer/anim_frame_panel.hide()
+			$CanvasLayer/anim_split.hide()
 		if index==1:
 			$control_layer/tool_bar.hide()
 		if index==2:
