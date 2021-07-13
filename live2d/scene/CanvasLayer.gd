@@ -1,7 +1,7 @@
 extends CanvasLayer
-
+var anim_name
 func _ready():
-	pass 
+	pass
 #取消新建图层
 func _on_cancel_pressed():
 	$ask_layer.hide()
@@ -57,3 +57,10 @@ func show_hide(button_pressed,button:Button):
 func _on_bind_cancel_pressed():
 	$ask_bind.hide()
 	pass 
+#动画重命名按钮 ask界面
+func _on_rename_pressed():
+	anim_name=$ask_rename/editbox.text
+	$ask_rename.hide()
+	print("重命名,名称",anim_name)
+	Global.res_manager.rename_btn(anim_name)
+	pass # Replace with function body.

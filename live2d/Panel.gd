@@ -16,6 +16,7 @@ func _on_ske_pressed():
 
 func _on_animation_pressed():
 	$ske_tree.hide()
+	$animes.show()
 	pass # Replace with function body.
 	
 #右键菜单
@@ -48,4 +49,5 @@ func _on_resource_pressed():
 	$res_content.show()
 	$ske_tree.hide()
 	$layer_scroll.hide()
+	$animes.hide()
 	pass # Replace with function body.

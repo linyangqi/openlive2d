@@ -24,6 +24,7 @@ var current_select
 #是否可旋转
 var can_rotate=false
 var ResourceManager=load("res://live2d/class/ResourceManager.gd").new()
+var anim_data_gd=load("res://live2d/class/AnimData.gd")
 func initMenuBar():
 	$CanvasLayer/MenuBar/language.add_item("Chinese")
 	$CanvasLayer/MenuBar/language.add_item("English")
@@ -35,6 +36,7 @@ func _ready():
 	root = tree.create_item()
 	root.set_text(0,"skeleton")
 	initMenuBar()
+	init_window_manager()
 func init_file_class():
 	#var file_res=load("res://live2d算法/class/FileDialog.gd")
 	#file_class=file_res.new()
@@ -128,70 +130,83 @@ func _on_savefile_pressed():
 func _on_add_pressed():
 	print("按下了添加按钮")
 	if $CanvasLayer/Panel/tool_bar/layer.pressed:
-		print("图层功能")
+		print("切换到图层资源面板")
 		$CanvasLayer/ask_layer.show()
 		$CanvasLayer/Panel/layer_scroll/layer.show()
-		#$CanvasLayer2/anim_name.show()
+	#询问是否添加动画
+	if $CanvasLayer/Panel/tool_bar/animation.pressed:
+		print("切换到动画资源面板")
+		$CanvasLayer2/ask_add_anim.show()
+		$CanvasLayer2/ask_add_anim/anim_name/add_frame.disabled=true
 	pass # Replace with function body.
-
-#添加动画名称
+#添加动画名称 
 func _on_ok_pressed():
-	var anim_name=$CanvasLayer2/anim_name.text
+	var anim_name=$CanvasLayer2/ask_add_anim/anim_name.text
 	var label=Button.new()
 	label.text=anim_name
 	label.connect("pressed",self,"edit_selected_anim",[anim_name])
 	var rename_btn=Button.new()
-	rename_btn.text="rename"
+	rename_btn.text="重命名"
 	var remove_btn=Button.new()
-	remove_btn.text="-remove"
-	remove_btn.connect("pressed",self,"remove_anim")
-	
-	$CanvasLayer/Panel/animes/item.add_child(label)
-	$CanvasLayer/Panel/animes/item.add_child(rename_btn)
-	$CanvasLayer/Panel/animes/item.add_child(remove_btn)
-	$CanvasLayer2/anim_name.hide()
-	
-	pass # Replace with function body.
+	remove_btn.text="删除"
+	var preline=HBoxContainer.new()
+	$CanvasLayer/Panel/animes/anime_vbox.add_child(preline)
+	preline.add_child(label)
+	preline.add_child(rename_btn)
+	preline.add_child(remove_btn)
+	rename_btn.connect("pressed",self,"rename_things",[preline.get_child(0)])
+	remove_btn.connect("pressed",self,"remove_anim",[remove_btn.get_parent()])
+	$CanvasLayer2/ask_add_anim.hide()
+	Global.bind_btn_font([label,rename_btn,remove_btn],Global.font)
+	#用来存动画数据
+	Global.anim_data=anim_data_gd.new()
+	Global.anim_data.anim_name=anim_name
+	print("动画数据",Global.anim_data)
+	pass 
+func rename_things(rename_btn):
+	Global.res_manager.current_select=rename_btn
+	print("重命名!,对象",Global.res_manager.current_select)
+	$CanvasLayer/ask_rename.show()
 func edit_selected_anim(anim_name):
 	print_debug("!edit anim:",anim_name)
 	$CanvasLayer/anim_frame_panel.show()
 	pass
-func remove_anim():
-#	todo
-	print("删除动画")
-	pass
+func remove_anim(preline:Control):
+	print("删除动画",preline)
+	preline.queue_free()
 	pass
 #关闭对话
 func _on_cancel_pressed():
-	$CanvasLayer2/anim_name.hide()
-	pass # Replace with function body.
-
-
+	$CanvasLayer2/ask_add_anim.hide()
+	pass 
+#添加动画帧按钮 动画编辑器里的
 func _on_anim_frame_add_pressed():
-	$CanvasLayer2/anim_name.show()
-	pass # Replace with function body.
-
+	$CanvasLayer2/ask_add_anim.show()
+	$CanvasLayer2/ask_add_anim/anim_name/add_anim.disabled=true
+	$CanvasLayer2/ask_add_anim/anim_name/add_frame.disabled=false
+	pass 
 #添加动画帧
 func _on_add_frame_pressed():
-	var frame_name=$CanvasLayer2/anim_name.text
+	var frame_name=$CanvasLayer2/ask_add_anim/anim_name.text
 	var label=Button.new()
 	label.text=frame_name
 	#时间补间 延迟ms
 	var label_time=Label.new()
-	label_time.text="time bu jian时间补间0ms"
-	$CanvasLayer/anim_frame_panel/animes.add_child(label)
-	$CanvasLayer/anim_frame_panel/animes.add_child(label_time)
-	$CanvasLayer2/anim_name.hide()
-	pass # Replace with function body.
+	label_time.text="时间补间0ms"
+	var preline=HBoxContainer.new()
+	$CanvasLayer/anim_frame_panel/animes/VBoxContainer.add_child(preline)
+	preline.add_child(label)
+	preline.add_child(label_time)
+	Global.bind_btn_font([label,label_time],Global.font)
+	$CanvasLayer2/ask_add_anim.hide()
+	pass 
 func _on_about_pressed():
 	$CanvasLayer2/about.popup()
-	pass # Replace with function body.
-
-
+	pass 
 func _on_openlive2d_pressed():
 # warning-ignore:return_value_discarded
 	OS.shell_open("https://gitee.com/open-live2d/OpenLive2d")
-	pass # Replace with function body.
+	pass 
 
 
 func _on_editor_pressed():
@@ -253,11 +268,6 @@ func load_external_image(filepath:String):
 	texture.create_from_image(image)
 	f.close()
 	return texture
-# warning-ignore:unused_argument
-# warning-ignore:unused_argument
-func drag(viewport, event, shape_idx):
-	print(event)
-	pass
 func _on_FileDialog_file_selected(path):
 	if FileAction=="导入图片":
 		print_debug(path)
@@ -300,7 +310,7 @@ func select_image(image_name:String,button:Button):
 	selected_btn=button
 	#同步当前选中的物体
 	current_select=selected_image
-	button.set("custom_styles/normal",load("res://live2d/tres/button_pressed.tres"))
+	#button.set("custom_styles/normal",load("res://live2d/tres/button_pressed.tres"))
 	print_debug("删除对象：",selected_image)
 #取消文件选择
 func _on_FileDialog_popup_hide():
@@ -367,11 +377,13 @@ func window_control(index,popup:PopupMenu):
 func _on_bind_ok_pressed():
 	var texture_name=$CanvasLayer/ask_bind/editbox.text
 	print(ResourceManager.res_textures)
-	#i是Object
-	
-	pass
 #重置编辑器
 func _on_reset_pressed():
 # warning-ignore:return_value_discarded
 	get_tree().reload_current_scene()
-	pass # Replace with function body.
+	pass 
+func _on_window_pressed():
+	pass 
+func _on_rename_cancel_pressed():
+	$CanvasLayer/ask_rename.hide()
+	pass

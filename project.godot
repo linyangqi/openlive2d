@@ -9,6 +9,16 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Reference",
+"class": "AnimData",
+"language": "GDScript",
+"path": "res://live2d/class/AnimData.gd"
+}, {
+"base": "Node",
+"class": "AnimManager",
+"language": "GDScript",
+"path": "res://live2d/class/AnimManager.gd"
+}, {
 "base": "ColorRect",
 "class": "ColorTile",
 "language": "GDScript",
@@ -55,6 +65,8 @@ _global_script_classes=[ {
 "path": "res://live2d/class/meshPoint.gd"
 } ]
 _global_script_class_icons={
+"AnimData": "",
+"AnimManager": "",
 "ColorTile": "",
 "FlexGridContainer": "res://addons/color-palette/utilities/FlexGridContainerIcon.png",
 "Palette": "",
@@ -69,6 +81,7 @@ _global_script_class_icons={
 [application]
 
 config/name="OpenLive2d editor"
+run/main_scene="res://live2d/start.tscn"
 config/icon="res://live2d/icon.png"
 
 [autoload]
