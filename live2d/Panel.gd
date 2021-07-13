@@ -47,4 +47,5 @@ func _on_PopupMenu_id_pressed(id):
 func _on_resource_pressed():
 	$res_content.show()
 	$ske_tree.hide()
+	$layer_scroll.hide()
 	pass # Replace with function body.

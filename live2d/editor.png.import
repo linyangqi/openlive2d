@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/live2d.png-87bae15962d0e23cdd892798b0fb0aba.stex"
+path="res://.import/editor.png-0ea4a15e18e6eec924cff2423d34ba4d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://live2d.png"
-dest_files=[ "res://.import/live2d.png-87bae15962d0e23cdd892798b0fb0aba.stex" ]
+source_file="res://live2d/editor.png"
+dest_files=[ "res://.import/editor.png-0ea4a15e18e6eec924cff2423d34ba4d.stex" ]
 
 [params]
 

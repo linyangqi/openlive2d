@@ -1,7 +1,8 @@
 extends Node2D
 var point=load("res://live2d/point.tscn")
 var points=[]
-var index=0
+#骨骼数量
+var bone_count=0
 var mouse_start_pos
 var mouse_move_speed=2
 var edit_mode="预览"
@@ -14,7 +15,7 @@ var root
 var file_class
 var FileAction
 #选中的图片 按钮 骨骼 网格顶点
-var selected_image:Sprite
+var selected_image
 var selected_btn:Button
 var selected_bone:Node2D
 var selected_mesh_point
@@ -22,6 +23,7 @@ var selected_mesh_point
 var current_select
 #是否可旋转
 var can_rotate=false
+var ResourceManager=load("res://live2d/class/ResourceManager.gd").new()
 func initMenuBar():
 	$CanvasLayer/MenuBar/language.add_item("Chinese")
 	$CanvasLayer/MenuBar/language.add_item("English")
@@ -38,6 +40,10 @@ func init_file_class():
 	#file_class=file_res.new()
 	#print(file_class)
 	pass
+func init_window_manager():
+	var window=$CanvasLayer/MenuBar/window
+	var popup=window.get_popup()
+	popup.connect("index_pressed",self,"window_control",[popup])
 func init_ske_tree():
 	pass
 # warning-ignore:unused_argument
@@ -59,7 +65,6 @@ func _input(event):
 			if edit_mode=="添加骨架":
 				can_rotate=false
 				var bone=load("res://live2d/control/骨骼.tscn").instance()
-				#bone.position=$Position2D.position
 				add_child(bone)
 				bone.position=event.position
 				bone.connect("select_bone",self,"update_selected_bone",[bone])
@@ -94,9 +99,9 @@ func _on_reset_zoom_pressed():
 
 
 func _on_add_point_pressed():
-	index+=1
+	bone_count+=1
 	var point_instance=point.instance()
-	point_instance.name="point"+str(index)
+	point_instance.name="point"+str(bone_count)
 	point_instance.position=$Position2D.position
 	points.append(point)
 	
@@ -125,7 +130,7 @@ func _on_add_pressed():
 	if $CanvasLayer/Panel/tool_bar/layer.pressed:
 		print("图层功能")
 		$CanvasLayer/ask_layer.show()
-		$CanvasLayer/Panel/layer.show()
+		$CanvasLayer/Panel/layer_scroll/layer.show()
 		#$CanvasLayer2/anim_name.show()
 	pass # Replace with function body.
 
@@ -208,6 +213,7 @@ func _on_import_img_pressed():
 	update_file_state("导入图片")
 	update_mode_tip("导入图片")
 	$CanvasLayer2/FileDialog.mode=FileDialog.MODE_OPEN_ANY
+	$CanvasLayer2/FileDialog.set_filters(PoolStringArray(["*.png;*.jpg;*.bmp;*.tga;*.webp;"]))
 	$CanvasLayer2/FileDialog.popup()
 #更新文件状态
 func update_file_state(action):
@@ -219,11 +225,12 @@ func update_mode_tip(text:String):
 	$CanvasLayer/MenuBar/edit_mode.text="当前模式:"+text
 	edit_mode=text
 	print("模式:"+text)
+#更新选中的对象提示
 func update_selected_bone(bone:Node2D):
 	selected_bone=bone
 	current_select=selected_bone
 	print_debug("同步信息：选中的骨骼",bone)
-	$contorl_layer/selected_bone.text="选中的对象："+bone.name
+	$control_layer/selected_bone.text="选中的对象："+bone.name
 #加载外部文件
 func load_external_image(filepath:String):
 	var f=File.new()
@@ -261,20 +268,31 @@ func _on_FileDialog_file_selected(path):
 		shape.extents=Vector2(200,200)
 		col2d.shape=shape
 		area.connect("input_event",self,"drag")
-		var sprite=Sprite.new()
-		sprite.texture=texture
+		#资源管理器中的图片
+		var res_rect=TextureRect.new()
+		res_rect.texture=texture
+		res_rect.expand=true
+		res_rect.rect_min_size=Vector2(32,32)
+		var preline=HBoxContainer.new()
+		$CanvasLayer/Panel/res_content/res_layer.add_child(preline)
 		area.name=path.get_basename()
 		add_child(area)
 		#area.add_child(sprite)
 		area.position=$Position2D.position
-		#更新gui 资源按钮
+		#图片名称按钮 
 		var button=Button.new()
-		button.text=path.get_file()
-		button.set("custom_fonts/font",load("res://live2d/tres/font.tres"))
-	
-		button.connect("pressed",self,"select_image",[sprite.name,button])
+		button.text=path.get_file().split(".")[0]
+		var btn_del=Button.new()
+		btn_del.text="删除"
+		button.connect("pressed",self,"select_image",[area.name,button])
 		#更新gui 图层
-		$CanvasLayer/Panel/res_content/res_layer.add_child(button)
+		preline.add_child(res_rect)
+		preline.add_child(button)
+		preline.add_child(btn_del)
+		#调用资源管理器处理
+		btn_del.connect("pressed",ResourceManager,"remove_resource",[btn_del.get_parent(),res_rect,area])
+		Global.bind_btn_font([button,btn_del],Global.font)
+		ResourceManager.add_resource(res_rect)
 	pass
 #sprite button
 func select_image(image_name:String,button:Button):
@@ -306,24 +324,54 @@ func _on_confirmDel_confirmed():
 	if selected_btn!=null:
 		selected_btn.queue_free()
 	pass 
-
-
 func _on_rotate_tool_pressed():
 	Input.set_custom_mouse_cursor(load("res://live2d/img/旋转2.png"))
 	update_mode_tip("旋转模式")
-	pass # Replace with function body.
-
-
 func _on_move_tool_pressed():
 	Input.set_custom_mouse_cursor(load("res://live2d/img/arrow.png"))
 	update_mode_tip("选择模式")
-	pass 
 func _on_ProgressBar_value_changed(value):
-	$CanvasLayer2/ProgressBar/Label.text="旋转角度:"+str(value)
+	$control_layer/ProgressBar/Label.text="旋转角度:"+str(value)
 	if current_select!=null:
 		var node=get_node(current_select.name)
-		print("选中了:",node)
+		#print("选中了:",node)
 		node.set("rotation_degrees",value)
 func _draw():
 	if can_rotate:
 		draw_line($Position2D.position,get_global_mouse_position(),Color.blue,20)
+func window_control(index,popup:PopupMenu):
+	var check0=popup.is_item_checked(index)
+	if not check0:
+		popup.set_item_checked(index,true)
+		if index==0:
+			$CanvasLayer/anim_frame_panel.show()
+		if index==1:
+			$control_layer/tool_bar.show()
+		if index==2:
+			$CanvasLayer/Panel.show()
+		if index==3:
+			$CanvasLayer/tools.show()
+	if check0:
+		popup.set_item_checked(index,false)
+		if index==0:
+			$CanvasLayer/anim_frame_panel.hide()
+		if index==1:
+			$control_layer/tool_bar.hide()
+		if index==2:
+			$CanvasLayer/Panel.hide()
+		if index==3:
+			$CanvasLayer/tools.hide()
+	print_debug("选中项状态",check0)
+	pass
+#绑定图层材质
+func _on_bind_ok_pressed():
+	var texture_name=$CanvasLayer/ask_bind/editbox.text
+	print(ResourceManager.res_textures)
+	#i是Object
+	
+	pass
+#重置编辑器
+func _on_reset_pressed():
+# warning-ignore:return_value_discarded
+	get_tree().reload_current_scene()
+	pass # Replace with function body.
