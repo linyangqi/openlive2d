@@ -28,8 +28,8 @@ var anim_data_gd=load("res://live2d/class/AnimData.gd")
 signal reg_key
 func _ready():
 	OS.window_borderless=false
-	#Input.set_custom_mouse_cursor(load("res://live2d/img/arrow.png"))
-	tree = $CanvasLayer/Panel/ske_tree
+	Input.set_custom_mouse_cursor(load("res://live2d/img/arrow.png"))
+	tree = $CanvasLayer/ResManager/manager/ske_tree
 	root = tree.create_item()
 	root.set_text(0,"skeleton")
 	initMenuBar()
@@ -221,7 +221,7 @@ func _on_editor_pressed():
 func _on_add_ske_pressed():
 	update_mode_tip("添加骨架")
 	$CanvasLayer/tools/rotate_tool.disabled=false
-	$CanvasLayer/MenuBar/control_tip.text="操作提示："+"按下鼠标来添加骨骼"
+	$control_tip.text="操作提示："+"按下鼠标来添加骨骼"
 	pass # Replace with function body.
 #播放动画按钮
 func _on_play_pressed():
@@ -363,7 +363,7 @@ func window_control(index,popup:PopupMenu):
 		if index==1:
 			$control_layer/tool_bar.show()
 		if index==2:
-			$CanvasLayer/Panel.show()
+			$CanvasLayer/ResManager.show()
 		if index==3:
 			$CanvasLayer/tools.show()
 	if check0:
@@ -373,7 +373,7 @@ func window_control(index,popup:PopupMenu):
 		if index==1:
 			$control_layer/tool_bar.hide()
 		if index==2:
-			$CanvasLayer/Panel.hide()
+			$CanvasLayer/ResManager.hide()
 		if index==3:
 			$CanvasLayer/tools.hide()
 	print_debug("选中项状态",check0)

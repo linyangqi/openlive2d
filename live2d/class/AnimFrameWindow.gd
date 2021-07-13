@@ -11,4 +11,5 @@ func frame_selected(node:Panel,frame_name:String):
 func frame_remove():
 	current_item.queue_free()
 func update_rotation(rotation):
-	rotation_label.text="旋转角度:"+str(rotation)
+	if rotation_label!=null:
+		rotation_label.text="旋转角度:"+str(rotation)
