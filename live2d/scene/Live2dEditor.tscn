@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://live2d/panel_right.tres" type="ButtonGroup" id=1]
 [ext_resource path="res://live2d/scene/live2dEditor.gd" type="Script" id=2]
@@ -11,9 +11,16 @@
 [ext_resource path="res://live2d/img/mesh.png" type="Texture" id=9]
 [ext_resource path="res://live2d/Alibaba-PuHuiTi-Light.otf" type="DynamicFontData" id=10]
 [ext_resource path="res://live2d/tres/font.tres" type="DynamicFont" id=11]
+[ext_resource path="res://live2d/scene/CanvasLayer.gd" type="Script" id=12]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 10 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.333333, 0.494118, 0.678431, 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.396078, 0.403922, 0.345098, 1 )
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 2 )
@@ -150,8 +157,8 @@ theme = ExtResource( 3 )
 window_title = "打开文件"
 mode = 0
 access = 2
-current_dir = "/整理/000工作台/算法测试"
-current_path = "/整理/000工作台/算法测试/"
+current_dir = "/Users/11111/Documents/GitHub/Godot_useful_codes"
+current_path = "/Users/11111/Documents/GitHub/Godot_useful_codes/"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -168,19 +175,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="selected_bone" type="Label" parent="CanvasLayer2"]
-margin_left = 731.0
-margin_top = 450.0
-margin_right = 811.0
-margin_bottom = 475.0
-custom_fonts/font = ExtResource( 6 )
-text = "选中的骨骼：null"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
+script = ExtResource( 12 )
 
 [node name="Panel" type="Panel" parent="CanvasLayer"]
 margin_left = 751.0
@@ -309,16 +306,20 @@ __meta__ = {
 }
 
 [node name="layer" type="VBoxContainer" parent="CanvasLayer/Panel"]
-visible = false
 margin_left = 7.0
 margin_top = 48.0
 margin_right = 210.0
 margin_bottom = 342.0
 __meta__ = {
+"_edit_use_anchors_": false,
 "_editor_description_": "图层"
 }
 
+[node name="pre_imgRoot" type="HBoxContainer" parent="CanvasLayer/Panel/layer"]
+margin_right = 203.0
+
 [node name="res_content" type="ScrollContainer" parent="CanvasLayer/Panel"]
+visible = false
 margin_left = 7.0
 margin_top = 48.0
 margin_right = 210.0
@@ -334,10 +335,10 @@ __meta__ = {
 }
 
 [node name="tools" type="VBoxContainer" parent="CanvasLayer"]
-margin_left = 565.0
-margin_top = 127.0
-margin_right = 675.0
-margin_bottom = 390.0
+margin_left = 633.258
+margin_top = 123.825
+margin_right = 743.258
+margin_bottom = 386.825
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -407,6 +408,7 @@ margin_right = 110.0
 margin_bottom = 221.0
 theme = ExtResource( 4 )
 custom_fonts/font = SubResource( 1 )
+disabled = true
 text = "旋转工具"
 icon = ExtResource( 8 )
 __meta__ = {
@@ -497,32 +499,33 @@ text = "关于"
 
 [node name="edit_mode" type="Label" parent="CanvasLayer/MenuBar"]
 margin_left = 437.0
-margin_top = 18.0
-margin_right = 444.0
-margin_bottom = 20.0
+margin_top = 8.0
+margin_right = 549.0
+margin_bottom = 31.0
 custom_fonts/font = ExtResource( 6 )
 text = "当前模式：预览"
 
 [node name="control_tip" type="Label" parent="CanvasLayer/MenuBar"]
-margin_left = 448.0
-margin_top = 18.0
-margin_right = 453.0
-margin_bottom = 20.0
+margin_left = 553.0
+margin_top = 8.0
+margin_right = 633.0
+margin_bottom = 31.0
 custom_fonts/font = ExtResource( 6 )
 text = "操作提示："
 
 [node name="window" type="OptionButton" parent="CanvasLayer/MenuBar"]
-margin_left = 457.0
-margin_right = 550.0
+margin_left = 637.0
+margin_right = 730.0
 margin_bottom = 39.0
+theme = ExtResource( 3 )
 custom_fonts/font = ExtResource( 11 )
 text = "窗口开关"
 items = [ "窗口开关", null, false, 0, null, "底部控制条", null, false, 1, null, "动画帧编辑器", null, false, 2, null, "资源编辑器", null, false, 3, null ]
 selected = 0
 
 [node name="MenuButton" type="MenuButton" parent="CanvasLayer/MenuBar"]
-margin_left = 554.0
-margin_right = 570.0
+margin_left = 734.0
+margin_right = 810.0
 margin_bottom = 39.0
 custom_fonts/font = ExtResource( 6 )
 text = "窗口开关"
@@ -597,6 +600,94 @@ theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 11 )
 text = "网格控制"
 
+[node name="ask_layer" type="Panel" parent="CanvasLayer"]
+visible = false
+margin_left = 202.217
+margin_top = 132.447
+margin_right = 704.217
+margin_bottom = 451.447
+custom_styles/panel = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="editbox" type="LineEdit" parent="CanvasLayer/ask_layer"]
+margin_left = 113.075
+margin_top = 115.219
+margin_right = 416.075
+margin_bottom = 155.219
+custom_styles/normal = SubResource( 3 )
+custom_fonts/font = ExtResource( 6 )
+placeholder_text = "请输入图层名称"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ok" type="Button" parent="CanvasLayer/ask_layer/editbox"]
+margin_left = 174.0
+margin_top = 44.0
+margin_right = 247.0
+margin_bottom = 77.0
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
+text = "添加"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="cancel" type="Button" parent="CanvasLayer/ask_layer/editbox"]
+margin_left = 251.888
+margin_top = 43.3007
+margin_right = 304.888
+margin_bottom = 76.3007
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
+text = "取消"
+
+[node name="ask_bind" type="Panel" parent="CanvasLayer"]
+visible = false
+margin_left = 202.217
+margin_top = 132.447
+margin_right = 704.217
+margin_bottom = 451.447
+custom_styles/panel = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="editbox" type="LineEdit" parent="CanvasLayer/ask_bind"]
+margin_left = 113.075
+margin_top = 115.219
+margin_right = 416.075
+margin_bottom = 155.219
+custom_styles/normal = SubResource( 3 )
+custom_fonts/font = ExtResource( 6 )
+placeholder_text = "请输入要绑定的材质名称"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ok" type="Button" parent="CanvasLayer/ask_bind/editbox"]
+margin_left = 174.0
+margin_top = 44.0
+margin_right = 247.0
+margin_bottom = 77.0
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
+text = "添加绑定"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="cancel" type="Button" parent="CanvasLayer/ask_bind/editbox"]
+margin_left = 251.888
+margin_top = 43.3007
+margin_right = 304.888
+margin_bottom = 76.3007
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
+text = "取消"
+
 [node name="Position2D" type="Position2D" parent="."]
 position = Vector2( 414.124, 254.299 )
 
@@ -611,12 +702,39 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Bone2D" type="Bone2D" parent="."]
-position = Vector2( 460.223, 310.383 )
-rest = Transform2D( 1, 0, 0, 1, 0, 0 )
+[node name="control_layer" type="CanvasLayer" parent="."]
+layer = -2
 
-[node name="Skeleton2D" type="Skeleton2D" parent="."]
-position = Vector2( 453.088, 190.273 )
+[node name="ProgressBar" type="HSlider" parent="control_layer"]
+margin_left = 593.193
+margin_top = 427.34
+margin_right = 741.193
+margin_bottom = 459.34
+hint_tooltip = "旋转角度:"
+theme = ExtResource( 3 )
+max_value = 360.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="control_layer/ProgressBar"]
+margin_left = 4.48985
+margin_top = 30.3065
+margin_right = 44.4899
+margin_bottom = 53.3065
+custom_fonts/font = ExtResource( 6 )
+text = "旋转角度:0"
+
+[node name="selected_bone" type="Label" parent="control_layer"]
+margin_left = 361.136
+margin_top = 53.1498
+margin_right = 483.136
+margin_bottom = 78.1498
+custom_fonts/font = ExtResource( 6 )
+text = "选中的对象：null"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="pressed" from="CanvasLayer2/anim_name/ok" to="." method="_on_ok_pressed"]
 [connection signal="pressed" from="CanvasLayer2/anim_name/add_frame" to="." method="_on_add_frame_pressed"]
@@ -626,6 +744,7 @@ position = Vector2( 453.088, 190.273 )
 [connection signal="file_selected" from="CanvasLayer2/FileDialog" to="." method="_on_FileDialog_file_selected"]
 [connection signal="popup_hide" from="CanvasLayer2/FileDialog" to="." method="_on_FileDialog_popup_hide"]
 [connection signal="confirmed" from="CanvasLayer2/confirmDel" to="." method="_on_confirmDel_confirmed"]
+[connection signal="pressed" from="CanvasLayer/Panel/tool_bar/layer" to="CanvasLayer" method="_on_layer_pressed"]
 [connection signal="pressed" from="CanvasLayer/Panel/tool_bar/resource" to="CanvasLayer/Panel" method="_on_resource_pressed"]
 [connection signal="pressed" from="CanvasLayer/Panel/tool_bar/ske" to="CanvasLayer/Panel" method="_on_ske_pressed"]
 [connection signal="pressed" from="CanvasLayer/Panel/tool_bar/animation" to="CanvasLayer/Panel" method="_on_animation_pressed"]
@@ -645,5 +764,8 @@ position = Vector2( 453.088, 190.273 )
 [connection signal="pressed" from="CanvasLayer/MenuBar/about" to="." method="_on_about_pressed"]
 [connection signal="pressed" from="CanvasLayer/anim_frame_panel/add" to="." method="_on_anim_frame_add_pressed"]
 [connection signal="pressed" from="CanvasLayer/tool_bar/play" to="." method="_on_play_pressed"]
-[connection signal="about_to_show" from="File" to="." method="_on_File_about_to_show"]
+[connection signal="pressed" from="CanvasLayer/ask_layer/editbox/ok" to="CanvasLayer" method="_on_ok_pressed"]
+[connection signal="pressed" from="CanvasLayer/ask_layer/editbox/cancel" to="CanvasLayer" method="_on_cancel_pressed"]
+[connection signal="pressed" from="CanvasLayer/ask_bind/editbox/cancel" to="CanvasLayer" method="_on_bind_cancel_pressed"]
 [connection signal="pressed" from="File" to="." method="_on_File_pressed"]
+[connection signal="value_changed" from="control_layer/ProgressBar" to="." method="_on_ProgressBar_value_changed"]

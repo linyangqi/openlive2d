@@ -1,10 +1,10 @@
 extends Node2D
-var point=load("res://live2d算法/point.tscn")
+var point=load("res://live2d/point.tscn")
 var points=[]
 var index=0
 var mouse_start_pos
 var mouse_move_speed=2
-var edit_mode=""
+var edit_mode="预览"
 #骨架数据
 var ske_data=[]
 var current_bone_index=0
@@ -20,14 +20,15 @@ var selected_bone:Node2D
 var selected_mesh_point
 #当前选中的物体
 var current_select
-var is_drag=false
+#是否可旋转
+var can_rotate=false
 func initMenuBar():
 	$CanvasLayer/MenuBar/language.add_item("Chinese")
 	$CanvasLayer/MenuBar/language.add_item("English")
 	$CanvasLayer/MenuBar/language.add_item("Japanese")
 	$CanvasLayer/MenuBar/language.text="language"
 func _ready():
-	Input.set_custom_mouse_cursor(load("res://live2d算法/img/arrow.png"))
+	Input.set_custom_mouse_cursor(load("res://live2d/img/arrow.png"))
 	tree = $CanvasLayer/Panel/ske_tree
 	root = tree.create_item()
 	root.set_text(0,"skeleton")
@@ -56,17 +57,21 @@ func _input(event):
 	if event is InputEventMouseButton:
 		if event.is_pressed() and event.button_index==BUTTON_LEFT:
 			if edit_mode=="添加骨架":
-				var bone=load("res://live2d/组件/骨骼.tscn").instance()
+				can_rotate=false
+				var bone=load("res://live2d/control/骨骼.tscn").instance()
+				#bone.position=$Position2D.position
 				add_child(bone)
 				bone.position=event.position
-				#print(bone)
 				bone.connect("select_bone",self,"update_selected_bone",[bone])
 				#同步创建gui信息
 				var child1 = tree.create_item(root)
 				child1.set_text(0,"bone"+str(current_bone_index))
 				print(event.position)
 				current_bone_index+=1
-			pass
+			if edit_mode=="旋转模式":
+				can_rotate=true
+				print("状态>",can_rotate)
+				pass
 		if event.button_index==BUTTON_RIGHT:
 			mouse_start_pos=event.position
 			#print("视图移动",event.position)
@@ -103,17 +108,7 @@ func _on_add_point_pressed():
 func _on_File_pressed():
 	var popup=$File.get_popup()
 	print(popup.get_current_index())
-#	var text=popup.get_item_text(popup.get_current_index())
-#	print(text)
-	#$FileDialog.popup()
-	pass # Replace with function body.
-
-
-func _on_File_about_to_show():
-	print("about to show")
-	pass # Replace with function body.
-
-
+	pass 
 func _on_openfile_pressed():
 	update_mode_tip("打开文件")
 	$CanvasLayer2/FileDialog.popup()
@@ -124,9 +119,14 @@ func _on_savefile_pressed():
 	update_mode_tip("保存文件")
 	pass # Replace with function body.
 
-#添加动画id名称
+#添加按钮
 func _on_add_pressed():
-	$CanvasLayer2/anim_name.show()
+	print("按下了添加按钮")
+	if $CanvasLayer/Panel/tool_bar/layer.pressed:
+		print("图层功能")
+		$CanvasLayer/ask_layer.show()
+		$CanvasLayer/Panel/layer.show()
+		#$CanvasLayer2/anim_name.show()
 	pass # Replace with function body.
 
 #添加动画名称
@@ -193,10 +193,9 @@ func _on_editor_pressed():
 # warning-ignore:return_value_discarded
 	OS.shell_open("https://gitee.com/small-sandbox/Godot_useful_codes")
 	pass # Replace with function body.
-
-
 func _on_add_ske_pressed():
 	update_mode_tip("添加骨架")
+	$CanvasLayer/tools/rotate_tool.disabled=false
 	$CanvasLayer/MenuBar/control_tip.text="操作提示："+"按下鼠标来添加骨骼"
 	pass # Replace with function body.
 #播放动画按钮
@@ -204,7 +203,6 @@ func _on_play_pressed():
 	update_mode_tip("播放动画")
 	edit_mode="play anim"
 	pass # Replace with function body.
-
 #导入图片资源
 func _on_import_img_pressed():
 	update_file_state("导入图片")
@@ -223,8 +221,9 @@ func update_mode_tip(text:String):
 	print("模式:"+text)
 func update_selected_bone(bone:Node2D):
 	selected_bone=bone
+	current_select=selected_bone
 	print_debug("同步信息：选中的骨骼",bone)
-	$CanvasLayer2/selected_bone.text="选中的骨骼："+bone.name
+	$contorl_layer/selected_bone.text="选中的对象："+bone.name
 #加载外部文件
 func load_external_image(filepath:String):
 	var f=File.new()
@@ -268,12 +267,13 @@ func _on_FileDialog_file_selected(path):
 		add_child(area)
 		#area.add_child(sprite)
 		area.position=$Position2D.position
-		#更新gui
+		#更新gui 资源按钮
 		var button=Button.new()
 		button.text=path.get_file()
 		button.set("custom_fonts/font",load("res://live2d/tres/font.tres"))
 	
 		button.connect("pressed",self,"select_image",[sprite.name,button])
+		#更新gui 图层
 		$CanvasLayer/Panel/res_content/res_layer.add_child(button)
 	pass
 #sprite button
@@ -317,4 +317,13 @@ func _on_rotate_tool_pressed():
 func _on_move_tool_pressed():
 	Input.set_custom_mouse_cursor(load("res://live2d/img/arrow.png"))
 	update_mode_tip("选择模式")
-	pass # Replace with function body.
+	pass 
+func _on_ProgressBar_value_changed(value):
+	$CanvasLayer2/ProgressBar/Label.text="旋转角度:"+str(value)
+	if current_select!=null:
+		var node=get_node(current_select.name)
+		print("选中了:",node)
+		node.set("rotation_degrees",value)
+func _draw():
+	if can_rotate:
+		draw_line($Position2D.position,get_global_mouse_position(),Color.blue,20)

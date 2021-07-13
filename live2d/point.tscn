@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://live2d算法/point.tres" type="Shape2D" id=1]
-[ext_resource path="res://live2d算法/point.gd" type="Script" id=2]
+[ext_resource path="res://live2d/point.tres" type="Shape2D" id=1]
+[ext_resource path="res://live2d/point.gd" type="Script" id=2]
 
 [node name="point" type="Area2D"]
 script = ExtResource( 2 )

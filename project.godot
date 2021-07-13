@@ -9,6 +9,36 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "ColorRect",
+"class": "ColorTile",
+"language": "GDScript",
+"path": "res://addons/color-palette/ColorTile.gd"
+}, {
+"base": "Container",
+"class": "FlexGridContainer",
+"language": "GDScript",
+"path": "res://addons/color-palette/utilities/FlexGridContainer.gd"
+}, {
+"base": "Reference",
+"class": "Palette",
+"language": "GDScript",
+"path": "res://addons/color-palette/Palette.gd"
+}, {
+"base": "Reference",
+"class": "PaletteImporter",
+"language": "GDScript",
+"path": "res://addons/color-palette/PaletteImporter.gd"
+}, {
+"base": "Reference",
+"class": "dragState",
+"language": "GDScript",
+"path": "res://live2d/class/dragState.gd"
+}, {
+"base": "Reference",
+"class": "editMode",
+"language": "GDScript",
+"path": "res://live2d/class/editMode.gd"
+}, {
 "base": "Reference",
 "class": "file_dialog",
 "language": "GDScript",
@@ -20,6 +50,12 @@ _global_script_classes=[ {
 "path": "res://live2d/class/meshPoint.gd"
 } ]
 _global_script_class_icons={
+"ColorTile": "",
+"FlexGridContainer": "res://addons/color-palette/utilities/FlexGridContainerIcon.png",
+"Palette": "",
+"PaletteImporter": "",
+"dragState": "",
+"editMode": "",
 "file_dialog": "",
 "mesh_point": ""
 }
@@ -27,8 +63,15 @@ _global_script_class_icons={
 [application]
 
 config/name="OpenLive2d editor"
-run/main_scene="res://live2d/start.tscn"
-config/icon="res://live2d算法/icon.png"
+config/icon="res://live2d/icon.png"
+
+[autoload]
+
+Global="*res://live2d/Global.gd"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/color-palette/plugin.cfg" )
 
 [input]
 
