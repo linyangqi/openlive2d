@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/删 除  (1).png-6d2f053bbc600496b0f002bf6cc5dcd7.stex"
+path="res://.import/del.png-ce86e704023c15cc1609e6355ce0e8aa.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://live2d/删 除  (1).png"
-dest_files=[ "res://.import/删 除  (1).png-6d2f053bbc600496b0f002bf6cc5dcd7.stex" ]
+source_file="res://live2d/img/del.png"
+dest_files=[ "res://.import/del.png-ce86e704023c15cc1609e6355ce0e8aa.stex" ]
 
 [params]
 

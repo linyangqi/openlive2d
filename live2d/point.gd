@@ -1,24 +1,18 @@
-extends Area2D
-
-func _ready():
-	pass 
-# warning-ignore:unused_argument
-# warning-ignore:unused_argument
-func _on_point_input_event(viewport, event, shape_idx):
-	if event is InputEventMouseButton:
-		if event.button_index==BUTTON_LEFT:
-			self.position=event.position
-	if event is InputEventMouseMotion:
-		#self.position=event.position
-		pass
-	pass # Replace with function body.
-
-
+extends Drag
+var color_select=Color.red
+var color_normal=Color.green
+var color=color_normal
 func _on_point_mouse_entered():
-	$CanvasModulate.color=Color(0.219608, 0.698039, 0.180392)
+	color=color_select
 	pass # Replace with function body.
-
-
+func _on_Drag_input_event(viewport, event, shape_idx):
+	._on_Drag_input_event(viewport,event,shape_idx)
 func _on_point_mouse_exited():
-	$CanvasModulate.color=Color(1,1,1)
-	pass # Replace with function body.
+	color=color_normal
+func _process(delta):
+	._process(delta)
+	update()
+func _on_point_input_event(viewport, event, shape_idx):
+	._on_Drag_input_event(viewport,event,shape_idx)
+func _draw():
+	draw_circle(Vector2(0,0),10.0,color)

@@ -25,7 +25,7 @@ var current_select
 var can_rotate=false
 var ResourceManager=load("res://live2d/class/ResourceManager.gd").new()
 var anim_data_gd=load("res://live2d/class/AnimData.gd")
-signal reg_key
+#signal reg_key
 func _ready():
 	OS.window_borderless=false
 	Input.set_custom_mouse_cursor(load("res://live2d/img/arrow.png"))
@@ -75,11 +75,19 @@ func _input(event):
 			if edit_mode=="旋转模式":
 				can_rotate=true
 				print("状态>",can_rotate)
-				pass
-		if event.button_index==BUTTON_RIGHT:
-			mouse_start_pos=event.position
-			#print("视图移动",event.position)
-			pass
+			if edit_mode=="预览":
+				$CanvasLayer3/Drag.position=event.position
+			if edit_mode=="添加顶点":
+				#Global.editor_data.point_count+=1
+				var point_instance=point.instance()
+				point_instance.name="point"+str(Global.editor_data.point_count)
+				point_instance.position=event.position
+				add_child(point_instance)
+				$HudLayer/hbox/vertex_info.text="顶点信息：顶点数量>"+str(Global.editor_data.point_count)
+		if event.is_pressed() and event.button_index==BUTTON_RIGHT:
+			if edit_mode=="添加顶点":
+				print("退出添加顶点编辑模式")
+				edit_mode="预览"
 		if event.button_index==BUTTON_WHEEL_UP and edit_mode!="导入图片" and edit_mode!="打开文件" and edit_mode!="保存文件":
 			$Camera2D.zoom.x-=0.1
 			$Camera2D.zoom.y-=0.1
@@ -96,19 +104,15 @@ func _on_reset_zoom_pressed():
 	$Camera2D.zoom=Vector2(1,1)
 	pass # Replace with function body.
 
-
+#添加网格顶点
 func _on_add_point_pressed():
-	bone_count+=1
-	var point_instance=point.instance()
-	point_instance.name="point"+str(bone_count)
-	point_instance.position=$Position2D.position
-	points.append(point)
-	
-	add_child(point_instance)
-	
+	edit_mode="添加顶点"
+	update_mode_tip("添加顶点")
+	update_hud_tip("左键添加顶点，右键退出编辑（完成）")
 	pass # Replace with function body.
-
-
+#操作提示
+func update_hud_tip(text):
+	$HudLayer/hbox/control_tip.text="操作提示:"+text
 func _on_File_pressed():
 	var popup=$File.get_popup()
 	print(popup.get_current_index())
@@ -399,4 +403,8 @@ func _on_reg_key_pressed():
 		print("注册帧>对象:",current_select)
 		print("注册帧>旋转信息:",rotation)
 		Global.animFrameWindow.update_rotation(rotation)
-	pass 
+#删除顶点
+func _on_del_point_pressed():
+	update_hud_tip("点击要删除的顶点")
+	update_mode_tip("删除顶点模式")
+	pass # Replace with function body.

@@ -63,4 +63,3 @@ func _on_rename_pressed():
 	$ask_rename.hide()
 	print("重命名,名称",anim_name)
 	Global.res_manager.rename_btn(anim_name)
-	pass # Replace with function body.
