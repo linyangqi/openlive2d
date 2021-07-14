@@ -1,3 +1,4 @@
+#编辑器主类
 extends Node2D
 var point=load("res://live2d/point.tscn")
 var points=[]
@@ -75,7 +76,7 @@ func _input(event):
 			if edit_mode=="旋转模式":
 				can_rotate=true
 				print("状态>",can_rotate)
-			if edit_mode=="预览":
+			if edit_mode=="预览模式":
 				$CanvasLayer3/Drag.position=event.position
 			if edit_mode=="添加顶点":
 				#Global.editor_data.point_count+=1
@@ -84,10 +85,23 @@ func _input(event):
 				point_instance.position=event.position
 				add_child(point_instance)
 				$HudLayer/hbox/vertex_info.text="顶点信息：顶点数量>"+str(Global.editor_data.point_count)
+			if edit_mode=="删除顶点":
+				Global.editor_mode.current_mode="删除顶点"
+			
+				pass
 		if event.is_pressed() and event.button_index==BUTTON_RIGHT:
 			if edit_mode=="添加顶点":
-				print("退出添加顶点编辑模式")
-				edit_mode="预览"
+				print("退出添加顶点模式")
+				edit_mode="预览模式"
+				sync_edit_mode(edit_mode)
+				update_hud_tip("预览模式")
+				update_mode_tip("预览模式")
+			if edit_mode=="删除顶点":
+				print("退出顶点删除模式")
+				edit_mode="预览模式"
+				sync_edit_mode(edit_mode)
+				update_hud_tip("预览模式")
+				update_mode_tip("预览模式")
 		if event.button_index==BUTTON_WHEEL_UP and edit_mode!="导入图片" and edit_mode!="打开文件" and edit_mode!="保存文件":
 			$Camera2D.zoom.x-=0.1
 			$Camera2D.zoom.y-=0.1
@@ -102,14 +116,15 @@ func _input(event):
 func _on_reset_zoom_pressed():
 	$CanvasLayer/MenuBar/zoom.text="zoom:"+str(1)
 	$Camera2D.zoom=Vector2(1,1)
-	pass # Replace with function body.
-
 #添加网格顶点
 func _on_add_point_pressed():
 	edit_mode="添加顶点"
 	update_mode_tip("添加顶点")
 	update_hud_tip("左键添加顶点，右键退出编辑（完成）")
-	pass # Replace with function body.
+	sync_edit_mode("添加顶点")
+#同步更新编辑模式到全局变量
+func sync_edit_mode(value):
+	Global.editor_mode.current_mode=value
 #操作提示
 func update_hud_tip(text):
 	$HudLayer/hbox/control_tip.text="操作提示:"+text
@@ -405,6 +420,7 @@ func _on_reg_key_pressed():
 		Global.animFrameWindow.update_rotation(rotation)
 #删除顶点
 func _on_del_point_pressed():
-	update_hud_tip("点击要删除的顶点")
+	update_hud_tip("点击要删除的顶点,右键退出")
 	update_mode_tip("删除顶点模式")
+	edit_mode="删除顶点"
 	pass # Replace with function body.

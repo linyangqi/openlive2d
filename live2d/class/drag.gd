@@ -5,6 +5,7 @@ var is_drag=false
 var offest=Vector2.ZERO
 var draw_pos:Vector2
 var is_enable_test_print=false
+var remove_self_on_select=false
 func _ready():
 	draw_pos=self.position-Vector2(50,50)
 	set_process(true)
