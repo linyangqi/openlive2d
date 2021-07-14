@@ -26,11 +26,15 @@ var current_select
 var can_rotate=false
 var ResourceManager=load("res://live2d/class/ResourceManager.gd").new()
 var anim_data_gd=load("res://live2d/class/AnimData.gd")
-#signal reg_key
+#line2d 连线用
+var line
+var is_drag=false
+var can_draw=false
+var can_zoom=true
 func _ready():
 	OS.window_borderless=false
 	Input.set_custom_mouse_cursor(load("res://live2d/img/arrow.png"))
-	tree = $CanvasLayer/ResManager/manager/ske_tree
+	tree = $ResManagerLayer/ResManager/manager/vbox/ske_tree
 	root = tree.create_item()
 	root.set_text(0,"skeleton")
 	initMenuBar()
@@ -44,8 +48,6 @@ func init_window_manager():
 	var window=$CanvasLayer/MenuBar/window
 	var popup=window.get_popup()
 	popup.connect("index_pressed",self,"window_control",[popup])
-func init_ske_tree():
-	pass
 # warning-ignore:unused_argument
 func _process(delta):
 	if Input.is_action_pressed("w"):
@@ -56,9 +58,15 @@ func _process(delta):
 		$Camera2D.position.x+=mouse_move_speed
 	if Input.is_action_pressed("s"):
 		$Camera2D.position.y+=mouse_move_speed
+	if is_drag:
+		update()
+	update_fps()
+func _draw():
+	if can_draw:
+		draw_rect(Rect2(get_global_mouse_position(),Vector2(100,100)),Color.green,false,2.0,true)
+func update_fps():
 	var fps=Engine.get_frames_per_second()
 	$CanvasLayer/fps.text="fps:"+str(fps)
-	pass
 func _input(event):
 	if event is InputEventMouseButton:
 		if event.is_pressed() and event.button_index==BUTTON_LEFT:
@@ -77,17 +85,24 @@ func _input(event):
 				can_rotate=true
 				print("状态>",can_rotate)
 			if edit_mode=="预览模式":
+				#游标位置
 				$CanvasLayer3/Drag.position=event.position
+				can_draw=false
 			if edit_mode=="添加顶点":
-				#Global.editor_data.point_count+=1
+				Global.editor_data.point_count+=1
 				var point_instance=point.instance()
 				point_instance.name="point"+str(Global.editor_data.point_count)
 				point_instance.position=event.position
 				add_child(point_instance)
 				$HudLayer/hbox/vertex_info.text="顶点信息：顶点数量>"+str(Global.editor_data.point_count)
 			if edit_mode=="删除顶点":
-				Global.editor_mode.current_mode="删除顶点"
-			
+				Global.editor_data.point_count-=1
+				$HudLayer/hbox/vertex_info.text="顶点信息:顶点数量:"+str(Global.editor_data.point_count)
+			if edit_mode=="顶点连线":
+				line.add_point(event.position)
+			if edit_mode=="框选模式":
+				is_drag=true
+				can_draw=true
 				pass
 		if event.is_pressed() and event.button_index==BUTTON_RIGHT:
 			if edit_mode=="添加顶点":
@@ -102,16 +117,30 @@ func _input(event):
 				sync_edit_mode(edit_mode)
 				update_hud_tip("预览模式")
 				update_mode_tip("预览模式")
-		if event.button_index==BUTTON_WHEEL_UP and edit_mode!="导入图片" and edit_mode!="打开文件" and edit_mode!="保存文件":
-			$Camera2D.zoom.x-=0.1
-			$Camera2D.zoom.y-=0.1
-			print("zoom",$Camera2D.zoom)
-			$CanvasLayer/MenuBar/zoom.text="zoom:"+str($Camera2D.zoom.x)
-		if event.button_index==BUTTON_WHEEL_DOWN and edit_mode!="导入图片" and edit_mode!="打开文件" and edit_mode!="保存文件":
-			print("zoom",$Camera2D.zoom)
-			$CanvasLayer/MenuBar/zoom.text="zoom:"+str($Camera2D.zoom.x)
-			$Camera2D.zoom.x+=0.1
-			$Camera2D.zoom.y+=0.1
+			if edit_mode=="顶点连线":
+				edit_mode="预览模式"
+				sync_edit_mode(edit_mode)
+				update_hud_tip(edit_mode)
+				update_mode_tip(edit_mode)
+			if edit_mode=="框选模式":
+				is_drag=false
+				can_draw=false
+				edit_mode="预览模式"
+				sync_edit_mode(edit_mode)
+				update_hud_tip(edit_mode)
+				update_mode_tip(edit_mode)
+				print("退出框选模式")
+		if can_zoom:
+			if event.button_index==BUTTON_WHEEL_UP and edit_mode!="导入图片" and edit_mode!="打开文件" and edit_mode!="保存文件":
+				$Camera2D.zoom.x-=0.1
+				$Camera2D.zoom.y-=0.1
+				print("zoom",$Camera2D.zoom)
+				$CanvasLayer/MenuBar/zoom.text="zoom:"+str($Camera2D.zoom.x)
+			if event.button_index==BUTTON_WHEEL_DOWN and edit_mode!="导入图片" and edit_mode!="打开文件" and edit_mode!="保存文件":
+				print("zoom",$Camera2D.zoom)
+				$CanvasLayer/MenuBar/zoom.text="zoom:"+str($Camera2D.zoom.x)
+				$Camera2D.zoom.x+=0.1
+				$Camera2D.zoom.y+=0.1
 		pass
 func _on_reset_zoom_pressed():
 	$CanvasLayer/MenuBar/zoom.text="zoom:"+str(1)
@@ -239,8 +268,8 @@ func _on_editor_pressed():
 	pass # Replace with function body.
 func _on_add_ske_pressed():
 	update_mode_tip("添加骨架")
-	$CanvasLayer/tools/rotate_tool.disabled=false
-	$control_tip.text="操作提示："+"按下鼠标来添加骨骼"
+	#$.disabled=false
+	$HudLayer/hbox/control_tip.text="操作提示："+"按下鼠标来添加骨骼"
 	pass # Replace with function body.
 #播放动画按钮
 func _on_play_pressed():
@@ -269,7 +298,7 @@ func update_selected_bone(bone:Node2D):
 	selected_bone=bone
 	current_select=selected_bone
 	print_debug("同步信息：选中的骨骼",bone)
-	$control_layer/current_tip/selected_bone.text="选中的对象："+bone.name
+	$HudLayer/current_tip/selected_bone.text="选中的对象："+bone.name
 #加载外部文件
 func load_external_image(filepath:String):
 	var f=File.new()
@@ -370,9 +399,6 @@ func _on_ProgressBar_value_changed(value):
 		var node=get_node(current_select.name)
 		#print("选中了:",node)
 		node.set("rotation_degrees",value)
-func _draw():
-	if can_rotate:
-		draw_line($Position2D.position,get_global_mouse_position(),Color.blue,20)
 func window_control(index,popup:PopupMenu):
 	var check0=popup.is_item_checked(index)
 	if not check0:
@@ -423,4 +449,25 @@ func _on_del_point_pressed():
 	update_hud_tip("点击要删除的顶点,右键退出")
 	update_mode_tip("删除顶点模式")
 	edit_mode="删除顶点"
-	pass # Replace with function body.
+	sync_edit_mode(edit_mode)
+#顶点连线
+func _on_point_toline_pressed():
+	update_hud_tip("点击输入坐标，连线")
+	update_mode_tip("顶点连线模式")
+	edit_mode="顶点连线"
+	sync_edit_mode(edit_mode)
+	line=Line2D.new()
+	#line.position=$Position2D.position
+	$test.rect_position=$Position2D.position
+	add_child(line)
+	pass
+#框选工具
+func _on_rect_select_pressed():
+	edit_mode="框选模式"
+	print("进入框选模式！")
+	sync_edit_mode(edit_mode)
+	update_hud_tip("拖动鼠标来框选物体，右键退出")
+	update_mode_tip(edit_mode)
+func _on_ScrollContainer_mouse_entered():
+	can_zoom=false
+	print("不许缩放")

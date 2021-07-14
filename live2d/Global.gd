@@ -27,3 +27,7 @@ func bind_btn_font(button:Array,custom_font):
 func adder(node:Node,child_array:Array):
 	for i in child_array:
 		node.add_child(i)
+#加载外部文件
+func load_external_image(filepath:String):
+	
+	pass

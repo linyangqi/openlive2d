@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://live2d/panel_right.tres" type="ButtonGroup" id=1]
 [ext_resource path="res://live2d/scene/live2dEditor.gd" type="Script" id=2]
@@ -42,6 +42,12 @@ action = "select"
 [sub_resource type="ShortCut" id=6]
 shortcut = SubResource( 5 )
 
+[sub_resource type="InputEventAction" id=16]
+action = "rect_select"
+
+[sub_resource type="ShortCut" id=17]
+shortcut = SubResource( 16 )
+
 [sub_resource type="InputEventAction" id=7]
 action = "rotate"
 
@@ -73,11 +79,6 @@ font_data = ExtResource( 10 )
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 2 )
-
-[node name="Line2D" type="Line2D" parent="."]
-visible = false
-points = PoolVector2Array( 476, 119, 335, 338 )
-default_color = Color( 0, 0, 0, 1 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 515.412, 302.033 )
@@ -263,10 +264,10 @@ layer = -1
 script = ExtResource( 12 )
 
 [node name="fps" type="Label" parent="CanvasLayer"]
-margin_left = 17.5639
-margin_top = 552.567
-margin_right = 57.5639
-margin_bottom = 566.567
+margin_left = 913.241
+margin_top = 53.3369
+margin_right = 953.241
+margin_bottom = 67.3369
 rect_scale = Vector2( 2, 2 )
 text = "fps"
 __meta__ = {
@@ -737,118 +738,6 @@ theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 11 )
 text = "网格控制"
 
-[node name="tools" type="HBoxContainer" parent="control_layer"]
-margin_left = 346.0
-margin_top = 561.0
-margin_right = 992.0
-margin_bottom = 587.0
-script = ExtResource( 18 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="control_layer/tools"]
-margin_top = 3.0
-margin_right = 42.0
-margin_bottom = 23.0
-mouse_filter = 1
-mouse_default_cursor_shape = 13
-custom_styles/normal = ExtResource( 16 )
-custom_fonts/font = ExtResource( 17 )
-text = "工具条"
-align = 1
-
-[node name="move_tool" type="Button" parent="control_layer/tools"]
-margin_left = 46.0
-margin_right = 132.0
-margin_bottom = 26.0
-theme = ExtResource( 4 )
-custom_fonts/font = ExtResource( 17 )
-shortcut = SubResource( 6 )
-text = "选择工具"
-icon = ExtResource( 7 )
-__meta__ = {
-"_edit_use_anchors_": false,
-"_editor_description_": "添加关键帧"
-}
-
-[node name="rotate_tool" type="Button" parent="control_layer/tools"]
-margin_left = 136.0
-margin_right = 222.0
-margin_bottom = 26.0
-theme = ExtResource( 4 )
-custom_fonts/font = ExtResource( 17 )
-shortcut = SubResource( 8 )
-text = "旋转工具"
-icon = ExtResource( 8 )
-__meta__ = {
-"_edit_use_anchors_": false,
-"_editor_description_": "添加关键帧"
-}
-
-[node name="add_point" type="Button" parent="control_layer/tools"]
-margin_left = 226.0
-margin_right = 312.0
-margin_bottom = 26.0
-theme = ExtResource( 4 )
-custom_fonts/font = ExtResource( 17 )
-shortcut = SubResource( 10 )
-text = "添加顶点"
-icon = ExtResource( 9 )
-__meta__ = {
-"_edit_use_anchors_": true
-}
-
-[node name="del_point" type="Button" parent="control_layer/tools"]
-margin_left = 316.0
-margin_right = 402.0
-margin_bottom = 26.0
-theme = ExtResource( 4 )
-custom_fonts/font = ExtResource( 17 )
-text = "删除顶点"
-icon = ExtResource( 23 )
-__meta__ = {
-"_edit_use_anchors_": true
-}
-
-[node name="reset zoom" type="Button" parent="control_layer/tools"]
-margin_left = 406.0
-margin_right = 502.0
-margin_bottom = 26.0
-theme = ExtResource( 4 )
-custom_fonts/font = ExtResource( 17 )
-shortcut = SubResource( 12 )
-text = "重置视图缩放"
-__meta__ = {
-"_edit_use_anchors_": true
-}
-
-[node name="add_ske" type="Button" parent="control_layer/tools"]
-margin_left = 506.0
-margin_right = 574.0
-margin_bottom = 26.0
-theme = ExtResource( 4 )
-custom_fonts/font = ExtResource( 17 )
-text = "添加骨架"
-__meta__ = {
-"_edit_use_anchors_": false,
-"_editor_description_": "添加关键帧"
-}
-
-[node name="edit_mesh" type="Button" parent="control_layer/tools"]
-margin_left = 578.0
-margin_right = 664.0
-margin_bottom = 26.0
-theme = ExtResource( 4 )
-custom_fonts/font = ExtResource( 17 )
-shortcut = SubResource( 14 )
-text = "编辑网格"
-icon = ExtResource( 9 )
-__meta__ = {
-"_edit_use_anchors_": false,
-"_editor_description_": "添加关键帧"
-}
-
 [node name="work_mode" type="HBoxContainer" parent="control_layer"]
 margin_left = 699.334
 margin_top = 51.1957
@@ -885,6 +774,153 @@ custom_fonts/font = ExtResource( 6 )
 toggle_mode = true
 group = ExtResource( 20 )
 text = "动画"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="control_layer"]
+margin_left = 208.0
+margin_top = 554.0
+margin_right = 809.0
+margin_bottom = 592.0
+scroll_vertical_enabled = false
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="tools" type="HBoxContainer" parent="control_layer/ScrollContainer"]
+margin_right = 808.0
+margin_bottom = 26.0
+script = ExtResource( 18 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="control_layer/ScrollContainer/tools"]
+margin_top = 3.0
+margin_right = 42.0
+margin_bottom = 23.0
+mouse_filter = 1
+mouse_default_cursor_shape = 13
+custom_styles/normal = ExtResource( 16 )
+custom_fonts/font = ExtResource( 17 )
+text = "工具条"
+align = 1
+
+[node name="move_tool" type="Button" parent="control_layer/ScrollContainer/tools"]
+margin_left = 46.0
+margin_right = 132.0
+margin_bottom = 26.0
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 17 )
+shortcut = SubResource( 6 )
+text = "选择工具"
+icon = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "添加关键帧"
+}
+
+[node name="rect_select" type="Button" parent="control_layer/ScrollContainer/tools"]
+margin_left = 136.0
+margin_right = 204.0
+margin_bottom = 26.0
+hint_tooltip = "快捷键B"
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 17 )
+shortcut_in_tooltip = false
+shortcut = SubResource( 17 )
+text = "框选工具"
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "添加关键帧"
+}
+
+[node name="rotate_tool" type="Button" parent="control_layer/ScrollContainer/tools"]
+margin_left = 208.0
+margin_right = 294.0
+margin_bottom = 26.0
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 17 )
+shortcut = SubResource( 8 )
+text = "旋转工具"
+icon = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "添加关键帧"
+}
+
+[node name="add_point" type="Button" parent="control_layer/ScrollContainer/tools"]
+margin_left = 298.0
+margin_right = 384.0
+margin_bottom = 26.0
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 17 )
+shortcut = SubResource( 10 )
+text = "添加顶点"
+icon = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="del_point" type="Button" parent="control_layer/ScrollContainer/tools"]
+margin_left = 388.0
+margin_right = 474.0
+margin_bottom = 26.0
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 17 )
+text = "删除顶点"
+icon = ExtResource( 23 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="point_toline" type="Button" parent="control_layer/ScrollContainer/tools"]
+margin_left = 478.0
+margin_right = 546.0
+margin_bottom = 26.0
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 17 )
+text = "顶点连线"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="reset zoom" type="Button" parent="control_layer/ScrollContainer/tools"]
+margin_left = 550.0
+margin_right = 646.0
+margin_bottom = 26.0
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 17 )
+shortcut = SubResource( 12 )
+text = "重置视图缩放"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="add_ske" type="Button" parent="control_layer/ScrollContainer/tools"]
+margin_left = 650.0
+margin_right = 718.0
+margin_bottom = 26.0
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 17 )
+text = "添加骨架"
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "添加关键帧"
+}
+
+[node name="edit_mesh" type="Button" parent="control_layer/ScrollContainer/tools"]
+margin_left = 722.0
+margin_right = 808.0
+margin_bottom = 26.0
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 17 )
+shortcut = SubResource( 14 )
+text = "编辑网格"
+icon = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "添加关键帧"
+}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 "anims/新建动画" = ExtResource( 15 )
@@ -932,10 +968,10 @@ __meta__ = {
 }
 
 [node name="current_tip" type="HBoxContainer" parent="HudLayer"]
-margin_left = 70.2829
-margin_top = 554.083
-margin_right = 339.283
-margin_bottom = 594.083
+margin_left = 339.659
+margin_top = 60.4105
+margin_right = 608.659
+margin_bottom = 100.41
 __meta__ = {
 "_edit_group_": true,
 "_edit_use_anchors_": false,
@@ -943,21 +979,21 @@ __meta__ = {
 }
 
 [node name="selected_bone" type="Label" parent="HudLayer/current_tip"]
-margin_top = 8.0
-margin_right = 122.0
-margin_bottom = 31.0
-custom_fonts/font = ExtResource( 6 )
+margin_top = 10.0
+margin_right = 106.0
+margin_bottom = 30.0
+custom_fonts/font = ExtResource( 17 )
 text = "选中的对象：null"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="edited_anim" type="Label" parent="HudLayer/current_tip"]
-margin_left = 126.0
-margin_top = 8.0
-margin_right = 269.0
-margin_bottom = 31.0
-custom_fonts/font = ExtResource( 6 )
+margin_left = 110.0
+margin_top = 10.0
+margin_right = 235.0
+margin_bottom = 30.0
+custom_fonts/font = ExtResource( 17 )
 text = "当前编辑的动画:null"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1169,16 +1205,19 @@ script = ExtResource( 22 )
 [connection signal="value_changed" from="control_layer/ProgressBar" to="." method="_on_ProgressBar_value_changed"]
 [connection signal="pressed" from="control_layer/tool_bar/play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="control_layer/tool_bar/reg_key" to="." method="_on_reg_key_pressed"]
-[connection signal="gui_input" from="control_layer/tools/Label" to="control_layer/tools" method="_on_Label_gui_input"]
-[connection signal="pressed" from="control_layer/tools/move_tool" to="." method="_on_move_tool_pressed"]
-[connection signal="pressed" from="control_layer/tools/rotate_tool" to="." method="_on_rotate_tool_pressed"]
-[connection signal="pressed" from="control_layer/tools/add_point" to="." method="_on_add_point_pressed"]
-[connection signal="pressed" from="control_layer/tools/del_point" to="." method="_on_del_point_pressed"]
-[connection signal="pressed" from="control_layer/tools/reset zoom" to="." method="_on_reset_zoom_pressed"]
-[connection signal="pressed" from="control_layer/tools/add_ske" to="." method="_on_add_ske_pressed"]
-[connection signal="pressed" from="control_layer/tools/edit_mesh" to="." method="_on_add_ske_pressed"]
 [connection signal="pressed" from="control_layer/work_mode/model" to="control_layer" method="_on_model_pressed"]
 [connection signal="pressed" from="control_layer/work_mode/anim" to="control_layer" method="_on_anim_pressed"]
+[connection signal="mouse_entered" from="control_layer/ScrollContainer" to="." method="_on_ScrollContainer_mouse_entered"]
+[connection signal="gui_input" from="control_layer/ScrollContainer/tools/Label" to="control_layer/ScrollContainer/tools" method="_on_Label_gui_input"]
+[connection signal="pressed" from="control_layer/ScrollContainer/tools/move_tool" to="." method="_on_move_tool_pressed"]
+[connection signal="pressed" from="control_layer/ScrollContainer/tools/rect_select" to="." method="_on_rect_select_pressed"]
+[connection signal="pressed" from="control_layer/ScrollContainer/tools/rotate_tool" to="." method="_on_rotate_tool_pressed"]
+[connection signal="pressed" from="control_layer/ScrollContainer/tools/add_point" to="." method="_on_add_point_pressed"]
+[connection signal="pressed" from="control_layer/ScrollContainer/tools/del_point" to="." method="_on_del_point_pressed"]
+[connection signal="pressed" from="control_layer/ScrollContainer/tools/point_toline" to="." method="_on_point_toline_pressed"]
+[connection signal="pressed" from="control_layer/ScrollContainer/tools/reset zoom" to="." method="_on_reset_zoom_pressed"]
+[connection signal="pressed" from="control_layer/ScrollContainer/tools/add_ske" to="." method="_on_add_ske_pressed"]
+[connection signal="pressed" from="control_layer/ScrollContainer/tools/edit_mesh" to="." method="_on_add_ske_pressed"]
 [connection signal="pressed" from="ResManagerLayer/ResManager/manager/vbox/tool_bar/layer" to="CanvasLayer" method="_on_layer_pressed"]
 [connection signal="pressed" from="ResManagerLayer/ResManager/manager/vbox/tool_bar/resource" to="ResManagerLayer/ResManager/manager" method="_on_resource_pressed"]
 [connection signal="pressed" from="ResManagerLayer/ResManager/manager/vbox/tool_bar/ske" to="ResManagerLayer/ResManager/manager" method="_on_ske_pressed"]

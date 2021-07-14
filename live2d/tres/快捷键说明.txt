@@ -6,8 +6,8 @@
 	s:选择工具/select
 	x:指定x轴操作/
 	y:指定y轴操作/
+	b:框选
 	m:编辑网格/editMesh
 	p:添加网格顶点/addPoint
 	小键盘.:恢复默认摄像机缩放/resizeCam
 	小键盘数字：数值输入
-	
