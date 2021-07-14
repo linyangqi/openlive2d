@@ -36,19 +36,15 @@ func _ready():
 	tree =$ResManagerLayer/ResManager/manager/vbox/p/ske_tree
 	root = tree.create_item()
 	root.set_text(0,"skeleton")
-	#initMenuBar()
 	init_window_manager()
-func initMenuBar():
-	$CanvasLayer/MenuBar/language.add_item("Chinese")
-	$CanvasLayer/MenuBar/language.add_item("English")
-	$CanvasLayer/MenuBar/language.add_item("Japanese")
-	$CanvasLayer/MenuBar/language.text="language"
+	init_resource_manager()
 func init_window_manager():
 	var window=$CanvasLayer/MenuBar/window
 	var popup=window.get_popup()
 	popup.connect("index_pressed",self,"window_control",[popup])
+#右侧gui控制 nodes[] 共有4种资源 4个面板容器
 func init_resource_manager():
-	#Global.editor_res_manager.init_gui([])
+	ResourceManager.init_gui($ResManagerLayer)
 	pass
 # warning-ignore:unused_argument
 func _process(delta):
@@ -346,7 +342,7 @@ func _on_FileDialog_file_selected(path):
 		res_rect.expand=true
 		res_rect.rect_min_size=Vector2(32,32)
 		var preline=HBoxContainer.new()
-		$ResManagerLayer/ResManager/manager/vbox/p/res_content/res_layer.add_child(preline)
+		ResourceManager.import_resource_to_manager(preline)
 		area.name=path.get_basename()
 		add_child(area)
 		#area.add_child(sprite)
@@ -385,8 +381,13 @@ func _on_del_pressed():
 	$CanvasLayer2/confirmDel.popup()
 #确认删除
 func _on_confirmDel_confirmed():
-	if current_select!=null:
+	print(is_instance_valid(current_select))
+	print(current_select)
+	if is_instance_valid(current_select):
 		current_select.queue_free()
+	else:
+		print("在内存中不存在这个对象")
+		OS.alert("在内存中不存在选中的对象")
 	pass 
 func _on_rotate_tool_pressed():
 	Input.set_custom_mouse_cursor(load("res://live2d/img/旋转2.png"))
@@ -469,6 +470,7 @@ func _on_rect_select_pressed():
 	sync_edit_mode(edit_mode)
 	update_hud_tip("拖动鼠标来框选物体，右键退出")
 	update_mode_tip(edit_mode)
+	pass
 func _on_ScrollContainer_mouse_entered():
 	can_zoom=false
 	print("不许缩放")

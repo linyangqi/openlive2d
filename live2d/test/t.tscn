@@ -17,7 +17,6 @@ margin_right = 951.783
 margin_bottom = 469.702
 
 [node name="TabContainer" type="TabContainer" parent="."]
-visible = false
 margin_left = 41.0
 margin_top = 36.0
 margin_right = 402.0
@@ -64,8 +63,6 @@ visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 24.0
-
-[node name="Sprite" type="Sprite" parent="."]
 
 [node name="HSplitContainer" type="HSplitContainer" parent="."]
 margin_left = 520.783

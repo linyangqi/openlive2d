@@ -1,10 +1,9 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://live2d/panel_right.tres" type="ButtonGroup" id=1]
 [ext_resource path="res://live2d/scene/live2dEditor.gd" type="Script" id=2]
 [ext_resource path="res://live2d/中文字体主题.tres" type="Theme" id=3]
 [ext_resource path="res://live2d/tres/button_theme.tres" type="Theme" id=4]
-[ext_resource path="res://live2d/Panel.gd" type="Script" id=5]
 [ext_resource path="res://live2d/font.tres" type="DynamicFont" id=6]
 [ext_resource path="res://live2d/img/arrow.png" type="Texture" id=7]
 [ext_resource path="res://live2d/img/旋转2.png" type="Texture" id=8]
@@ -1031,7 +1030,6 @@ __meta__ = {
 margin_left = 26.0
 margin_right = 346.0
 margin_bottom = 381.0
-script = ExtResource( 5 )
 
 [node name="vbox" type="VBoxContainer" parent="ResManagerLayer/ResManager/manager"]
 margin_left = 7.0
@@ -1076,7 +1074,7 @@ toggle_mode = true
 group = ExtResource( 1 )
 text = "资源"
 
-[node name="ske" type="Button" parent="ResManagerLayer/ResManager/manager/vbox/tool_bar"]
+[node name="bone" type="Button" parent="ResManagerLayer/ResManager/manager/vbox/tool_bar"]
 margin_left = 96.0
 margin_right = 140.0
 margin_bottom = 29.0
@@ -1103,6 +1101,7 @@ margin_bottom = 29.0
 hint_tooltip = "添加图层/资源/骨架"
 theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 6 )
+disabled = true
 text = "添加"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1126,6 +1125,7 @@ margin_right = 306.0
 margin_bottom = 60.0
 
 [node name="layer_scroll" type="ScrollContainer" parent="ResManagerLayer/ResManager/manager/vbox/p"]
+visible = false
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 299.0
@@ -1167,17 +1167,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="animes" type="ScrollContainer" parent="ResManagerLayer/ResManager/manager/vbox/p"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 299.0
-margin_bottom = 299.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="anime_vbox" type="VBoxContainer" parent="ResManagerLayer/ResManager/manager/vbox/p/animes"]
-
 [node name="ske_tree" type="Tree" parent="ResManagerLayer/ResManager/manager/vbox/p"]
 visible = false
 margin_left = 4.0
@@ -1188,6 +1177,18 @@ allow_rmb_select = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="animes" type="ScrollContainer" parent="ResManagerLayer/ResManager/manager/vbox/p"]
+visible = false
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 299.0
+margin_bottom = 299.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="anime_vbox" type="VBoxContainer" parent="ResManagerLayer/ResManager/manager/vbox/p/animes"]
 
 [node name="CanvasLayer3" type="CanvasLayer" parent="."]
 
@@ -1233,10 +1234,5 @@ script = ExtResource( 22 )
 [connection signal="pressed" from="control_layer/ScrollContainer/tools/reset zoom" to="." method="_on_reset_zoom_pressed"]
 [connection signal="pressed" from="control_layer/ScrollContainer/tools/add_ske" to="." method="_on_add_ske_pressed"]
 [connection signal="pressed" from="control_layer/ScrollContainer/tools/edit_mesh" to="." method="_on_add_ske_pressed"]
-[connection signal="pressed" from="ResManagerLayer/ResManager/manager/vbox/tool_bar/layer" to="ResManagerLayer/ResManager/manager" method="_on_layer_pressed"]
-[connection signal="pressed" from="ResManagerLayer/ResManager/manager/vbox/tool_bar/resource" to="ResManagerLayer/ResManager/manager" method="_on_resource_pressed"]
-[connection signal="pressed" from="ResManagerLayer/ResManager/manager/vbox/tool_bar/ske" to="ResManagerLayer/ResManager/manager" method="_on_ske_pressed"]
-[connection signal="pressed" from="ResManagerLayer/ResManager/manager/vbox/tool_bar/animation" to="ResManagerLayer/ResManager/manager" method="_on_animation_pressed"]
-[connection signal="pressed" from="ResManagerLayer/ResManager/manager/vbox/tool_bar/add" to="." method="_on_add_pressed"]
 [connection signal="pressed" from="ResManagerLayer/ResManager/manager/vbox/tool_bar/del" to="." method="_on_del_pressed"]
 [connection signal="item_rmb_selected" from="ResManagerLayer/ResManager/manager/vbox/p/ske_tree" to="ResManagerLayer/ResManager/manager" method="_on_ske_tree_item_rmb_selected"]

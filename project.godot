@@ -55,11 +55,6 @@ _global_script_classes=[ {
 "path": "res://addons/color-palette/PaletteImporter.gd"
 }, {
 "base": "Reference",
-"class": "ResourceManager",
-"language": "GDScript",
-"path": "res://live2d/class/editor/ResourceManager.gd"
-}, {
-"base": "Reference",
 "class": "dragState",
 "language": "GDScript",
 "path": "res://live2d/class/dragState.gd"
@@ -84,7 +79,6 @@ _global_script_class_icons={
 "OpenLive_editMode": "",
 "Palette": "",
 "PaletteImporter": "",
-"ResourceManager": "",
 "dragState": "",
 "file_dialog": "",
 "mesh_point": ""
@@ -100,6 +94,7 @@ config/icon="res://live2d/img/openlive2d.png"
 [autoload]
 
 Global="*res://live2d/Global.gd"
+ResourceManager="*res://live2d/class/editor/ResourceManager.gd"
 
 [display]
 
