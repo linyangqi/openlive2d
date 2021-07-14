@@ -4,12 +4,16 @@ var res_textures_data
 var current_select
 var anim_name:String
 #图层 资源 动画 骨骼
-var layer_control:Control
+var layer_control:ScrollContainer
 var res_control:Control
 var anim_control:Control
 var bone_control:Tree
 #右侧gui控制 nodes[] 共有4种资源 4个面板容器 4个按钮
 var btn_add:Button
+#添加图层
+func add_layer(node):
+	anim_control.get_node("anime_vbox").add_child(node)
+	pass
 func import_resource_to_manager(node):
 	res_control.get_node("res_layer").add_child(node)
 	pass
@@ -77,6 +81,7 @@ func add_res(btn_layer:Button):
 		"bone":
 			pass
 		"animation":
+			get_tree().current_scene.get_node("CanvasLayer2/ask_add_anim").show()
 			pass
 	pass
 #添加图片资源 用于绑定

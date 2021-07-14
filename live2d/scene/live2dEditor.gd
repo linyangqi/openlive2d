@@ -202,7 +202,6 @@ func _on_ok_pressed():
 	var remove_btn=Button.new()
 	remove_btn.text="删除"
 	var preline=HBoxContainer.new()
-	$CanvasLayer/Panel/animes/anime_vbox.add_child(preline)
 	preline.add_child(label)
 	preline.add_child(rename_btn)
 	preline.add_child(remove_btn)
@@ -211,10 +210,9 @@ func _on_ok_pressed():
 	$CanvasLayer2/ask_add_anim.hide()
 	Global.bind_btn_font([label,rename_btn,remove_btn],Global.font)
 	#添加动画
-	Global.current_anim_data=anim_data_gd.new()
-	Global.current_anim_data.add_anim(anim_name)
 	print("动画数据对象>",Global.anim_data)
-	$control_layer/current_tip/edited_anim.text="当前编辑的动画:"+anim_name
+	$HudLayer/current_tip/edited_anim.text="当前编辑的动画:"+anim_name
+	ResourceManager.add_layer(preline)
 	pass 
 func rename_things(rename_btn):
 	Global.res_manager.current_select=rename_btn
