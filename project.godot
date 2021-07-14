@@ -54,10 +54,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/color-palette/PaletteImporter.gd"
 }, {
-"base": "Node2D",
+"base": "Reference",
 "class": "ResourceManager",
 "language": "GDScript",
-"path": "res://live2d/class/ResourceManager.gd"
+"path": "res://live2d/class/editor/ResourceManager.gd"
 }, {
 "base": "Reference",
 "class": "dragState",
@@ -95,7 +95,7 @@ _global_script_class_icons={
 config/name="OpenLive2d editor"
 run/main_scene="res://live2d/start.tscn"
 boot_splash/image="res://live2d/live2d.png"
-config/icon="res://live2d/icon.png"
+config/icon="res://live2d/img/openlive2d.png"
 
 [autoload]
 

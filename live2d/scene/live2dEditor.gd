@@ -18,13 +18,12 @@ var FileAction
 #选中的图片 按钮 骨骼 网格顶点
 var selected_image
 var selected_btn:Button
-var selected_bone:Node2D
+#var selected_bone
 var selected_mesh_point
 #当前选中的物体
 var current_select
 #是否可旋转
 var can_rotate=false
-var ResourceManager=load("res://live2d/class/ResourceManager.gd").new()
 var anim_data_gd=load("res://live2d/class/AnimData.gd")
 #line2d 连线用
 var line
@@ -34,10 +33,10 @@ var can_zoom=true
 func _ready():
 	OS.window_borderless=false
 	Input.set_custom_mouse_cursor(load("res://live2d/img/arrow.png"))
-	tree = $ResManagerLayer/ResManager/manager/vbox/ske_tree
+	tree =$ResManagerLayer/ResManager/manager/vbox/p/ske_tree
 	root = tree.create_item()
 	root.set_text(0,"skeleton")
-	initMenuBar()
+	#initMenuBar()
 	init_window_manager()
 func initMenuBar():
 	$CanvasLayer/MenuBar/language.add_item("Chinese")
@@ -48,6 +47,9 @@ func init_window_manager():
 	var window=$CanvasLayer/MenuBar/window
 	var popup=window.get_popup()
 	popup.connect("index_pressed",self,"window_control",[popup])
+func init_resource_manager():
+	#Global.editor_res_manager.init_gui([])
+	pass
 # warning-ignore:unused_argument
 func _process(delta):
 	if Input.is_action_pressed("w"):
@@ -75,6 +77,8 @@ func _input(event):
 				var bone=load("res://live2d/control/骨骼.tscn").instance()
 				add_child(bone)
 				bone.position=event.position
+				Global.editor_data.bone_count+=1
+				bone.name="bone"+str(Global.editor_data.bone_count)
 				bone.connect("select_bone",self,"update_selected_bone",[bone])
 				#同步创建gui信息
 				var child1 = tree.create_item(root)
@@ -130,6 +134,11 @@ func _input(event):
 				update_hud_tip(edit_mode)
 				update_mode_tip(edit_mode)
 				print("退出框选模式")
+			if edit_mode=="添加骨架":
+				edit_mode="预览模式"
+				update_hud_tip(edit_mode)
+				update_mode_tip(edit_mode)
+				sync_edit_mode(edit_mode)
 		if can_zoom:
 			if event.button_index==BUTTON_WHEEL_UP and edit_mode!="导入图片" and edit_mode!="打开文件" and edit_mode!="保存文件":
 				$Camera2D.zoom.x-=0.1
@@ -171,20 +180,21 @@ func _on_savefile_pressed():
 	update_mode_tip("保存文件")
 	pass # Replace with function body.
 
-#添加按钮
+#资源管理器的添加按钮
 func _on_add_pressed():
 	print("按下了添加按钮")
-	if $CanvasLayer/Panel/tool_bar/layer.pressed:
+	var res_layer=$ResManagerLayer
+	var layer=res_layer.get_node("ResManager/manager/vbox/tool_bar/layer")
+	if layer.pressed:
 		print("切换到图层资源面板")
-		$CanvasLayer/ask_layer.show()
-		$CanvasLayer/Panel/layer_scroll/layer.show()
+		res_layer.get_node("ResManager/manager/vbox/tool_bar/layer").show()
+		res_layer.get_node("ResManager/manager/vbox/layer_scroll/layer").show()
 	#询问是否添加动画
-	if $CanvasLayer/Panel/tool_bar/animation.pressed:
+	if res_layer.get_node("ResManager/manager/vbox/tool_bar/animation").pressed:
 		print("切换到动画资源面板")
 		$CanvasLayer2/ask_add_anim.show()
 		$CanvasLayer2/ask_add_anim/anim_name/add_frame.disabled=true
 		$CanvasLayer2/ask_add_anim/anim_name/add_anim.disabled=false
-	pass 
 #添加动画名称 资源管理器 右侧
 func _on_ok_pressed():
 	var anim_name=$CanvasLayer2/ask_add_anim/anim_name.text
@@ -295,8 +305,7 @@ func update_mode_tip(text:String):
 	print("模式:"+text)
 #更新选中的对象提示
 func update_selected_bone(bone:Node2D):
-	selected_bone=bone
-	current_select=selected_bone
+	current_select=bone
 	print_debug("同步信息：选中的骨骼",bone)
 	$HudLayer/current_tip/selected_bone.text="选中的对象："+bone.name
 #加载外部文件
@@ -337,7 +346,7 @@ func _on_FileDialog_file_selected(path):
 		res_rect.expand=true
 		res_rect.rect_min_size=Vector2(32,32)
 		var preline=HBoxContainer.new()
-		$CanvasLayer/Panel/res_content/res_layer.add_child(preline)
+		$ResManagerLayer/ResManager/manager/vbox/p/res_content/res_layer.add_child(preline)
 		area.name=path.get_basename()
 		add_child(area)
 		#area.add_child(sprite)
@@ -355,7 +364,6 @@ func _on_FileDialog_file_selected(path):
 		#调用资源管理器处理
 		btn_del.connect("pressed",ResourceManager,"remove_resource",[btn_del.get_parent(),res_rect,area])
 		Global.bind_btn_font([button,btn_del],Global.font)
-		ResourceManager.add_resource(res_rect)
 	pass
 #sprite button
 func select_image(image_name:String,button:Button):
@@ -371,21 +379,14 @@ func _on_FileDialog_popup_hide():
 	update_mode_tip("预览")
 #资源管理删除按钮 弹出确认窗口
 func _on_del_pressed():
-	print("要删除的对象",selected_image)
-	#如果有任意选中的对象
-	if selected_image!=null or selected_btn!=null or selected_bone!=null:
-		$CanvasLayer2/confirmDel.popup()
-	else:
-		OS.alert("错误，没有选中要删除的对象")
-	pass 
+	print("要删除的对象",current_select)
+	#重构删除方法
+	$CanvasLayer2/confirmDel.dialog_text="要删除的对象>"+str(current_select)	
+	$CanvasLayer2/confirmDel.popup()
 #确认删除
 func _on_confirmDel_confirmed():
-	if selected_bone!=null:
-		selected_bone.queue_free()
-	if selected_image!=null:
-		selected_image.queue_free()
-	if selected_btn!=null:
-		selected_btn.queue_free()
+	if current_select!=null:
+		current_select.queue_free()
 	pass 
 func _on_rotate_tool_pressed():
 	Input.set_custom_mouse_cursor(load("res://live2d/img/旋转2.png"))
@@ -408,9 +409,9 @@ func window_control(index,popup:PopupMenu):
 		if index==1:
 			$control_layer/tool_bar.show()
 		if index==2:
-			$CanvasLayer/ResManager.show()
+			$ResManagerLayer/ResManager.show()
 		if index==3:
-			$CanvasLayer/tools.show()
+			$control_layer/ScrollContainer.show()
 	if check0:
 		popup.set_item_checked(index,false)
 		if index==0:
@@ -418,9 +419,9 @@ func window_control(index,popup:PopupMenu):
 		if index==1:
 			$control_layer/tool_bar.hide()
 		if index==2:
-			$CanvasLayer/ResManager.hide()
+			$ResManagerLayer/ResManager.hide()
 		if index==3:
-			$CanvasLayer/tools.hide()
+			$control_layer/ScrollContainer.hide()
 	print_debug("选中项状态",check0)
 	pass
 #绑定图层材质
@@ -471,3 +472,4 @@ func _on_rect_select_pressed():
 func _on_ScrollContainer_mouse_entered():
 	can_zoom=false
 	print("不许缩放")
+	pass

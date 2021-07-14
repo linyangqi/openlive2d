@@ -3,6 +3,7 @@ var work_mode:String
 var work_mode_model="model"
 var work_mode_anim="anim"
 var point_count=0
+var bone_count=0
 var line2d:Line2D
 func new_line():
 	var line2d=Line2D.new()

@@ -6,12 +6,7 @@ func _ready():
 func _on_cancel_pressed():
 	$ask_layer.hide()
 	pass 
-#切换到图层功能
-func _on_layer_pressed():
-	print("切换到图层")
-	$Panel/res_content.hide()
-	$Panel/layer_scroll.show()
-	pass # Replace with function body.
+
 #添加图层
 func _on_ok_pressed():
 	var pre_line=HBoxContainer.new()

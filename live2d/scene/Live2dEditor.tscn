@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://live2d/panel_right.tres" type="ButtonGroup" id=1]
 [ext_resource path="res://live2d/scene/live2dEditor.gd" type="Script" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://live2d/scene/control_layer.gd" type="Script" id=21]
 [ext_resource path="res://live2d/control/游标.gd" type="Script" id=22]
 [ext_resource path="res://live2d/img/del.png" type="Texture" id=23]
+[ext_resource path="res://live2d/scene/ResManagerLayer.gd" type="Script" id=24]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.498039, 0.666667, 0.733333, 1 )
@@ -314,7 +315,9 @@ margin_left = 272.0
 margin_right = 333.0
 margin_bottom = 39.0
 custom_fonts/font = ExtResource( 11 )
-text = "语言"
+text = "中文"
+items = [ "中文", null, false, 0, null, "English", null, false, 1, null, "Japanese", null, false, 2, null ]
+selected = 0
 
 [node name="zoom" type="Label" parent="CanvasLayer/MenuBar"]
 margin_left = 337.0
@@ -935,6 +938,7 @@ __meta__ = {
 }
 
 [node name="HudLayer" type="CanvasLayer" parent="."]
+layer = -1
 
 [node name="hbox" type="HBoxContainer" parent="HudLayer"]
 margin_left = 54.0326
@@ -1000,6 +1004,8 @@ __meta__ = {
 }
 
 [node name="ResManagerLayer" type="CanvasLayer" parent="."]
+layer = 0
+script = ExtResource( 24 )
 
 [node name="ResManager" type="HSplitContainer" parent="ResManagerLayer"]
 anchor_left = 0.669
@@ -1007,16 +1013,16 @@ anchor_top = 0.193
 anchor_right = 1.0
 anchor_bottom = 0.778
 margin_left = -0.0560303
-margin_top = 0.199997
+margin_top = -29.8
 margin_right = 7.0
-margin_bottom = 27.2
+margin_bottom = 0.200012
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="toolPanel" type="PanelContainer" parent="ResManagerLayer/ResManager"]
 margin_right = 14.0
-margin_bottom = 378.0
+margin_bottom = 381.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1024,14 +1030,14 @@ __meta__ = {
 [node name="manager" type="PanelContainer" parent="ResManagerLayer/ResManager"]
 margin_left = 26.0
 margin_right = 346.0
-margin_bottom = 378.0
+margin_bottom = 381.0
 script = ExtResource( 5 )
 
 [node name="vbox" type="VBoxContainer" parent="ResManagerLayer/ResManager/manager"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 313.0
-margin_bottom = 371.0
+margin_bottom = 374.0
 
 [node name="tooltip" type="Label" parent="ResManagerLayer/ResManager/manager/vbox"]
 margin_right = 306.0
@@ -1094,6 +1100,7 @@ text = "动画"
 margin_left = 192.0
 margin_right = 236.0
 margin_bottom = 29.0
+hint_tooltip = "添加图层/资源/骨架"
 theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 6 )
 text = "添加"
@@ -1105,6 +1112,7 @@ __meta__ = {
 margin_left = 240.0
 margin_right = 284.0
 margin_bottom = 29.0
+hint_tooltip = "删除选中的对象"
 theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 11 )
 text = "删除"
@@ -1112,64 +1120,71 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="animes" type="ScrollContainer" parent="ResManagerLayer/ResManager/manager/vbox"]
-visible = false
+[node name="p" type="Panel" parent="ResManagerLayer/ResManager/manager/vbox"]
 margin_top = 60.0
 margin_right = 306.0
 margin_bottom = 60.0
+
+[node name="layer_scroll" type="ScrollContainer" parent="ResManagerLayer/ResManager/manager/vbox/p"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 299.0
+margin_bottom = 309.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="anime_vbox" type="VBoxContainer" parent="ResManagerLayer/ResManager/manager/vbox/animes"]
-
-[node name="ske_tree" type="Tree" parent="ResManagerLayer/ResManager/manager/vbox"]
-visible = false
-margin_top = 60.0
-margin_right = 306.0
-margin_bottom = 61.0
-allow_rmb_select = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="layer_scroll" type="ScrollContainer" parent="ResManagerLayer/ResManager/manager/vbox"]
-margin_top = 60.0
-margin_right = 306.0
-margin_bottom = 60.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="layer" type="VBoxContainer" parent="ResManagerLayer/ResManager/manager/vbox/layer_scroll"]
+[node name="layer" type="VBoxContainer" parent="ResManagerLayer/ResManager/manager/vbox/p/layer_scroll"]
 __meta__ = {
 "_edit_use_anchors_": false,
 "_editor_description_": "图层"
 }
 
-[node name="res_content" type="ScrollContainer" parent="ResManagerLayer/ResManager/manager/vbox"]
-margin_top = 64.0
-margin_right = 306.0
-margin_bottom = 364.0
-rect_min_size = Vector2( 0, 300 )
+[node name="res_content" type="ScrollContainer" parent="ResManagerLayer/ResManager/manager/vbox/p"]
+visible = false
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 299.0
+margin_bottom = 302.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="res_layer" type="VBoxContainer" parent="ResManagerLayer/ResManager/manager/vbox/res_content"]
-margin_right = 64.0
-margin_bottom = 64.0
+[node name="res_layer" type="VBoxContainer" parent="ResManagerLayer/ResManager/manager/vbox/p/res_content"]
 __meta__ = {
 "_edit_use_anchors_": false,
 "_editor_description_": "资源"
 }
 
-[node name="TextureRect" type="TextureRect" parent="ResManagerLayer/ResManager/manager/vbox/res_content/res_layer"]
+[node name="TextureRect" type="TextureRect" parent="ResManagerLayer/ResManager/manager/vbox/p/res_content/res_layer"]
+visible = false
 margin_right = 64.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 64, 64 )
 texture = ExtResource( 14 )
 expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="animes" type="ScrollContainer" parent="ResManagerLayer/ResManager/manager/vbox/p"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 299.0
+margin_bottom = 299.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="anime_vbox" type="VBoxContainer" parent="ResManagerLayer/ResManager/manager/vbox/p/animes"]
+
+[node name="ske_tree" type="Tree" parent="ResManagerLayer/ResManager/manager/vbox/p"]
+visible = false
+margin_left = 4.0
+margin_top = 8.0
+margin_right = 296.0
+margin_bottom = 310.0
+allow_rmb_select = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1218,10 +1233,10 @@ script = ExtResource( 22 )
 [connection signal="pressed" from="control_layer/ScrollContainer/tools/reset zoom" to="." method="_on_reset_zoom_pressed"]
 [connection signal="pressed" from="control_layer/ScrollContainer/tools/add_ske" to="." method="_on_add_ske_pressed"]
 [connection signal="pressed" from="control_layer/ScrollContainer/tools/edit_mesh" to="." method="_on_add_ske_pressed"]
-[connection signal="pressed" from="ResManagerLayer/ResManager/manager/vbox/tool_bar/layer" to="CanvasLayer" method="_on_layer_pressed"]
+[connection signal="pressed" from="ResManagerLayer/ResManager/manager/vbox/tool_bar/layer" to="ResManagerLayer/ResManager/manager" method="_on_layer_pressed"]
 [connection signal="pressed" from="ResManagerLayer/ResManager/manager/vbox/tool_bar/resource" to="ResManagerLayer/ResManager/manager" method="_on_resource_pressed"]
 [connection signal="pressed" from="ResManagerLayer/ResManager/manager/vbox/tool_bar/ske" to="ResManagerLayer/ResManager/manager" method="_on_ske_pressed"]
 [connection signal="pressed" from="ResManagerLayer/ResManager/manager/vbox/tool_bar/animation" to="ResManagerLayer/ResManager/manager" method="_on_animation_pressed"]
 [connection signal="pressed" from="ResManagerLayer/ResManager/manager/vbox/tool_bar/add" to="." method="_on_add_pressed"]
 [connection signal="pressed" from="ResManagerLayer/ResManager/manager/vbox/tool_bar/del" to="." method="_on_del_pressed"]
-[connection signal="item_rmb_selected" from="ResManagerLayer/ResManager/manager/vbox/ske_tree" to="ResManagerLayer/ResManager/manager" method="_on_ske_tree_item_rmb_selected"]
+[connection signal="item_rmb_selected" from="ResManagerLayer/ResManager/manager/vbox/p/ske_tree" to="ResManagerLayer/ResManager/manager" method="_on_ske_tree_item_rmb_selected"]

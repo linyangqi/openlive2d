@@ -1,9 +1,20 @@
-extends Node2D
 class_name ResourceManager
 var res_textures=[]
 var res_textures_data
 var current_select
 var anim_name:String
+#图层 资源 动画 骨骼
+var layer_control:Control
+var res_control:Control
+var anim_control:Control
+var bone_control:Tree
+#右侧gui控制 nodes[] 共有4种资源 4个面板容器
+func init_gui(array):
+	layer_control=array[0]
+	res_control=array[1]
+	anim_control=array[2]
+	bone_control=array[3]
+
 func add_resource(res_rect:TextureRect):
 	var json={"name":res_rect.name,"texture":res_rect.texture}
 	var res_textures_data=to_json(json)
