@@ -1,60 +1,33 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://live2d/openlive2d.jpg" type="Texture" id=1]
-
-[sub_resource type="CircleShape2D" id=2]
-radius = 32.0132
+[ext_resource path="res://live2d/img/gBot_pieces.png" type="Texture" id=2]
 
 [sub_resource type="Animation" id=1]
 resource_name = "新建动画"
 length = 4.0
-tracks/0/type = "value"
-tracks/0/path = NodePath("openlive2d2:polygon")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1, 3 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ PoolVector2Array( 68.9394, 17.803, 37.5, 94.3182, 57.9545, 127.273, 88.1977, 128.559, 123.864, 132.955, 144.697, 122.727, 146.97, 64.3939, 90.5303, 21.5909 ), PoolVector2Array( 68.9394, 17.803, 37.5, 94.3182, 60.1885, 104.525, 88.1977, 128.559, 123.864, 132.955, 144.697, 122.727, 146.97, 64.3939, 90.5303, 21.5909 ), PoolVector2Array( 68.9394, 17.803, 35.1869, 52.9347, 60.1885, 104.525, 88.1977, 128.559, 130.431, 146.591, 144.697, 122.727, 146.97, 64.3939, 91.1428, 21.1867 ) ]
-}
 
 [node name="Node2D" type="Node2D"]
 
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
-position = Vector2( 300.996, 277.88 )
+[node name="Skeleton2D" type="Skeleton2D" parent="."]
+position = Vector2( -279.082, 113.193 )
 
-[node name="ColorRect" type="ColorRect" parent="RigidBody2D"]
-margin_right = 40.0
-margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
-position = Vector2( 12.3471, 19.0818 )
-shape = SubResource( 2 )
-
-[node name="openlive2d" type="Sprite" parent="."]
-position = Vector2( 326.236, 482.729 )
-texture = ExtResource( 1 )
-
-[node name="openlive2d2" type="Polygon2D" parent="."]
-position = Vector2( 424.962, 364.168 )
-texture = ExtResource( 1 )
-polygon = PoolVector2Array( 68.9394, 17.803, 35.1869, 52.9347, 60.1885, 104.525, 88.1977, 128.559, 130.431, 146.591, 144.697, 122.727, 146.97, 64.3939, 91.1428, 21.1867 )
-uv = PoolVector2Array( 68.9394, 17.803, 36.3434, 73.6264, 60.1885, 104.525, 88.1977, 128.559, 127.147, 139.773, 144.697, 122.727, 146.97, 64.3939, 90.8365, 21.3888 )
-polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 0, 7, 3 ), PoolIntArray( 7, 6, 3 ), PoolIntArray( 3, 4, 5 ), PoolIntArray( 5, 6, 3 ), PoolIntArray( 8, 1, 2 ), PoolIntArray( 8, 9, 3 ) ]
-internal_vertex_count = 2
+[node name="Bone2D" type="Bone2D" parent="Skeleton2D"]
+position = Vector2( 483.682, 303.145 )
+rotation = -0.0290878
+rest = Transform2D( 1, 0, 0, 1, 483.682, 303.145 )
+default_length = 100.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "新建动画"
 "anims/新建动画" = SubResource( 1 )
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-position = Vector2( 216.859, 498.461 )
-polygon = PoolVector2Array( 58.1707, -89.5186, 82.9194, -109.318, 114.739, -110.025, 157.873, -103.661, 161.408, -86.6901, 184.036, -79.6191, 188.278, -63.3556, 188.985, -42.8495, 193.935, -25.879, 198.178, -2.54443, 201.713, 19.3759, 201.006, 41.2962, 186.864, 50.4886, 167.772, 39.882, 155.751, 17.2546, 136.66, 15.8403, 153.63, 32.8109, 162.822, 58.2668, 166.358, 81.6013, 49.6854, 82.3084, 50.3925, 56.1454, 52.5138, 37.0535, 34.129, 31.3967, 27.7651, 15.8403, 27.7651, -11.0297, 30.5935, -39.314, 37.6646, -58.4059, 43.3214, -74.6693, 50.3925, -84.5688 )
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2( -175.621, 125.085 )
+rotation = 0.0142512
+texture = ExtResource( 2 )
+skeleton = NodePath("../Skeleton2D")
+polygon = PoolVector2Array( 374.757, 18.4466, 515.534, 13.5922, 509.272, 246.139, 484.466, 340.777, 364.078, 340.777, 327.184, 285.437, 334.951, 191.262, 355.34, 48.5437, 356.302, 255.462, 384.874, 271.429, 431.933, 271.429, 462.185, 260.504, 489.076, 247.899, 359.664, 173.95, 498.319, 157.143, 398.319, 163.866, 451.26, 157.983 )
+uv = PoolVector2Array( 374.757, 18.4466, 515.534, 13.5922, 519.417, 247.573, 484.466, 340.777, 364.078, 340.777, 327.184, 285.437, 334.951, 191.262, 355.34, 48.5437, 356.302, 255.462, 384.874, 271.429, 431.933, 271.429, 462.185, 260.504, 489.076, 247.899, 359.664, 173.95, 498.319, 157.143, 398.319, 163.866, 451.26, 157.983 )
+polygons = [ PoolIntArray( 5, 8, 9 ), PoolIntArray( 4, 9, 5 ), PoolIntArray( 9, 10, 3 ), PoolIntArray( 4, 9, 3 ), PoolIntArray( 10, 11, 3 ), PoolIntArray( 11, 12, 3 ), PoolIntArray( 12, 2, 3 ), PoolIntArray( 13, 15, 9 ), PoolIntArray( 6, 13, 9 ), PoolIntArray( 15, 16, 9 ), PoolIntArray( 16, 14, 2 ), PoolIntArray( 16, 9, 10 ), PoolIntArray( 10, 11, 16 ), PoolIntArray( 11, 12, 16 ), PoolIntArray( 16, 12, 2 ) ]
+bones = [ NodePath("Bone2D"), PoolRealArray( 0, 0, 0, 0.5, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ) ]
+internal_vertex_count = 9
