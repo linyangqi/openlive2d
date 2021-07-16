@@ -25,7 +25,25 @@ func bind_btn_font(button:Array,custom_font):
 func adder(node:Node,child_array:Array):
 	for i in child_array:
 		node.add_child(i)
-#加载外部文件
+#加载外部图片
 func load_external_image(filepath:String):
-	
-	pass
+	var f=File.new()
+	f.open(filepath,File.READ)
+	var buffer=f.get_buffer(f.get_len())
+	var image=Image.new()
+	var texture=ImageTexture.new()
+	if filepath.ends_with("jpg"):
+		image.load_jpg_from_buffer(buffer)
+	if filepath.ends_with("png"):
+		image.load_png_from_buffer(buffer)
+	if filepath.ends_with("tga"):
+		image.load_tga_from_buffer(buffer)
+	if filepath.ends_with("webp"):
+		image.load_webp_from_buffer(buffer)
+	if filepath.ends_with("bmp"):
+		image.load_jpg_from_buffer(buffer)
+	else:
+		print_debug("错误，不支持的文件类型")
+	texture.create_from_image(image)
+	f.close()
+	return texture

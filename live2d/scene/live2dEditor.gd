@@ -38,8 +38,8 @@ func _ready():
 	init_window_manager()
 	init_resource_manager()
 	init_animFrameWindow()
-	init_asks()
 	init_objectWindow()
+	print(AnimFrameWindow)
 func init_window_manager():
 	var window=$menuBarLayer/MenuBar/window
 	var popup=window.get_popup()
@@ -50,12 +50,7 @@ func init_resource_manager():
 	pass
 #左侧动画帧编辑器 参数:根节点 询问根节点
 func init_animFrameWindow():
-	#AnimFrameWindow.init_gui($animFrameLayer,$asks)
-	pass
-#初始化询问节点
-func init_asks():
-	$asks/ask_add_anim/anim_name/add_frame.connect("pressed",AnimFrameWindow,"add_frame")
-	pass
+	AnimFrameWindow.init_gui($animFrameLayer,$asks)
 func init_objectWindow():
 	ObjectWindow.init_gui($ResManagerLayer/ResManager/objectPanel)
 # warning-ignore:unused_argument
@@ -184,10 +179,6 @@ func sync_edit_mode(value):
 #操作提示
 func update_hud_tip(text):
 	$HudLayer/hbox/control_tip.text="操作提示:"+text
-func _on_File_pressed():
-	var popup=$File.get_popup()
-	print(popup.get_current_index())
-	pass 
 func _on_openfile_pressed():
 	update_mode_tip("打开文件")
 	$CanvasLayer2/FileDialog.popup()
@@ -197,32 +188,9 @@ func _on_savefile_pressed():
 	$CanvasLayer2/FileDialog.mode=FileDialog.MODE_SAVE_FILE
 	update_mode_tip("保存文件")
 	pass # Replace with function body.
-#添加动画名称 资源管理器 右侧
-func _on_ok_pressed():
-	var anim_name=$CanvasLayer2/ask_add_anim/anim_name.text
-	var label=Button.new()
-	label.text=anim_name
-	label.connect("pressed",self,"edit_selected_anim",[anim_name])
-	var rename_btn=Button.new()
-	rename_btn.text="重命名"
-	var remove_btn=Button.new()
-	remove_btn.text="删除"
-	var preline=HBoxContainer.new()
-	preline.add_child(label)
-	preline.add_child(rename_btn)
-	preline.add_child(remove_btn)
-	rename_btn.connect("pressed",self,"rename_things",[preline.get_child(0)])
-	remove_btn.connect("pressed",self,"remove_anim",[remove_btn.get_parent()])
-	$CanvasLayer2/ask_add_anim.hide()
-	Global.bind_btn_font([label,rename_btn,remove_btn],Global.font)
-	#添加动画
-	print("动画数据对象>",Global.anim_data)
-	$HudLayer/current_tip/edited_anim.text="当前编辑的动画:"+anim_name
-	ResourceManager.add_layer(preline)
-	pass 
+#关于信息
 func _on_about_pressed():
 	$asks/about.popup()
-	pass 
 func _on_openlive2d_pressed():
 # warning-ignore:return_value_discarded
 	OS.shell_open("https://gitee.com/open-live2d/OpenLive2d")
@@ -259,31 +227,10 @@ func update_selected_bone(bone:Node2D):
 	print_debug("同步信息：选中的骨骼",bone)
 	$HudLayer/current_tip/selected_bone.text="选中的对象："+bone.name
 #加载外部文件
-func load_external_image(filepath:String):
-	var f=File.new()
-	f.open(filepath,File.READ)
-	var buffer=f.get_buffer(f.get_len())
-	var image=Image.new()
-	var texture=ImageTexture.new()
-	if filepath.ends_with("jpg"):
-		image.load_jpg_from_buffer(buffer)
-	if filepath.ends_with("png"):
-		image.load_png_from_buffer(buffer)
-	if filepath.ends_with("tga"):
-		image.load_tga_from_buffer(buffer)
-	if filepath.ends_with("webp"):
-		image.load_webp_from_buffer(buffer)
-	if filepath.ends_with("bmp"):
-		image.load_jpg_from_buffer(buffer)
-	else:
-		print_debug("错误，不支持的文件类型")
-	texture.create_from_image(image)
-	f.close()
-	return texture
 func _on_FileDialog_file_selected(path):
 	if FileAction=="导入图片":
 		print_debug(path)
-		var texture=load_external_image(path)
+		var texture=Global.load_external_image(path)
 		var area=Area2D.new()
 		var col2d=CollisionShape2D.new()
 		var shape=RectangleShape2D.new()
@@ -299,7 +246,6 @@ func _on_FileDialog_file_selected(path):
 		ResourceManager.import_resource_to_manager(preline)
 		area.name=path.get_basename()
 		add_child(area)
-		#area.add_child(sprite)
 		area.position=$Position2D.position
 		#图片名称按钮 
 		var button=Button.new()
@@ -315,14 +261,6 @@ func _on_FileDialog_file_selected(path):
 		btn_del.connect("pressed",ResourceManager,"remove_resource",[btn_del.get_parent(),res_rect,area])
 		Global.bind_btn_font([button,btn_del],Global.font)
 	pass
-#sprite button
-func select_image(image_name:String,button:Button):
-	selected_image=get_node(image_name)
-	selected_btn=button
-	#同步当前选中的物体
-	current_select=selected_image
-	#button.set("custom_styles/normal",load("res://live2d/tres/button_pressed.tres"))
-	print_debug("删除对象：",selected_image)
 #取消文件选择
 func _on_FileDialog_popup_hide():
 	print("取消文件选择")
@@ -450,8 +388,13 @@ func _on_LineEdit_text_changed(new_text):
 	print("设置时长>"+new_text)
 func _on_reg_cancel_pressed():
 	$asks/ask_reg_key.hide()
+#注册关键帧
 func _on_add_key_pressed():
 	var bone_rotation=current_select.rotation_degrees
-	AnimFrameWindow.add_frame(bone_rotation,current_select,float($asks/ask_reg_key/key_time.text))
-	AnimData.set_reg_key_time(float($asks/ask_reg_key/key_time.text))
+	var key_time=float($asks/ask_reg_key/key_time.text)
+
+	AnimData.set_property("rotation")
+	AnimData.reg_key(180,current_select)
+	AnimData.set_reg_key_time(key_time)
+	AnimFrameWindow.add_frame(bone_rotation,current_select,key_time)
 	$asks/ask_reg_key.hide()

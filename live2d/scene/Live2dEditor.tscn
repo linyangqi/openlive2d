@@ -140,7 +140,6 @@ __meta__ = {
 }
 
 [node name="ask_reg_key" type="Panel" parent="asks"]
-visible = false
 margin_left = 228.701
 margin_top = 142.28
 margin_right = 657.701
