@@ -1,5 +1,5 @@
 extends Node
-#view类
+#view 
 #当前选中的一行动画帧 ui
 var current_item:Panel
 var rotation_label:Label
@@ -53,8 +53,6 @@ func add_frame(rotation,current_node:Node2D,time):
 	preline.add_child(label_time)
 	preline.add_child(label_rotation)
 	Global.bind_btn_font([label_time,label_rotation],Global.font)
-	AnimData.set_property("rotation_degrees")
-	AnimData.reg_key(rotation,current_node)
 	#选中信息
 	preline.connect("gui_input",self,"frame_selected",[line_panel])
 func frame_selected(event,preline:Panel):
