@@ -24,7 +24,6 @@ var selected_mesh_point
 var current_select
 #是否可旋转
 var can_rotate=false
-var anim_data_gd=load("res://live2d/class/AnimData.gd")
 #line2d 连线用
 var line
 var is_drag=false
@@ -40,6 +39,7 @@ func _ready():
 	init_resource_manager()
 	init_animFrameWindow()
 	init_asks()
+	init_objectWindow()
 func init_window_manager():
 	var window=$menuBarLayer/MenuBar/window
 	var popup=window.get_popup()
@@ -57,6 +57,8 @@ func init_asks():
 # warning-ignore:return_value_discarded
 	$asks/ask_add_anim/anim_name/add_frame.connect("pressed",AnimFrameWindow,"add_frame")
 	pass
+func init_objectWindow():
+	ObjectWindow.init_gui($ResManagerLayer/ResManager/objectPanel)
 # warning-ignore:unused_argument
 func _process(delta):
 	if Input.is_action_pressed("w"):
@@ -438,8 +440,7 @@ func _on_reg_key_pressed():
 		var rotation=current_select.rotation_degrees
 		print("注册帧>对象:",current_select)
 		print("注册帧>旋转信息:",rotation)
-		AnimData.add_anim("a",rotation,current_select)
-		#Global.animFrameWindow.update_rotation(rotation)
+		AnimFrameWindow.add_frame(rotation,current_select)
 #删除顶点
 func _on_del_point_pressed():
 	update_hud_tip("点击要删除的顶点,右键退出")
@@ -453,10 +454,8 @@ func _on_point_toline_pressed():
 	edit_mode="顶点连线"
 	sync_edit_mode(edit_mode)
 	line=Line2D.new()
-	#line.position=$Position2D.position
 	$test.rect_position=$Position2D.position
 	add_child(line)
-	pass
 #框选工具
 func _on_rect_select_pressed():
 	edit_mode="框选模式"
@@ -473,8 +472,13 @@ func _on_ScrollContainer_mouse_entered():
 func _on_play_pressed():
 	update_mode_tip("播放动画")
 	edit_mode="play anim"
-	AnimData.caculate_anim()
+	AnimData.set_loop(false)
+	AnimData.play()
 func _on_stop_anim_pressed():
 	update_mode_tip("停止播放动画")
 	edit_mode="stop anim"
-	AnimData.stop_caculate()
+	AnimData.set_loop(false)
+	AnimData.stop()
+func _on_play_loop_pressed():
+	AnimData.set_loop(true)
+	AnimData.play()

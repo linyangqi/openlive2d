@@ -334,9 +334,10 @@ __meta__ = {
 }
 
 [node name="anim_vbox" type="VBoxContainer" parent="animFrameLayer/anim_split/anim_frame_panel/vbox/animes"]
+margin_right = 278.0
+margin_bottom = 62.0
 
 [node name="Panel" type="PanelContainer" parent="animFrameLayer/anim_split/anim_frame_panel/vbox/animes/anim_vbox"]
-visible = false
 margin_right = 278.0
 margin_bottom = 29.0
 custom_styles/panel = ExtResource( 16 )
@@ -369,9 +370,9 @@ custom_fonts/font = ExtResource( 6 )
 text = "旋转角度:0"
 
 [node name="Panel2" type="PanelContainer" parent="animFrameLayer/anim_split/anim_frame_panel/vbox/animes/anim_vbox"]
-visible = false
+margin_top = 33.0
 margin_right = 278.0
-margin_bottom = 29.0
+margin_bottom = 62.0
 custom_styles/panel = ExtResource( 16 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="animFrameLayer/anim_split/anim_frame_panel/vbox/animes/anim_vbox/Panel2"]
@@ -413,6 +414,7 @@ __meta__ = {
 margin_right = 54.0
 margin_bottom = 26.0
 custom_fonts/font = ExtResource( 17 )
+disabled = true
 text = "添加帧"
 
 [node name="remove" type="Button" parent="animFrameLayer/anim_split/anim_frame_panel/vbox/HBoxContainer"]
@@ -681,41 +683,49 @@ theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 11 )
 text = "播放动画"
 
-[node name="stop_anim" type="Button" parent="control_layer/tool_bar"]
+[node name="play_loop" type="Button" parent="control_layer/tool_bar"]
 margin_left = 164.0
 margin_right = 240.0
+margin_bottom = 40.0
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 11 )
+text = "循环播放"
+
+[node name="stop_anim" type="Button" parent="control_layer/tool_bar"]
+margin_left = 244.0
+margin_right = 320.0
 margin_bottom = 40.0
 theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 11 )
 text = "停止播放"
 
 [node name="reg_key" type="Button" parent="control_layer/tool_bar"]
-margin_left = 244.0
-margin_right = 336.0
+margin_left = 324.0
+margin_right = 416.0
 margin_bottom = 40.0
 theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 11 )
 text = "注册关键帧"
 
 [node name="set_time" type="Button" parent="control_layer/tool_bar"]
-margin_left = 340.0
-margin_right = 448.0
+margin_left = 420.0
+margin_right = 528.0
 margin_bottom = 40.0
 theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 11 )
 text = "设置时间补间"
 
 [node name="set_bone" type="Button" parent="control_layer/tool_bar"]
-margin_left = 452.0
-margin_right = 528.0
+margin_left = 532.0
+margin_right = 608.0
 margin_bottom = 40.0
 theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 11 )
 text = "骨骼控制"
 
 [node name="set_mesh" type="Button" parent="control_layer/tool_bar"]
-margin_left = 532.0
-margin_right = 608.0
+margin_left = 612.0
+margin_right = 688.0
 margin_bottom = 40.0
 theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 11 )
@@ -909,10 +919,10 @@ __meta__ = {
 "anims/新建动画" = ExtResource( 15 )
 
 [node name="test" type="ColorRect" parent="."]
-margin_left = 895.75
-margin_top = 500.651
-margin_right = 935.75
-margin_bottom = 540.651
+margin_left = 563.983
+margin_top = 246.667
+margin_right = 603.983
+margin_bottom = 286.667
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1003,41 +1013,304 @@ anchor_left = 0.669
 anchor_top = 0.193
 anchor_right = 1.0
 anchor_bottom = 0.778
-margin_left = -0.0560303
-margin_top = -29.8
-margin_right = 7.0
-margin_bottom = 0.200012
+margin_left = -180.772
+margin_top = -35.4123
+margin_right = -3.71637
+margin_bottom = -5.41229
+split_offset = 200
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="toolPanel" type="PanelContainer" parent="ResManagerLayer/ResManager"]
-margin_right = 14.0
+[node name="objectPanel" type="Panel" parent="ResManagerLayer/ResManager"]
+margin_right = 200.0
 margin_bottom = 381.0
+
+[node name="box_root" type="VBoxContainer" parent="ResManagerLayer/ResManager/objectPanel"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 199.0
+margin_bottom = 360.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="title" type="HBoxContainer" parent="ResManagerLayer/ResManager/objectPanel/box_root"]
+margin_right = 192.0
+margin_bottom = 29.0
+
+[node name="Label" type="Label" parent="ResManagerLayer/ResManager/objectPanel/box_root/title"]
+margin_top = 3.0
+margin_right = 96.0
+margin_bottom = 26.0
+custom_fonts/font = ExtResource( 6 )
+text = "物体属性面板"
+
+[node name="hide_shu_xing" type="Button" parent="ResManagerLayer/ResManager/objectPanel/box_root/title"]
+margin_left = 100.0
+margin_right = 192.0
+margin_bottom = 29.0
+custom_fonts/font = ExtResource( 6 )
+text = "隐藏此窗口"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ResManagerLayer/ResManager/objectPanel/box_root"]
+margin_top = 33.0
+margin_right = 192.0
+margin_bottom = 353.0
+rect_min_size = Vector2( 0, 320 )
+
+[node name="scroll_vbox" type="VBoxContainer" parent="ResManagerLayer/ResManager/objectPanel/box_root/ScrollContainer"]
+margin_right = 142.0
+margin_bottom = 393.0
+
+[node name="title2" type="HBoxContainer" parent="ResManagerLayer/ResManager/objectPanel/box_root/ScrollContainer/scroll_vbox"]
+margin_right = 142.0
+margin_bottom = 23.0
+
+[node name="Label" type="Label" parent="ResManagerLayer/ResManager/objectPanel/box_root/ScrollContainer/scroll_vbox/title2"]
+margin_right = 64.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 6 )
+text = "物体名称"
+
+[node name="Label2" type="Label" parent="ResManagerLayer/ResManager/objectPanel/box_root/ScrollContainer/scroll_vbox/title2"]
+margin_left = 68.0
+margin_right = 94.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 6 )
+text = "null"
+
+[node name="title3" type="HBoxContainer" parent="ResManagerLayer/ResManager/objectPanel/box_root/ScrollContainer/scroll_vbox"]
+margin_top = 27.0
+margin_right = 142.0
+margin_bottom = 60.0
+
+[node name="Label" type="Label" parent="ResManagerLayer/ResManager/objectPanel/box_root/ScrollContainer/scroll_vbox/title3"]
+margin_top = 5.0
+margin_right = 80.0
+margin_bottom = 28.0
+custom_fonts/font = ExtResource( 6 )
+text = "旋转角度："
+
+[node name="Label2" type="LineEdit" parent="ResManagerLayer/ResManager/objectPanel/box_root/ScrollContainer/scroll_vbox/title3"]
+margin_left = 84.0
+margin_right = 142.0
+margin_bottom = 33.0
+custom_fonts/font = ExtResource( 6 )
+text = "null"
+
+[node name="title4" type="HBoxContainer" parent="ResManagerLayer/ResManager/objectPanel/box_root/ScrollContainer/scroll_vbox"]
+margin_top = 64.0
+margin_right = 142.0
+margin_bottom = 97.0
+
+[node name="Label" type="Label" parent="ResManagerLayer/ResManager/objectPanel/box_root/ScrollContainer/scroll_vbox/title4"]
+margin_top = 5.0
+margin_right = 48.0
+margin_bottom = 28.0
+custom_fonts/font = ExtResource( 6 )
+text = "位置："
+
+[node name="Label2" type="LineEdit" parent="ResManagerLayer/ResManager/objectPanel/box_root/ScrollContainer/scroll_vbox/title4"]
+margin_left = 52.0
+margin_right = 110.0
+margin_bottom = 33.0
+hint_tooltip = "x,y 坐标"
+mouse_filter = 1
+custom_fonts/font = ExtResource( 6 )
+text = "null,null"
+
+[node name="title5" type="HBoxContainer" parent="ResManagerLayer/ResManager/objectPanel/box_root/ScrollContainer/scroll_vbox"]
+margin_top = 101.0
+margin_right = 142.0
+margin_bottom = 134.0
+
+[node name="Label" type="Label" parent="ResManagerLayer/ResManager/objectPanel/box_root/ScrollContainer/scroll_vbox/title5"]
+margin_top = 5.0
+margin_right = 48.0
+margin_bottom = 28.0
+custom_fonts/font = ExtResource( 6 )
+text = "位置："
+
+[node name="Label2" type="LineEdit" parent="ResManagerLayer/ResManager/objectPanel/box_root/ScrollContainer/scroll_vbox/title5"]
+margin_left = 52.0
+margin_right = 110.0
+margin_bottom = 33.0
+hint_tooltip = "x,y 坐标"
+mouse_filter = 1
+custom_fonts/font = ExtResource( 6 )
+text = "null,null"
+
+[node name="title6" type="HBoxContainer" parent="ResManagerLayer/ResManager/objectPanel/box_root/ScrollContainer/scroll_vbox"]
+margin_top = 138.0
+margin_right = 142.0
+margin_bottom = 171.0
+
+[node name="Label" type="Label" parent="ResManagerLayer/ResManager/objectPanel/box_root/ScrollContainer/scroll_vbox/title6"]
+margin_top = 5.0
+margin_right = 48.0
+margin_bottom = 28.0
+custom_fonts/font = ExtResource( 6 )
+text = "位置："
+
+[node name="Label2" type="LineEdit" parent="ResManagerLayer/ResManager/objectPanel/box_root/ScrollContainer/scroll_vbox/title6"]
+margin_left = 52.0
+margin_right = 110.0
+margin_bottom = 33.0
+hint_tooltip = "x,y 坐标"
+mouse_filter = 1
+custom_fonts/font = ExtResource( 6 )
+text = "null,null"
+
+[node name="title7" type="HBoxContainer" parent="ResManagerLayer/ResManager/objectPanel/box_root/ScrollContainer/scroll_vbox"]
+margin_top = 175.0
+margin_right = 142.0
+margin_bottom = 208.0
+
+[node name="Label" type="Label" parent="ResManagerLayer/ResManager/objectPanel/box_root/ScrollContainer/scroll_vbox/title7"]
+margin_top = 5.0
+margin_right = 48.0
+margin_bottom = 28.0
+custom_fonts/font = ExtResource( 6 )
+text = "位置："
+
+[node name="Label2" type="LineEdit" parent="ResManagerLayer/ResManager/objectPanel/box_root/ScrollContainer/scroll_vbox/title7"]
+margin_left = 52.0
+margin_right = 110.0
+margin_bottom = 33.0
+hint_tooltip = "x,y 坐标"
+mouse_filter = 1
+custom_fonts/font = ExtResource( 6 )
+text = "null,null"
+
+[node name="title8" type="HBoxContainer" parent="ResManagerLayer/ResManager/objectPanel/box_root/ScrollContainer/scroll_vbox"]
+margin_top = 212.0
+margin_right = 142.0
+margin_bottom = 245.0
+
+[node name="Label" type="Label" parent="ResManagerLayer/ResManager/objectPanel/box_root/ScrollContainer/scroll_vbox/title8"]
+margin_top = 5.0
+margin_right = 48.0
+margin_bottom = 28.0
+custom_fonts/font = ExtResource( 6 )
+text = "位置："
+
+[node name="Label2" type="LineEdit" parent="ResManagerLayer/ResManager/objectPanel/box_root/ScrollContainer/scroll_vbox/title8"]
+margin_left = 52.0
+margin_right = 110.0
+margin_bottom = 33.0
+hint_tooltip = "x,y 坐标"
+mouse_filter = 1
+custom_fonts/font = ExtResource( 6 )
+text = "null,null"
+
+[node name="title9" type="HBoxContainer" parent="ResManagerLayer/ResManager/objectPanel/box_root/ScrollContainer/scroll_vbox"]
+margin_top = 249.0
+margin_right = 142.0
+margin_bottom = 282.0
+
+[node name="Label" type="Label" parent="ResManagerLayer/ResManager/objectPanel/box_root/ScrollContainer/scroll_vbox/title9"]
+margin_top = 5.0
+margin_right = 48.0
+margin_bottom = 28.0
+custom_fonts/font = ExtResource( 6 )
+text = "位置："
+
+[node name="Label2" type="LineEdit" parent="ResManagerLayer/ResManager/objectPanel/box_root/ScrollContainer/scroll_vbox/title9"]
+margin_left = 52.0
+margin_right = 110.0
+margin_bottom = 33.0
+hint_tooltip = "x,y 坐标"
+mouse_filter = 1
+custom_fonts/font = ExtResource( 6 )
+text = "null,null"
+
+[node name="title10" type="HBoxContainer" parent="ResManagerLayer/ResManager/objectPanel/box_root/ScrollContainer/scroll_vbox"]
+margin_top = 286.0
+margin_right = 142.0
+margin_bottom = 319.0
+
+[node name="Label" type="Label" parent="ResManagerLayer/ResManager/objectPanel/box_root/ScrollContainer/scroll_vbox/title10"]
+margin_top = 5.0
+margin_right = 48.0
+margin_bottom = 28.0
+custom_fonts/font = ExtResource( 6 )
+text = "位置："
+
+[node name="Label2" type="LineEdit" parent="ResManagerLayer/ResManager/objectPanel/box_root/ScrollContainer/scroll_vbox/title10"]
+margin_left = 52.0
+margin_right = 110.0
+margin_bottom = 33.0
+hint_tooltip = "x,y 坐标"
+mouse_filter = 1
+custom_fonts/font = ExtResource( 6 )
+text = "null,null"
+
+[node name="title11" type="HBoxContainer" parent="ResManagerLayer/ResManager/objectPanel/box_root/ScrollContainer/scroll_vbox"]
+margin_top = 323.0
+margin_right = 142.0
+margin_bottom = 356.0
+
+[node name="Label" type="Label" parent="ResManagerLayer/ResManager/objectPanel/box_root/ScrollContainer/scroll_vbox/title11"]
+margin_top = 5.0
+margin_right = 48.0
+margin_bottom = 28.0
+custom_fonts/font = ExtResource( 6 )
+text = "位置："
+
+[node name="Label2" type="LineEdit" parent="ResManagerLayer/ResManager/objectPanel/box_root/ScrollContainer/scroll_vbox/title11"]
+margin_left = 52.0
+margin_right = 110.0
+margin_bottom = 33.0
+hint_tooltip = "x,y 坐标"
+mouse_filter = 1
+custom_fonts/font = ExtResource( 6 )
+text = "null,null"
+
+[node name="title12" type="HBoxContainer" parent="ResManagerLayer/ResManager/objectPanel/box_root/ScrollContainer/scroll_vbox"]
+margin_top = 360.0
+margin_right = 142.0
+margin_bottom = 393.0
+
+[node name="Label" type="Label" parent="ResManagerLayer/ResManager/objectPanel/box_root/ScrollContainer/scroll_vbox/title12"]
+margin_top = 5.0
+margin_right = 48.0
+margin_bottom = 28.0
+custom_fonts/font = ExtResource( 6 )
+text = "位置："
+
+[node name="Label2" type="LineEdit" parent="ResManagerLayer/ResManager/objectPanel/box_root/ScrollContainer/scroll_vbox/title12"]
+margin_left = 52.0
+margin_right = 110.0
+margin_bottom = 33.0
+hint_tooltip = "x,y 坐标"
+mouse_filter = 1
+custom_fonts/font = ExtResource( 6 )
+text = "null,null"
 
 [node name="manager" type="PanelContainer" parent="ResManagerLayer/ResManager"]
-margin_left = 26.0
-margin_right = 346.0
+margin_left = 212.0
+margin_right = 516.0
 margin_bottom = 381.0
 
 [node name="vbox" type="VBoxContainer" parent="ResManagerLayer/ResManager/manager"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 313.0
+margin_right = 297.0
 margin_bottom = 374.0
 
 [node name="title" type="HBoxContainer" parent="ResManagerLayer/ResManager/manager/vbox"]
-margin_right = 306.0
+margin_right = 290.0
 margin_bottom = 29.0
 alignment = 1
 
 [node name="tooltip" type="Label" parent="ResManagerLayer/ResManager/manager/vbox/title"]
-margin_left = 65.0
+margin_left = 57.0
 margin_top = 3.0
-margin_right = 145.0
+margin_right = 137.0
 margin_bottom = 26.0
 custom_fonts/font = ExtResource( 6 )
 text = "资源管理器"
@@ -1046,15 +1319,15 @@ __meta__ = {
 }
 
 [node name="hide" type="Button" parent="ResManagerLayer/ResManager/manager/vbox/title"]
-margin_left = 149.0
-margin_right = 241.0
+margin_left = 141.0
+margin_right = 233.0
 margin_bottom = 29.0
 custom_fonts/font = ExtResource( 6 )
 text = "隐藏此窗口"
 
 [node name="tool_bar" type="HBoxContainer" parent="ResManagerLayer/ResManager/manager/vbox"]
 margin_top = 33.0
-margin_right = 306.0
+margin_right = 290.0
 margin_bottom = 62.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1126,7 +1399,7 @@ __meta__ = {
 
 [node name="p" type="Panel" parent="ResManagerLayer/ResManager/manager/vbox"]
 margin_top = 66.0
-margin_right = 306.0
+margin_right = 290.0
 margin_bottom = 66.0
 
 [node name="layer_scroll" type="ScrollContainer" parent="ResManagerLayer/ResManager/manager/vbox/p"]
@@ -1317,6 +1590,7 @@ text = "当前模式：预览"
 [connection signal="pressed" from="animFrameLayer/ask_rename/editbox/cancel" to="." method="_on_rename_cancel_pressed"]
 [connection signal="value_changed" from="control_layer/ProgressBar" to="." method="_on_ProgressBar_value_changed"]
 [connection signal="pressed" from="control_layer/tool_bar/play_anim" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="control_layer/tool_bar/play_loop" to="." method="_on_play_loop_pressed"]
 [connection signal="pressed" from="control_layer/tool_bar/stop_anim" to="." method="_on_stop_anim_pressed"]
 [connection signal="pressed" from="control_layer/tool_bar/reg_key" to="." method="_on_reg_key_pressed"]
 [connection signal="pressed" from="control_layer/work_mode/model" to="control_layer" method="_on_model_pressed"]

@@ -91,6 +91,7 @@ Global="*res://live2d/Global.gd"
 ResourceManager="*res://live2d/class/editor/ResourceManager.gd"
 AnimFrameWindow="*res://live2d/class/editor/AnimFrameWindow.gd"
 AnimData="*res://live2d/class/editor_data/AnimData.gd"
+ObjectWindow="*res://live2d/class/editor/ObjectWindow.gd"
 
 [display]
 

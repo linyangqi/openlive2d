@@ -81,8 +81,8 @@ func add_res(btn_layer:Button):
 		"bone":
 			pass
 		"animation":
-			get_tree().current_scene.get_node("CanvasLayer2/ask_add_anim").show()
 			pass
+			#get_tree().current_scene.get_node("CanvasLayer2/ask_add_anim").show()
 	pass
 #添加图片资源 用于绑定
 func add_resource(res_rect:TextureRect):

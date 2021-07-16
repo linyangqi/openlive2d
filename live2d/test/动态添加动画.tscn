@@ -34,3 +34,12 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 "anims/新建动画" = SubResource( 1 )
+
+[node name="test" type="ColorRect" parent="."]
+margin_left = 295.0
+margin_top = 324.0
+margin_right = 420.0
+margin_bottom = 445.0
+__meta__ = {
+"_edit_use_anchors_": false
+}

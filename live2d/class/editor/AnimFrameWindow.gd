@@ -38,38 +38,31 @@ func hide_ask_panel():
 	panel_ask_anim.hide()
 func hide_window():
 	root.get_child(0).hide()
-func add_frame():
-	var line_panel=Panel.new()
+func add_frame(rotation,current_node:Node2D):
+	var line_panel=PanelContainer.new()
 	line_panel.rect_min_size=Vector2(200,32)
 	root.find_node("anim_vbox").add_child(line_panel)
 	var frame_name=panel_ask_anim.get_node("anim_name").text
-	var anim_frame_name=Button.new()
-	anim_frame_name.text=frame_name
 	#时间补间 延迟ms
 	var label_time=Label.new()
-	label_time.text="时间补间0ms"
+	label_time.text="时间0s"
 	var preline=HBoxContainer.new()
 	var label_rotation=label_time.duplicate()
-	label_rotation.text="旋转角度:0"
+	label_rotation.text="旋转角度:"+str(rotation)
 	line_panel.add_child(preline)
-	preline.add_child(anim_frame_name)
 	preline.add_child(label_time)
 	preline.add_child(label_rotation)
-	anim_frame_name.connect("pressed",self,"frame_selected",[anim_frame_name.get_parent().get_parent(),anim_frame_name.text])
-	Global.bind_btn_font([anim_frame_name,label_time,label_rotation],Global.font)
-	root.add_child(preline)
-	panel_ask_anim.hide()
+	Global.bind_btn_font([label_time,label_rotation],Global.font)
+	AnimData.set_property("rotation_degrees")
+	AnimData.reg_key(rotation,2,4,current_node)
 func frame_selected(node:Panel,frame_name:String):
 	print("选中动画帧>名称:"+frame_name)
-	node.set("custom_styles/panel",Global.style_item_select)
+	#node.set("custom_styles/panel",Global.style_item_select)
 	current_item=node
-	rotation_label=node.get_child(0).get_child(2)
+	#rotation_label=node.get_child(0).get_child(2)
 	#print("旋转label",rotation_label)
 func frame_remove():
 	current_item.queue_free()
-func on_cancel():
-	print("取消添加动画")
-	pass 
 func update_rotation(rotation):
 	if rotation_label!=null:
 		rotation_label.text="旋转角度:"+str(rotation)
