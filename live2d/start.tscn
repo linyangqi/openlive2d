@@ -80,6 +80,9 @@ margin_bottom = 577.278
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "copyright:小沙盒工作室"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 386, 556 )
