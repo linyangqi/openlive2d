@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://炮台算法/c01.png" type="Texture" id=1]
+[ext_resource path="res://面向鼠标/Sprite.gd" type="Script" id=2]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 409.641, 262.397 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
