@@ -140,6 +140,7 @@ __meta__ = {
 }
 
 [node name="ask_reg_key" type="Panel" parent="asks"]
+visible = false
 margin_left = 228.701
 margin_top = 142.28
 margin_right = 657.701
@@ -288,8 +289,8 @@ theme = ExtResource( 3 )
 window_title = "打开文件"
 mode = 0
 access = 2
-current_dir = "/整理/000工作台/算法测试"
-current_path = "/整理/000工作台/算法测试/"
+current_dir = "/Users/11111/Documents/GitHub/Godot_useful_codes"
+current_path = "/Users/11111/Documents/GitHub/Godot_useful_codes/"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1341,14 +1342,14 @@ margin_right = 297.0
 margin_bottom = 374.0
 
 [node name="title" type="HBoxContainer" parent="ResManagerLayer/ResManager/manager/vbox"]
-margin_right = 290.0
+margin_right = 289.0
 margin_bottom = 29.0
 alignment = 1
 
 [node name="tooltip" type="Label" parent="ResManagerLayer/ResManager/manager/vbox/title"]
-margin_left = 57.0
+margin_left = 56.0
 margin_top = 3.0
-margin_right = 137.0
+margin_right = 136.0
 margin_bottom = 26.0
 custom_fonts/font = ExtResource( 6 )
 text = "资源管理器"
@@ -1357,15 +1358,15 @@ __meta__ = {
 }
 
 [node name="hide" type="Button" parent="ResManagerLayer/ResManager/manager/vbox/title"]
-margin_left = 141.0
-margin_right = 233.0
+margin_left = 140.0
+margin_right = 232.0
 margin_bottom = 29.0
 custom_fonts/font = ExtResource( 6 )
 text = "隐藏此窗口"
 
 [node name="tool_bar" type="HBoxContainer" parent="ResManagerLayer/ResManager/manager/vbox"]
 margin_top = 33.0
-margin_right = 290.0
+margin_right = 289.0
 margin_bottom = 62.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1437,7 +1438,7 @@ __meta__ = {
 
 [node name="p" type="Panel" parent="ResManagerLayer/ResManager/manager/vbox"]
 margin_top = 66.0
-margin_right = 290.0
+margin_right = 289.0
 margin_bottom = 66.0
 
 [node name="layer_scroll" type="ScrollContainer" parent="ResManagerLayer/ResManager/manager/vbox/p"]
@@ -1528,7 +1529,7 @@ margin_right = 76.0
 margin_bottom = 39.0
 theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 11 )
-text = "打开共存"
+text = "打开工程"
 
 [node name="savefile" type="Button" parent="menuBarLayer/MenuBar"]
 margin_left = 80.0

@@ -50,12 +50,11 @@ func init_resource_manager():
 	pass
 #左侧动画帧编辑器 参数:根节点 询问根节点
 func init_animFrameWindow():
-	AnimFrameWindow.init_gui($animFrameLayer,$asks)
+	#AnimFrameWindow.init_gui($animFrameLayer,$asks)
 	pass
 #初始化询问节点
 func init_asks():
-# warning-ignore:return_value_discarded
-	#$asks/ask_add_anim/anim_name/add_frame.connect("pressed",AnimFrameWindow,"add_frame")
+	$asks/ask_add_anim/anim_name/add_frame.connect("pressed",AnimFrameWindow,"add_frame")
 	pass
 func init_objectWindow():
 	ObjectWindow.init_gui($ResManagerLayer/ResManager/objectPanel)
@@ -71,6 +70,9 @@ func _process(delta):
 		$Camera2D.position.y+=mouse_move_speed
 	if is_drag:
 		update()
+	if can_rotate and current_select!=null:
+		current_select.look_at(get_global_mouse_position())
+		pass
 	update_fps()
 func _draw():
 	if can_draw:
@@ -97,6 +99,7 @@ func _input(event):
 			if edit_mode=="旋转模式":
 				can_rotate=true
 				print("状态>",can_rotate)
+				update_hud_tip(edit_mode+"，按住鼠标来旋转，按右键退出旋转模式")
 			if edit_mode=="预览模式":
 				#游标位置
 				$CanvasLayer3/Drag.position=event.position
@@ -117,6 +120,8 @@ func _input(event):
 				is_drag=true
 				can_draw=true
 				pass
+		else:
+			can_rotate=false
 		if event.is_pressed() and event.button_index==BUTTON_RIGHT:
 			if edit_mode=="添加顶点":
 				print("退出添加顶点模式")
@@ -148,6 +153,10 @@ func _input(event):
 				update_hud_tip(edit_mode)
 				update_mode_tip(edit_mode)
 				sync_edit_mode(edit_mode)
+			if edit_mode=="旋转模式":
+				edit_mode="预览模式"
+				update_hud_tip(edit_mode)
+				Input.set_custom_mouse_cursor(Global.icon_select)
 		if can_zoom:
 			if event.button_index==BUTTON_WHEEL_UP and edit_mode!="导入图片" and edit_mode!="打开文件" and edit_mode!="保存文件":
 				$Camera2D.zoom.x-=0.1
@@ -336,9 +345,10 @@ func _on_confirmDel_confirmed():
 	pass 
 func _on_rotate_tool_pressed():
 	Input.set_custom_mouse_cursor(load("res://live2d/img/旋转2.png"))
+	edit_mode="旋转模式"
 	update_mode_tip("旋转模式")
 func _on_move_tool_pressed():
-	Input.set_custom_mouse_cursor(load("res://live2d/img/arrow.png"))
+	Input.set_custom_mouse_cursor(Global.icon_select)
 	update_mode_tip("选择模式")
 func _on_ProgressBar_value_changed(value):
 	$control_layer/ProgressBar/Label.text="旋转角度:"+str(value)

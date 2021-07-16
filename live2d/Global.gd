@@ -3,6 +3,7 @@ extends Node
 var font=load("res://live2d/font.tres")
 var icon_show=load("res://live2d/img/eye_open.png")
 var icon_hide=load("res://live2d/img/eye_close.png")
+var icon_select=load("res://live2d/img/arrow.png")
 #var anim_data=load("res://live2d/class/AnimData.gd").new()
 var style_button_pressed=load("res://live2d/tres/button_pressed.tres")
 var style_item_select=load("res://live2d/tres/item_select.tres")
