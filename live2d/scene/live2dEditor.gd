@@ -238,10 +238,11 @@ func _on_anim_frame_add_pressed():
 	pass 
 #添加动画帧 左侧 动画帧编辑器
 func _on_add_frame_pressed():
+	var root=get_node("CanvasLayer")
 	var line_panel=Panel.new()
 	#line_panel.set("custom_styles/panel",Global.tres_button_pressed)
 	line_panel.rect_min_size=Vector2(200,32)
-	$CanvasLayer/anim_split/anim_frame_panel/animes/VBoxContainer.add_child(line_panel)
+	root.find_node("anim_vbox").add_child(line_panel)
 	var frame_name=$CanvasLayer2/ask_add_anim/anim_name.text
 	var label=Button.new()
 	label.text=frame_name
@@ -279,6 +280,7 @@ func _on_add_ske_pressed():
 func _on_play_pressed():
 	update_mode_tip("播放动画")
 	edit_mode="play anim"
+	AnimData.caculate_anim()
 	pass # Replace with function body.
 #导入图片资源
 func _on_import_img_pressed():
@@ -443,7 +445,8 @@ func _on_reg_key_pressed():
 		var rotation=current_select.rotation_degrees
 		print("注册帧>对象:",current_select)
 		print("注册帧>旋转信息:",rotation)
-		Global.animFrameWindow.update_rotation(rotation)
+		AnimData.add_anim("a",rotation,current_select)
+		#Global.animFrameWindow.update_rotation(rotation)
 #删除顶点
 func _on_del_point_pressed():
 	update_hud_tip("点击要删除的顶点,右键退出")

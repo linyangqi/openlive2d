@@ -9,11 +9,6 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Reference",
-"class": "AnimData",
-"language": "GDScript",
-"path": "res://live2d/class/AnimData.gd"
-}, {
 "base": "Node",
 "class": "AnimManager",
 "language": "GDScript",
@@ -70,7 +65,6 @@ _global_script_classes=[ {
 "path": "res://live2d/class/meshPoint.gd"
 } ]
 _global_script_class_icons={
-"AnimData": "",
 "AnimManager": "",
 "ColorTile": "",
 "Drag": "",
@@ -95,6 +89,7 @@ config/icon="res://live2d/img/openlive2d.png"
 
 Global="*res://live2d/Global.gd"
 ResourceManager="*res://live2d/class/editor/ResourceManager.gd"
+AnimData="*res://live2d/class/AnimData.gd"
 
 [display]
 
