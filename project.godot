@@ -100,7 +100,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/color-palette/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/color-palette/plugin.cfg", "res://addons/polygon2d_generator/plugin.cfg" )
 
 [input]
 

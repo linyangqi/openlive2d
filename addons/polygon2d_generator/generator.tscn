@@ -1,0 +1,84 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/polygon2d_generator/generator.gd" type="Script" id=1]
+
+[node name="Polygon2d generator" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.09503
+margin_right = 2.09503
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="generate poly" type="Button" parent="."]
+margin_right = 117.0
+margin_bottom = 20.0
+shortcut_in_tooltip = false
+text = "generate"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="clear" type="Button" parent="."]
+margin_top = 60.6814
+margin_right = 117.0
+margin_bottom = 80.6814
+shortcut_in_tooltip = false
+text = "clear"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="undo" type="Button" parent="."]
+visible = false
+margin_top = 89.1493
+margin_right = 116.0
+margin_bottom = 109.149
+shortcut_in_tooltip = false
+text = "undo"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="debug" type="Button" parent="."]
+visible = false
+margin_left = 189.618
+margin_top = 1.26029
+margin_right = 305.618
+margin_bottom = 21.2607
+shortcut_in_tooltip = false
+text = "debug"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="step" type="HSlider" parent="."]
+margin_left = 42.0
+margin_top = 32.0
+margin_right = 117.0
+margin_bottom = 48.0
+min_value = 5.0
+max_value = 200.0
+step = 5.0
+value = 5.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label" type="Label" parent="step"]
+margin_left = -31.0023
+margin_top = -1.33484
+margin_right = 8.99774
+margin_bottom = 17.6652
+text = "5"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="generate poly" to="." method="_on_generate_polygon"]
+[connection signal="pressed" from="clear" to="." method="_on_clear_pressed"]
+[connection signal="pressed" from="undo" to="." method="_on_undo_pressed"]
+[connection signal="pressed" from="debug" to="." method="_on_debug_pressed"]
+[connection signal="value_changed" from="step" to="." method="_on_step_value_changed"]
