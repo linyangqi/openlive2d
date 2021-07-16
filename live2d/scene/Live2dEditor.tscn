@@ -1,9 +1,10 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://live2d/panel_right.tres" type="ButtonGroup" id=1]
 [ext_resource path="res://live2d/scene/live2dEditor.gd" type="Script" id=2]
 [ext_resource path="res://live2d/中文字体主题.tres" type="Theme" id=3]
 [ext_resource path="res://live2d/tres/button_theme.tres" type="Theme" id=4]
+[ext_resource path="res://live2d/tres/panel.tres" type="StyleBox" id=5]
 [ext_resource path="res://live2d/font.tres" type="DynamicFont" id=6]
 [ext_resource path="res://live2d/img/arrow.png" type="Texture" id=7]
 [ext_resource path="res://live2d/img/旋转2.png" type="Texture" id=8]
@@ -95,20 +96,20 @@ __meta__ = {
 
 [node name="ask_add_anim" type="Panel" parent="asks"]
 visible = false
-margin_left = 94.3706
-margin_top = 79.4713
-margin_right = 871.371
-margin_bottom = 498.471
+margin_left = 228.701
+margin_top = 142.28
+margin_right = 657.701
+margin_bottom = 413.28
 custom_styles/panel = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="anim_name" type="LineEdit" parent="asks/ask_add_anim"]
-margin_left = 196.88
-margin_top = 162.827
-margin_right = 499.88
-margin_bottom = 202.827
+margin_left = 67.5718
+margin_top = 110.378
+margin_right = 370.572
+margin_bottom = 150.378
 custom_fonts/font = ExtResource( 6 )
 placeholder_text = "请输入动画名称"
 caret_blink = true
@@ -127,17 +128,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="add_frame" type="Button" parent="asks/ask_add_anim/anim_name"]
-margin_left = 61.5716
-margin_top = 43.0
-margin_right = 153.572
-margin_bottom = 76.0
-custom_fonts/font = ExtResource( 6 )
-text = "添加动画帧"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="cancel" type="Button" parent="asks/ask_add_anim/anim_name"]
 margin_left = 251.0
 margin_top = 44.0
@@ -149,11 +139,55 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ask_reg_key" type="Panel" parent="asks"]
+margin_left = 228.701
+margin_top = 142.28
+margin_right = 657.701
+margin_bottom = 413.28
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="key_time" type="LineEdit" parent="asks/ask_reg_key"]
+margin_left = 67.5718
+margin_top = 110.378
+margin_right = 370.572
+margin_bottom = 150.378
+custom_fonts/font = ExtResource( 6 )
+placeholder_text = "请输入动画注册在第几秒"
+caret_blink = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="add_key" type="Button" parent="asks/ask_reg_key/key_time"]
+margin_left = 157.954
+margin_top = 44.0
+margin_right = 242.954
+margin_bottom = 77.0
+custom_fonts/font = ExtResource( 6 )
+text = "添加帧"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="cancel" type="Button" parent="asks/ask_reg_key/key_time"]
+margin_left = 251.0
+margin_top = 44.0
+margin_right = 308.0
+margin_bottom = 77.0
+custom_fonts/font = ExtResource( 6 )
+text = "取消"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="about" type="PopupPanel" parent="asks"]
-margin_left = 169.879
-margin_top = 84.9394
-margin_right = 911.879
-margin_bottom = 520.939
+margin_left = 131.0
+margin_top = 25.0
+margin_right = 912.0
+margin_bottom = 521.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -161,8 +195,8 @@ __meta__ = {
 [node name="Panel" type="Panel" parent="asks/about"]
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 738.0
-margin_bottom = 432.0
+margin_right = 777.0
+margin_bottom = 492.0
 custom_styles/panel = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -320,6 +354,8 @@ margin_left = 100.0
 margin_right = 220.0
 margin_bottom = 33.0
 rect_min_size = Vector2( 120, 0 )
+hint_tooltip = "单位:秒"
+theme = ExtResource( 3 )
 custom_fonts/font = ExtResource( 6 )
 placeholder_text = "动画持续时间"
 caret_blink = true
@@ -335,9 +371,10 @@ __meta__ = {
 
 [node name="anim_vbox" type="VBoxContainer" parent="animFrameLayer/anim_split/anim_frame_panel/vbox/animes"]
 margin_right = 278.0
-margin_bottom = 62.0
+margin_bottom = 29.0
 
 [node name="Panel" type="PanelContainer" parent="animFrameLayer/anim_split/anim_frame_panel/vbox/animes/anim_vbox"]
+visible = false
 margin_right = 278.0
 margin_bottom = 29.0
 custom_styles/panel = ExtResource( 16 )
@@ -370,9 +407,8 @@ custom_fonts/font = ExtResource( 6 )
 text = "旋转角度:0"
 
 [node name="Panel2" type="PanelContainer" parent="animFrameLayer/anim_split/anim_frame_panel/vbox/animes/anim_vbox"]
-margin_top = 33.0
 margin_right = 278.0
-margin_bottom = 62.0
+margin_bottom = 29.0
 custom_styles/panel = ExtResource( 16 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="animFrameLayer/anim_split/anim_frame_panel/vbox/animes/anim_vbox/Panel2"]
@@ -708,6 +744,7 @@ custom_fonts/font = ExtResource( 11 )
 text = "注册关键帧"
 
 [node name="set_time" type="Button" parent="control_layer/tool_bar"]
+visible = false
 margin_left = 420.0
 margin_right = 528.0
 margin_bottom = 40.0
@@ -716,16 +753,16 @@ custom_fonts/font = ExtResource( 11 )
 text = "设置时间补间"
 
 [node name="set_bone" type="Button" parent="control_layer/tool_bar"]
-margin_left = 532.0
-margin_right = 608.0
+margin_left = 420.0
+margin_right = 496.0
 margin_bottom = 40.0
 theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 11 )
 text = "骨骼控制"
 
 [node name="set_mesh" type="Button" parent="control_layer/tool_bar"]
-margin_left = 612.0
-margin_right = 688.0
+margin_left = 500.0
+margin_right = 576.0
 margin_bottom = 40.0
 theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 11 )
@@ -1025,6 +1062,7 @@ __meta__ = {
 [node name="objectPanel" type="Panel" parent="ResManagerLayer/ResManager"]
 margin_right = 200.0
 margin_bottom = 381.0
+custom_styles/panel = ExtResource( 5 )
 
 [node name="box_root" type="VBoxContainer" parent="ResManagerLayer/ResManager/objectPanel"]
 margin_left = 7.0
@@ -1577,11 +1615,14 @@ custom_fonts/font = ExtResource( 6 )
 text = "当前模式：预览"
 
 [connection signal="pressed" from="asks/ask_add_anim/anim_name/add_anim" to="." method="_on_ok_pressed"]
+[connection signal="pressed" from="asks/ask_reg_key/key_time/add_key" to="." method="_on_add_key_pressed"]
+[connection signal="pressed" from="asks/ask_reg_key/key_time/cancel" to="." method="_on_reg_cancel_pressed"]
 [connection signal="pressed" from="asks/about/Panel/VBoxContainer/openlive2d" to="." method="_on_openlive2d_pressed"]
 [connection signal="pressed" from="asks/about/Panel/VBoxContainer/editor" to="." method="_on_editor_pressed"]
 [connection signal="file_selected" from="asks/FileDialog" to="." method="_on_FileDialog_file_selected"]
 [connection signal="popup_hide" from="asks/FileDialog" to="." method="_on_FileDialog_popup_hide"]
 [connection signal="confirmed" from="asks/confirmDel" to="." method="_on_confirmDel_confirmed"]
+[connection signal="text_changed" from="animFrameLayer/anim_split/anim_frame_panel/vbox/HBoxContainer2/LineEdit" to="." method="_on_LineEdit_text_changed"]
 [connection signal="pressed" from="animFrameLayer/ask_layer/editbox/ok" to="animFrameLayer" method="_on_ok_pressed"]
 [connection signal="pressed" from="animFrameLayer/ask_layer/editbox/cancel" to="animFrameLayer" method="_on_cancel_pressed"]
 [connection signal="pressed" from="animFrameLayer/ask_bind/editbox/ok" to="." method="_on_bind_ok_pressed"]

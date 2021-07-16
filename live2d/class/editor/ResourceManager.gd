@@ -102,3 +102,19 @@ func remove_resource(node:Control,res_rect:TextureRect,area:Area2D):
 	node.queue_free()
 	res_rect.queue_free()
 	area.queue_free()
+#备用代码
+#资源管理器的添加按钮
+func _on_add_pressed():
+	print("按下了添加按钮")
+	var res_layer=$ResManagerLayer
+	var layer=res_layer.get_node("ResManager/manager/vbox/tool_bar/layer")
+	if layer.pressed:
+		print("切换到图层资源面板")
+		res_layer.get_node("ResManager/manager/vbox/tool_bar/layer").show()
+		res_layer.get_node("ResManager/manager/vbox/layer_scroll/layer").show()
+	#询问是否添加动画
+	if res_layer.get_node("ResManager/manager/vbox/tool_bar/animation").pressed:
+		print("切换到动画资源面板")
+		$CanvasLayer2/ask_add_anim.show()
+		$CanvasLayer2/ask_add_anim/anim_name/add_frame.disabled=true
+		$CanvasLayer2/ask_add_anim/anim_name/add_anim.disabled=false

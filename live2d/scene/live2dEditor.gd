@@ -55,7 +55,7 @@ func init_animFrameWindow():
 #初始化询问节点
 func init_asks():
 # warning-ignore:return_value_discarded
-	$asks/ask_add_anim/anim_name/add_frame.connect("pressed",AnimFrameWindow,"add_frame")
+	#$asks/ask_add_anim/anim_name/add_frame.connect("pressed",AnimFrameWindow,"add_frame")
 	pass
 func init_objectWindow():
 	ObjectWindow.init_gui($ResManagerLayer/ResManager/objectPanel)
@@ -188,22 +188,6 @@ func _on_savefile_pressed():
 	$CanvasLayer2/FileDialog.mode=FileDialog.MODE_SAVE_FILE
 	update_mode_tip("保存文件")
 	pass # Replace with function body.
-
-#资源管理器的添加按钮
-func _on_add_pressed():
-	print("按下了添加按钮")
-	var res_layer=$ResManagerLayer
-	var layer=res_layer.get_node("ResManager/manager/vbox/tool_bar/layer")
-	if layer.pressed:
-		print("切换到图层资源面板")
-		res_layer.get_node("ResManager/manager/vbox/tool_bar/layer").show()
-		res_layer.get_node("ResManager/manager/vbox/layer_scroll/layer").show()
-	#询问是否添加动画
-	if res_layer.get_node("ResManager/manager/vbox/tool_bar/animation").pressed:
-		print("切换到动画资源面板")
-		$CanvasLayer2/ask_add_anim.show()
-		$CanvasLayer2/ask_add_anim/anim_name/add_frame.disabled=true
-		$CanvasLayer2/ask_add_anim/anim_name/add_anim.disabled=false
 #添加动画名称 资源管理器 右侧
 func _on_ok_pressed():
 	var anim_name=$CanvasLayer2/ask_add_anim/anim_name.text
@@ -227,42 +211,8 @@ func _on_ok_pressed():
 	$HudLayer/current_tip/edited_anim.text="当前编辑的动画:"+anim_name
 	ResourceManager.add_layer(preline)
 	pass 
-func rename_things(rename_btn):
-	Global.res_manager.current_select=rename_btn
-	print("重命名!,对象",Global.res_manager.current_select)
-	$CanvasLayer/ask_rename.show()
-func edit_selected_anim(anim_name):
-	print_debug("!edit anim:",anim_name)
-	$CanvasLayer/anim_frame_panel.show()
-	pass
-func remove_anim(preline:Control):
-	print("删除动画",preline)
-	preline.queue_free()
-#添加动画帧 左侧 动画帧编辑器
-func _on_add_frame_pressed():
-	var root=get_node("animFrameLayer")
-	var line_panel=Panel.new()
-	line_panel.rect_min_size=Vector2(200,32)
-	root.find_node("anim_vbox").add_child(line_panel)
-	var frame_name=$CanvasLayer2/ask_add_anim/anim_name.text
-	var label=Button.new()
-	label.text=frame_name
-	#时间补间 延迟ms
-	var label_time=Label.new()
-	label_time.text="时间补间0ms"
-	var preline=HBoxContainer.new()
-	var label_rotation=label_time.duplicate()
-	label_rotation.text="旋转角度:0"
-	line_panel.add_child(preline)
-	preline.add_child(label)
-	preline.add_child(label_time)
-	preline.add_child(label_rotation)
-	#label.connect("pressed",AnimFrameWindow,"frame_selected",[label.get_parent().get_parent(),label.text])
-	Global.bind_btn_font([label,label_time,label_rotation],Global.font)
-	$CanvasLayer2/ask_add_anim.hide()
-	pass 
 func _on_about_pressed():
-	$CanvasLayer2/about.popup()
+	$asks/about.popup()
 	pass 
 func _on_openlive2d_pressed():
 # warning-ignore:return_value_discarded
@@ -440,7 +390,10 @@ func _on_reg_key_pressed():
 		var rotation=current_select.rotation_degrees
 		print("注册帧>对象:",current_select)
 		print("注册帧>旋转信息:",rotation)
-		AnimFrameWindow.add_frame(rotation,current_select)
+		$asks/ask_reg_key.show()
+		#AnimFrameWindow.add_frame(rotation,current_select)
+	else:
+		OS.alert("错误！，未选中任何对象")
 #删除顶点
 func _on_del_point_pressed():
 	update_hud_tip("点击要删除的顶点,右键退出")
@@ -482,3 +435,13 @@ func _on_stop_anim_pressed():
 func _on_play_loop_pressed():
 	AnimData.set_loop(true)
 	AnimData.play()
+func _on_LineEdit_text_changed(new_text):
+	AnimData.set_time_length(float(new_text))
+	print("设置时长>"+new_text)
+func _on_reg_cancel_pressed():
+	$asks/ask_reg_key.hide()
+func _on_add_key_pressed():
+	var bone_rotation=current_select.rotation_degrees
+	AnimFrameWindow.add_frame(bone_rotation,current_select,float($asks/ask_reg_key/key_time.text))
+	AnimData.set_reg_key_time(float($asks/ask_reg_key/key_time.text))
+	$asks/ask_reg_key.hide()
