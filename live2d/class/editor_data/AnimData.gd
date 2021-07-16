@@ -3,13 +3,15 @@ var data=[]
 var anim_count=0
 var current_select:Area2D
 var can_process=true
-var animationPlayer=AnimationPlayer.new()
-var animation=Animation.new()
+var animationPlayer
+var animation
 var property=""
 var time_length:float
 var reg_key_time:float
 func _ready():
 	set_process(false)
+	animationPlayer=AnimationPlayer.new()
+	animation=Animation.new()
 	get_tree().current_scene.add_child(animationPlayer)
 func test():
 	print("测试动画")
