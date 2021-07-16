@@ -79,14 +79,21 @@ font_data = ExtResource( 10 )
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 2 )
+__meta__ = {
+"_editor_description_": "采用mvc架构
+model view control"
+}
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 515.412, 302.033 )
 current = true
 
-[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+[node name="asks" type="CanvasLayer" parent="."]
+__meta__ = {
+"_editor_description_": "询问节点"
+}
 
-[node name="ask_add_anim" type="Panel" parent="CanvasLayer2"]
+[node name="ask_add_anim" type="Panel" parent="asks"]
 visible = false
 margin_left = 94.3706
 margin_top = 79.4713
@@ -97,7 +104,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="anim_name" type="LineEdit" parent="CanvasLayer2/ask_add_anim"]
+[node name="anim_name" type="LineEdit" parent="asks/ask_add_anim"]
 margin_left = 196.88
 margin_top = 162.827
 margin_right = 499.88
@@ -109,15 +116,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="add_anim" type="Button" parent="CanvasLayer2/ask_add_anim/anim_name"]
+[node name="add_anim" type="Button" parent="asks/ask_add_anim/anim_name"]
 margin_left = 157.954
 margin_top = 44.0
 margin_right = 242.954
 margin_bottom = 77.0
 custom_fonts/font = ExtResource( 6 )
 text = "添加动画"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="add_frame" type="Button" parent="CanvasLayer2/ask_add_anim/anim_name"]
+[node name="add_frame" type="Button" parent="asks/ask_add_anim/anim_name"]
 margin_left = 61.5716
 margin_top = 43.0
 margin_right = 153.572
@@ -128,15 +138,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="cancel" type="Button" parent="CanvasLayer2/ask_add_anim/anim_name"]
+[node name="cancel" type="Button" parent="asks/ask_add_anim/anim_name"]
 margin_left = 251.0
 margin_top = 44.0
 margin_right = 308.0
 margin_bottom = 77.0
 custom_fonts/font = ExtResource( 6 )
 text = "取消"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="about" type="PopupPanel" parent="CanvasLayer2"]
+[node name="about" type="PopupPanel" parent="asks"]
 margin_left = 169.879
 margin_top = 84.9394
 margin_right = 911.879
@@ -145,7 +158,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Panel" type="Panel" parent="CanvasLayer2/about"]
+[node name="Panel" type="Panel" parent="asks/about"]
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 738.0
@@ -155,7 +168,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer2/about/Panel"]
+[node name="TextureRect" type="TextureRect" parent="asks/about/Panel"]
 margin_left = 93.8334
 margin_top = -5.04538
 margin_right = 633.834
@@ -166,7 +179,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer2/about/Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="asks/about/Panel"]
 margin_left = 133.682
 margin_top = 274.859
 margin_right = 550.682
@@ -176,7 +189,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="CanvasLayer2/about/Panel/VBoxContainer"]
+[node name="Label" type="Label" parent="asks/about/Panel/VBoxContainer"]
 margin_right = 417.0
 margin_bottom = 23.0
 custom_fonts/font = ExtResource( 6 )
@@ -185,7 +198,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="openlive2d" type="LinkButton" parent="CanvasLayer2/about/Panel/VBoxContainer"]
+[node name="openlive2d" type="LinkButton" parent="asks/about/Panel/VBoxContainer"]
 margin_top = 27.0
 margin_right = 417.0
 margin_bottom = 41.0
@@ -194,7 +207,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label2" type="Label" parent="CanvasLayer2/about/Panel/VBoxContainer"]
+[node name="Label2" type="Label" parent="asks/about/Panel/VBoxContainer"]
 margin_top = 45.0
 margin_right = 417.0
 margin_bottom = 68.0
@@ -204,14 +217,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="editor" type="LinkButton" parent="CanvasLayer2/about/Panel/VBoxContainer"]
+[node name="editor" type="LinkButton" parent="asks/about/Panel/VBoxContainer"]
 margin_top = 72.0
 margin_right = 417.0
 margin_bottom = 86.0
 focus_mode = 2
 text = "https://gitee.com/small-sandbox/Godot_useful_codes"
 
-[node name="Label3" type="Label" parent="CanvasLayer2/about/Panel/VBoxContainer"]
+[node name="Label3" type="Label" parent="asks/about/Panel/VBoxContainer"]
 margin_top = 90.0
 margin_right = 417.0
 margin_bottom = 113.0
@@ -221,7 +234,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label4" type="Label" parent="CanvasLayer2/about/Panel/VBoxContainer"]
+[node name="Label4" type="Label" parent="asks/about/Panel/VBoxContainer"]
 margin_top = 117.0
 margin_right = 417.0
 margin_bottom = 166.0
@@ -232,7 +245,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="FileDialog" type="FileDialog" parent="CanvasLayer2"]
+[node name="FileDialog" type="FileDialog" parent="asks"]
 margin_left = 154.708
 margin_top = 51.6721
 margin_right = 735.708
@@ -241,13 +254,13 @@ theme = ExtResource( 3 )
 window_title = "打开文件"
 mode = 0
 access = 2
-current_dir = "/Users/11111/Documents/GitHub/Godot_useful_codes"
-current_path = "/Users/11111/Documents/GitHub/Godot_useful_codes/"
+current_dir = "/整理/000工作台/算法测试"
+current_path = "/整理/000工作台/算法测试/"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="confirmDel" type="ConfirmationDialog" parent="CanvasLayer2"]
+[node name="confirmDel" type="ConfirmationDialog" parent="asks"]
 margin_left = 287.0
 margin_top = 215.0
 margin_right = 526.0
@@ -259,122 +272,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="animFrameLayer" type="CanvasLayer" parent="."]
 layer = -1
 script = ExtResource( 12 )
 
-[node name="fps" type="Label" parent="CanvasLayer"]
-margin_left = 913.241
-margin_top = 53.3369
-margin_right = 953.241
-margin_bottom = 67.3369
-rect_scale = Vector2( 2, 2 )
-text = "fps"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="MenuBar" type="HBoxContainer" parent="CanvasLayer"]
-margin_left = 7.85721
-margin_top = 6.17354
-margin_right = 225.857
-margin_bottom = 46.1735
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="openfile" type="Button" parent="CanvasLayer/MenuBar"]
-margin_right = 76.0
-margin_bottom = 39.0
-theme = ExtResource( 4 )
-custom_fonts/font = ExtResource( 11 )
-text = "打开共存"
-
-[node name="savefile" type="Button" parent="CanvasLayer/MenuBar"]
-margin_left = 80.0
-margin_right = 156.0
-margin_bottom = 39.0
-theme = ExtResource( 4 )
-custom_fonts/font = ExtResource( 11 )
-text = "保存工程"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="import_img" type="Button" parent="CanvasLayer/MenuBar"]
-margin_left = 160.0
-margin_right = 268.0
-margin_bottom = 39.0
-theme = ExtResource( 4 )
-custom_fonts/font = ExtResource( 11 )
-text = "导入图片资源"
-
-[node name="language" type="OptionButton" parent="CanvasLayer/MenuBar"]
-margin_left = 272.0
-margin_right = 333.0
-margin_bottom = 39.0
-custom_fonts/font = ExtResource( 11 )
-text = "中文"
-items = [ "中文", null, false, 0, null, "English", null, false, 1, null, "Japanese", null, false, 2, null ]
-selected = 0
-
-[node name="zoom" type="Label" parent="CanvasLayer/MenuBar"]
-margin_left = 337.0
-margin_top = 12.0
-margin_right = 385.0
-margin_bottom = 26.0
-text = "zoom:1"
-
-[node name="window" type="MenuButton" parent="CanvasLayer/MenuBar"]
-margin_left = 389.0
-margin_right = 465.0
-margin_bottom = 39.0
-theme = ExtResource( 3 )
-custom_fonts/font = ExtResource( 11 )
-text = "窗口开关"
-items = [ "动画帧编辑器", null, 1, false, false, 0, 0, null, "", false, "动画控制器", null, 1, true, false, 1, 0, null, "", false, "资源管理器", null, 1, true, false, 2, 0, null, "", false, "编辑工具", null, 1, true, false, 3, 0, null, "", false ]
-
-[node name="about" type="Button" parent="CanvasLayer/MenuBar"]
-margin_left = 469.0
-margin_right = 513.0
-margin_bottom = 39.0
-theme = ExtResource( 4 )
-custom_fonts/font = ExtResource( 11 )
-text = "关于"
-
-[node name="help" type="Button" parent="CanvasLayer/MenuBar"]
-margin_left = 517.0
-margin_right = 593.0
-margin_bottom = 39.0
-theme = ExtResource( 4 )
-custom_fonts/font = ExtResource( 11 )
-text = "帮助文档"
-
-[node name="reset_cursor" type="Button" parent="CanvasLayer/MenuBar"]
-margin_left = 597.0
-margin_right = 705.0
-margin_bottom = 39.0
-theme = ExtResource( 4 )
-custom_fonts/font = ExtResource( 11 )
-text = "重置游标位置"
-
-[node name="reset" type="Button" parent="CanvasLayer/MenuBar"]
-margin_left = 709.0
-margin_right = 801.0
-margin_bottom = 39.0
-theme = ExtResource( 4 )
-custom_fonts/font = ExtResource( 11 )
-text = "重置编辑器"
-
-[node name="edit_mode" type="Label" parent="CanvasLayer/MenuBar"]
-margin_left = 805.0
-margin_top = 8.0
-margin_right = 917.0
-margin_bottom = 31.0
-custom_fonts/font = ExtResource( 6 )
-text = "当前模式：预览"
-
-[node name="anim_split" type="HSplitContainer" parent="CanvasLayer"]
+[node name="anim_split" type="HSplitContainer" parent="animFrameLayer"]
 margin_left = 9.0
 margin_top = 84.0
 margin_right = 275.0
@@ -385,19 +287,27 @@ __meta__ = {
 "_editor_description_": "动画帧编辑器"
 }
 
-[node name="anim_frame_panel" type="PanelContainer" parent="CanvasLayer/anim_split"]
+[node name="anim_frame_panel" type="PanelContainer" parent="animFrameLayer/anim_split"]
 margin_right = 240.0
-margin_bottom = 421.0
+margin_bottom = 431.0
 
-[node name="vbox" type="VBoxContainer" parent="CanvasLayer/anim_split/anim_frame_panel"]
+[node name="vbox" type="VBoxContainer" parent="animFrameLayer/anim_split/anim_frame_panel"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 233.0
-margin_bottom = 414.0
+margin_bottom = 424.0
 
-[node name="Label" type="Label" parent="CanvasLayer/anim_split/anim_frame_panel/vbox"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="animFrameLayer/anim_split/anim_frame_panel/vbox"]
 margin_right = 226.0
-margin_bottom = 23.0
+margin_bottom = 33.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="animFrameLayer/anim_split/anim_frame_panel/vbox/HBoxContainer2"]
+margin_top = 5.0
+margin_right = 96.0
+margin_bottom = 28.0
 custom_fonts/font = ExtResource( 6 )
 text = "动画帧编辑器"
 align = 1
@@ -405,100 +315,107 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="animes" type="ScrollContainer" parent="CanvasLayer/anim_split/anim_frame_panel/vbox"]
-margin_top = 27.0
+[node name="LineEdit" type="LineEdit" parent="animFrameLayer/anim_split/anim_frame_panel/vbox/HBoxContainer2"]
+margin_left = 100.0
+margin_right = 220.0
+margin_bottom = 33.0
+rect_min_size = Vector2( 120, 0 )
+custom_fonts/font = ExtResource( 6 )
+placeholder_text = "动画持续时间"
+caret_blink = true
+
+[node name="animes" type="ScrollContainer" parent="animFrameLayer/anim_split/anim_frame_panel/vbox"]
+margin_top = 37.0
 margin_right = 226.0
-margin_bottom = 377.0
+margin_bottom = 387.0
 rect_min_size = Vector2( 0, 350 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="anim_vbox" type="VBoxContainer" parent="CanvasLayer/anim_split/anim_frame_panel/vbox/animes"]
-margin_right = 278.0
-margin_bottom = 62.0
+[node name="anim_vbox" type="VBoxContainer" parent="animFrameLayer/anim_split/anim_frame_panel/vbox/animes"]
 
-[node name="Panel" type="PanelContainer" parent="CanvasLayer/anim_split/anim_frame_panel/vbox/animes/anim_vbox"]
+[node name="Panel" type="PanelContainer" parent="animFrameLayer/anim_split/anim_frame_panel/vbox/animes/anim_vbox"]
+visible = false
 margin_right = 278.0
 margin_bottom = 29.0
 custom_styles/panel = ExtResource( 16 )
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/anim_split/anim_frame_panel/vbox/animes/anim_vbox/Panel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="animFrameLayer/anim_split/anim_frame_panel/vbox/animes/anim_vbox/Panel"]
 margin_right = 278.0
 margin_bottom = 29.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button2" type="Button" parent="CanvasLayer/anim_split/anim_frame_panel/vbox/animes/anim_vbox/Panel/HBoxContainer"]
+[node name="Button2" type="Button" parent="animFrameLayer/anim_split/anim_frame_panel/vbox/animes/anim_vbox/Panel/HBoxContainer"]
 margin_right = 90.0
 margin_bottom = 29.0
 custom_fonts/font = ExtResource( 6 )
 text = "旋转角度:0"
 
-[node name="Button3" type="Button" parent="CanvasLayer/anim_split/anim_frame_panel/vbox/animes/anim_vbox/Panel/HBoxContainer"]
+[node name="Button3" type="Button" parent="animFrameLayer/anim_split/anim_frame_panel/vbox/animes/anim_vbox/Panel/HBoxContainer"]
 margin_left = 94.0
 margin_right = 184.0
 margin_bottom = 29.0
 custom_fonts/font = ExtResource( 6 )
 text = "旋转角度:0"
 
-[node name="Button4" type="Button" parent="CanvasLayer/anim_split/anim_frame_panel/vbox/animes/anim_vbox/Panel/HBoxContainer"]
+[node name="Button4" type="Button" parent="animFrameLayer/anim_split/anim_frame_panel/vbox/animes/anim_vbox/Panel/HBoxContainer"]
 margin_left = 188.0
 margin_right = 278.0
 margin_bottom = 29.0
 custom_fonts/font = ExtResource( 6 )
 text = "旋转角度:0"
 
-[node name="Panel2" type="PanelContainer" parent="CanvasLayer/anim_split/anim_frame_panel/vbox/animes/anim_vbox"]
-margin_top = 33.0
+[node name="Panel2" type="PanelContainer" parent="animFrameLayer/anim_split/anim_frame_panel/vbox/animes/anim_vbox"]
+visible = false
 margin_right = 278.0
-margin_bottom = 62.0
+margin_bottom = 29.0
 custom_styles/panel = ExtResource( 16 )
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/anim_split/anim_frame_panel/vbox/animes/anim_vbox/Panel2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="animFrameLayer/anim_split/anim_frame_panel/vbox/animes/anim_vbox/Panel2"]
 margin_right = 278.0
 margin_bottom = 29.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button2" type="Button" parent="CanvasLayer/anim_split/anim_frame_panel/vbox/animes/anim_vbox/Panel2/HBoxContainer"]
+[node name="Button2" type="Button" parent="animFrameLayer/anim_split/anim_frame_panel/vbox/animes/anim_vbox/Panel2/HBoxContainer"]
 margin_right = 90.0
 margin_bottom = 29.0
 custom_fonts/font = ExtResource( 6 )
 text = "旋转角度:0"
 
-[node name="Button3" type="Button" parent="CanvasLayer/anim_split/anim_frame_panel/vbox/animes/anim_vbox/Panel2/HBoxContainer"]
+[node name="Button3" type="Button" parent="animFrameLayer/anim_split/anim_frame_panel/vbox/animes/anim_vbox/Panel2/HBoxContainer"]
 margin_left = 94.0
 margin_right = 184.0
 margin_bottom = 29.0
 custom_fonts/font = ExtResource( 6 )
 text = "旋转角度:0"
 
-[node name="Button4" type="Button" parent="CanvasLayer/anim_split/anim_frame_panel/vbox/animes/anim_vbox/Panel2/HBoxContainer"]
+[node name="Button4" type="Button" parent="animFrameLayer/anim_split/anim_frame_panel/vbox/animes/anim_vbox/Panel2/HBoxContainer"]
 margin_left = 188.0
 margin_right = 278.0
 margin_bottom = 29.0
 custom_fonts/font = ExtResource( 6 )
 text = "旋转角度:0"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/anim_split/anim_frame_panel/vbox"]
-margin_top = 381.0
+[node name="HBoxContainer" type="HBoxContainer" parent="animFrameLayer/anim_split/anim_frame_panel/vbox"]
+margin_top = 391.0
 margin_right = 226.0
-margin_bottom = 407.0
+margin_bottom = 417.0
 __meta__ = {
-"_edit_group_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="add" type="Button" parent="CanvasLayer/anim_split/anim_frame_panel/vbox/HBoxContainer"]
+[node name="add" type="Button" parent="animFrameLayer/anim_split/anim_frame_panel/vbox/HBoxContainer"]
 margin_right = 54.0
 margin_bottom = 26.0
 custom_fonts/font = ExtResource( 17 )
 text = "添加帧"
 
-[node name="remove" type="Button" parent="CanvasLayer/anim_split/anim_frame_panel/vbox/HBoxContainer"]
+[node name="remove" type="Button" parent="animFrameLayer/anim_split/anim_frame_panel/vbox/HBoxContainer"]
 margin_left = 58.0
 margin_right = 112.0
 margin_bottom = 26.0
@@ -508,12 +425,22 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect" type="PanelContainer" parent="CanvasLayer/anim_split"]
+[node name="hide" type="Button" parent="animFrameLayer/anim_split/anim_frame_panel/vbox/HBoxContainer"]
+margin_left = 116.0
+margin_right = 198.0
+margin_bottom = 26.0
+custom_fonts/font = ExtResource( 17 )
+text = "隐藏此窗口"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="PanelContainer" parent="animFrameLayer/anim_split"]
 margin_left = 252.0
 margin_right = 266.0
-margin_bottom = 421.0
+margin_bottom = 431.0
 
-[node name="ask_layer" type="Panel" parent="CanvasLayer"]
+[node name="ask_layer" type="Panel" parent="animFrameLayer"]
 visible = false
 margin_left = 202.217
 margin_top = 132.447
@@ -524,7 +451,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="editbox" type="LineEdit" parent="CanvasLayer/ask_layer"]
+[node name="editbox" type="LineEdit" parent="animFrameLayer/ask_layer"]
 margin_left = 113.075
 margin_top = 115.219
 margin_right = 416.075
@@ -537,7 +464,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ok" type="Button" parent="CanvasLayer/ask_layer/editbox"]
+[node name="ok" type="Button" parent="animFrameLayer/ask_layer/editbox"]
 margin_left = 174.0
 margin_top = 44.0
 margin_right = 247.0
@@ -549,7 +476,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="cancel" type="Button" parent="CanvasLayer/ask_layer/editbox"]
+[node name="cancel" type="Button" parent="animFrameLayer/ask_layer/editbox"]
 margin_left = 251.888
 margin_top = 43.3007
 margin_right = 304.888
@@ -558,7 +485,7 @@ theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 6 )
 text = "取消"
 
-[node name="ask_bind" type="Panel" parent="CanvasLayer"]
+[node name="ask_bind" type="Panel" parent="animFrameLayer"]
 visible = false
 margin_left = 202.217
 margin_top = 132.447
@@ -569,7 +496,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="editbox" type="LineEdit" parent="CanvasLayer/ask_bind"]
+[node name="editbox" type="LineEdit" parent="animFrameLayer/ask_bind"]
 margin_left = 113.075
 margin_top = 115.219
 margin_right = 416.075
@@ -582,7 +509,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ok" type="Button" parent="CanvasLayer/ask_bind/editbox"]
+[node name="ok" type="Button" parent="animFrameLayer/ask_bind/editbox"]
 margin_left = 173.056
 margin_top = 43.0561
 margin_right = 249.056
@@ -594,7 +521,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="cancel" type="Button" parent="CanvasLayer/ask_bind/editbox"]
+[node name="cancel" type="Button" parent="animFrameLayer/ask_bind/editbox"]
 margin_left = 251.888
 margin_top = 43.3007
 margin_right = 304.888
@@ -603,7 +530,7 @@ theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 6 )
 text = "取消"
 
-[node name="ask_rename" type="Panel" parent="CanvasLayer"]
+[node name="ask_rename" type="Panel" parent="animFrameLayer"]
 visible = false
 margin_left = 202.217
 margin_top = 132.447
@@ -614,7 +541,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="editbox" type="LineEdit" parent="CanvasLayer/ask_rename"]
+[node name="editbox" type="LineEdit" parent="animFrameLayer/ask_rename"]
 margin_left = 113.075
 margin_top = 115.219
 margin_right = 416.075
@@ -627,7 +554,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="rename" type="Button" parent="CanvasLayer/ask_rename/editbox"]
+[node name="rename" type="Button" parent="animFrameLayer/ask_rename/editbox"]
 margin_left = 174.47
 margin_top = 43.0561
 margin_right = 250.47
@@ -639,7 +566,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="cancel" type="Button" parent="CanvasLayer/ask_rename/editbox"]
+[node name="cancel" type="Button" parent="animFrameLayer/ask_rename/editbox"]
 margin_left = 251.888
 margin_top = 43.3007
 margin_right = 304.888
@@ -648,7 +575,8 @@ theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 6 )
 text = "取消"
 
-[node name="ask_setTime" type="Panel" parent="CanvasLayer"]
+[node name="ask_setTime" type="Panel" parent="animFrameLayer"]
+visible = false
 margin_left = 202.217
 margin_top = 132.447
 margin_right = 704.217
@@ -658,7 +586,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="editbox" type="LineEdit" parent="CanvasLayer/ask_setTime"]
+[node name="editbox" type="LineEdit" parent="animFrameLayer/ask_setTime"]
 margin_left = 113.075
 margin_top = 115.219
 margin_right = 416.075
@@ -666,13 +594,13 @@ margin_bottom = 155.219
 custom_styles/normal = SubResource( 4 )
 custom_fonts/font = ExtResource( 6 )
 text = "请输入保持时间 单位：秒"
-placeholder_text = "请输入重命名的名称"
+placeholder_text = "请输入保持时间 单位：秒"
 caret_blink = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="rename" type="Button" parent="CanvasLayer/ask_setTime/editbox"]
+[node name="rename" type="Button" parent="animFrameLayer/ask_setTime/editbox"]
 margin_left = 174.47
 margin_top = 43.0561
 margin_right = 250.47
@@ -684,7 +612,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="cancel" type="Button" parent="CanvasLayer/ask_setTime/editbox"]
+[node name="cancel" type="Button" parent="animFrameLayer/ask_setTime/editbox"]
 margin_left = 251.888
 margin_top = 43.3007
 margin_right = 304.888
@@ -745,7 +673,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="play" type="Button" parent="control_layer/tool_bar"]
+[node name="play_anim" type="Button" parent="control_layer/tool_bar"]
 margin_left = 84.0
 margin_right = 160.0
 margin_bottom = 40.0
@@ -753,33 +681,41 @@ theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 11 )
 text = "播放动画"
 
-[node name="reg_key" type="Button" parent="control_layer/tool_bar"]
+[node name="stop_anim" type="Button" parent="control_layer/tool_bar"]
 margin_left = 164.0
-margin_right = 256.0
+margin_right = 240.0
+margin_bottom = 40.0
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 11 )
+text = "停止播放"
+
+[node name="reg_key" type="Button" parent="control_layer/tool_bar"]
+margin_left = 244.0
+margin_right = 336.0
 margin_bottom = 40.0
 theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 11 )
 text = "注册关键帧"
 
 [node name="set_time" type="Button" parent="control_layer/tool_bar"]
-margin_left = 260.0
-margin_right = 368.0
+margin_left = 340.0
+margin_right = 448.0
 margin_bottom = 40.0
 theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 11 )
 text = "设置时间补间"
 
 [node name="set_bone" type="Button" parent="control_layer/tool_bar"]
-margin_left = 372.0
-margin_right = 448.0
+margin_left = 452.0
+margin_right = 528.0
 margin_bottom = 40.0
 theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 11 )
 text = "骨骼控制"
 
 [node name="set_mesh" type="Button" parent="control_layer/tool_bar"]
-margin_left = 452.0
-margin_right = 528.0
+margin_left = 532.0
+margin_right = 608.0
 margin_bottom = 40.0
 theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 11 )
@@ -823,9 +759,9 @@ group = ExtResource( 20 )
 text = "动画"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="control_layer"]
-margin_left = 208.0
+margin_left = 209.587
 margin_top = 554.0
-margin_right = 809.0
+margin_right = 810.587
 margin_bottom = 592.0
 scroll_vertical_enabled = false
 __meta__ = {
@@ -1047,6 +983,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="fps" type="Label" parent="HudLayer"]
+margin_left = 913.241
+margin_top = 53.3369
+margin_right = 953.241
+margin_bottom = 67.3369
+rect_scale = Vector2( 2, 2 )
+text = "fps"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="ResManagerLayer" type="CanvasLayer" parent="."]
 layer = 0
 script = ExtResource( 24 )
@@ -1082,20 +1029,33 @@ margin_top = 7.0
 margin_right = 313.0
 margin_bottom = 374.0
 
-[node name="tooltip" type="Label" parent="ResManagerLayer/ResManager/manager/vbox"]
+[node name="title" type="HBoxContainer" parent="ResManagerLayer/ResManager/manager/vbox"]
 margin_right = 306.0
-margin_bottom = 23.0
+margin_bottom = 29.0
+alignment = 1
+
+[node name="tooltip" type="Label" parent="ResManagerLayer/ResManager/manager/vbox/title"]
+margin_left = 65.0
+margin_top = 3.0
+margin_right = 145.0
+margin_bottom = 26.0
 custom_fonts/font = ExtResource( 6 )
 text = "资源管理器"
-align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="hide" type="Button" parent="ResManagerLayer/ResManager/manager/vbox/title"]
+margin_left = 149.0
+margin_right = 241.0
+margin_bottom = 29.0
+custom_fonts/font = ExtResource( 6 )
+text = "隐藏此窗口"
+
 [node name="tool_bar" type="HBoxContainer" parent="ResManagerLayer/ResManager/manager/vbox"]
-margin_top = 27.0
+margin_top = 33.0
 margin_right = 306.0
-margin_bottom = 56.0
+margin_bottom = 62.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1165,9 +1125,9 @@ __meta__ = {
 }
 
 [node name="p" type="Panel" parent="ResManagerLayer/ResManager/manager/vbox"]
-margin_top = 60.0
+margin_top = 66.0
 margin_right = 306.0
-margin_bottom = 60.0
+margin_bottom = 66.0
 
 [node name="layer_scroll" type="ScrollContainer" parent="ResManagerLayer/ResManager/manager/vbox/p"]
 visible = false
@@ -1241,30 +1201,123 @@ __meta__ = {
 position = Vector2( 783.645, 61.9207 )
 script = ExtResource( 22 )
 
-[connection signal="pressed" from="CanvasLayer2/ask_add_anim/anim_name/add_anim" to="." method="_on_ok_pressed"]
-[connection signal="pressed" from="CanvasLayer2/ask_add_anim/anim_name/add_frame" to="." method="_on_add_frame_pressed"]
-[connection signal="pressed" from="CanvasLayer2/ask_add_anim/anim_name/cancel" to="." method="_on_cancel_pressed"]
-[connection signal="pressed" from="CanvasLayer2/about/Panel/VBoxContainer/openlive2d" to="." method="_on_openlive2d_pressed"]
-[connection signal="pressed" from="CanvasLayer2/about/Panel/VBoxContainer/editor" to="." method="_on_editor_pressed"]
-[connection signal="file_selected" from="CanvasLayer2/FileDialog" to="." method="_on_FileDialog_file_selected"]
-[connection signal="popup_hide" from="CanvasLayer2/FileDialog" to="." method="_on_FileDialog_popup_hide"]
-[connection signal="confirmed" from="CanvasLayer2/confirmDel" to="." method="_on_confirmDel_confirmed"]
-[connection signal="pressed" from="CanvasLayer/MenuBar/openfile" to="." method="_on_openfile_pressed"]
-[connection signal="pressed" from="CanvasLayer/MenuBar/savefile" to="." method="_on_savefile_pressed"]
-[connection signal="pressed" from="CanvasLayer/MenuBar/import_img" to="." method="_on_import_img_pressed"]
-[connection signal="pressed" from="CanvasLayer/MenuBar/window" to="." method="_on_window_pressed"]
-[connection signal="pressed" from="CanvasLayer/MenuBar/about" to="." method="_on_about_pressed"]
-[connection signal="pressed" from="CanvasLayer/MenuBar/reset_cursor" to="CanvasLayer3/Drag" method="_on_reset_cursor_pressed"]
-[connection signal="pressed" from="CanvasLayer/MenuBar/reset" to="." method="_on_reset_pressed"]
-[connection signal="pressed" from="CanvasLayer/anim_split/anim_frame_panel/vbox/HBoxContainer/add" to="." method="_on_anim_frame_add_pressed"]
-[connection signal="pressed" from="CanvasLayer/ask_layer/editbox/ok" to="CanvasLayer" method="_on_ok_pressed"]
-[connection signal="pressed" from="CanvasLayer/ask_layer/editbox/cancel" to="CanvasLayer" method="_on_cancel_pressed"]
-[connection signal="pressed" from="CanvasLayer/ask_bind/editbox/ok" to="." method="_on_bind_ok_pressed"]
-[connection signal="pressed" from="CanvasLayer/ask_bind/editbox/cancel" to="CanvasLayer" method="_on_bind_cancel_pressed"]
-[connection signal="pressed" from="CanvasLayer/ask_rename/editbox/rename" to="CanvasLayer" method="_on_rename_pressed"]
-[connection signal="pressed" from="CanvasLayer/ask_rename/editbox/cancel" to="." method="_on_rename_cancel_pressed"]
+[node name="menuBarLayer" type="CanvasLayer" parent="."]
+
+[node name="MenuBar" type="HBoxContainer" parent="menuBarLayer"]
+margin_left = 7.85721
+margin_top = 6.17354
+margin_right = 924.857
+margin_bottom = 46.1735
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="openfile" type="Button" parent="menuBarLayer/MenuBar"]
+margin_right = 76.0
+margin_bottom = 39.0
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 11 )
+text = "打开共存"
+
+[node name="savefile" type="Button" parent="menuBarLayer/MenuBar"]
+margin_left = 80.0
+margin_right = 156.0
+margin_bottom = 39.0
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 11 )
+text = "保存工程"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="import_img" type="Button" parent="menuBarLayer/MenuBar"]
+margin_left = 160.0
+margin_right = 268.0
+margin_bottom = 39.0
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 11 )
+text = "导入图片资源"
+
+[node name="language" type="OptionButton" parent="menuBarLayer/MenuBar"]
+margin_left = 272.0
+margin_right = 333.0
+margin_bottom = 39.0
+custom_fonts/font = ExtResource( 11 )
+text = "中文"
+items = [ "中文", null, false, 0, null, "English", null, false, 1, null, "Japanese", null, false, 2, null ]
+selected = 0
+
+[node name="zoom" type="Label" parent="menuBarLayer/MenuBar"]
+margin_left = 337.0
+margin_top = 12.0
+margin_right = 385.0
+margin_bottom = 26.0
+text = "zoom:1"
+
+[node name="window" type="MenuButton" parent="menuBarLayer/MenuBar"]
+margin_left = 389.0
+margin_right = 465.0
+margin_bottom = 39.0
+theme = ExtResource( 3 )
+custom_fonts/font = ExtResource( 11 )
+text = "窗口开关"
+items = [ "动画帧编辑器", null, 1, false, false, 0, 0, null, "", false, "动画控制器", null, 1, true, false, 1, 0, null, "", false, "资源管理器", null, 1, true, false, 2, 0, null, "", false, "编辑工具", null, 1, true, false, 3, 0, null, "", false ]
+
+[node name="about" type="Button" parent="menuBarLayer/MenuBar"]
+margin_left = 469.0
+margin_right = 513.0
+margin_bottom = 39.0
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 11 )
+text = "关于"
+
+[node name="help" type="Button" parent="menuBarLayer/MenuBar"]
+margin_left = 517.0
+margin_right = 593.0
+margin_bottom = 39.0
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 11 )
+text = "帮助文档"
+
+[node name="reset_cursor" type="Button" parent="menuBarLayer/MenuBar"]
+margin_left = 597.0
+margin_right = 705.0
+margin_bottom = 39.0
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 11 )
+text = "重置游标位置"
+
+[node name="reset" type="Button" parent="menuBarLayer/MenuBar"]
+margin_left = 709.0
+margin_right = 801.0
+margin_bottom = 39.0
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 11 )
+text = "重置编辑器"
+
+[node name="edit_mode" type="Label" parent="menuBarLayer/MenuBar"]
+margin_left = 805.0
+margin_top = 8.0
+margin_right = 917.0
+margin_bottom = 31.0
+custom_fonts/font = ExtResource( 6 )
+text = "当前模式：预览"
+
+[connection signal="pressed" from="asks/ask_add_anim/anim_name/add_anim" to="." method="_on_ok_pressed"]
+[connection signal="pressed" from="asks/about/Panel/VBoxContainer/openlive2d" to="." method="_on_openlive2d_pressed"]
+[connection signal="pressed" from="asks/about/Panel/VBoxContainer/editor" to="." method="_on_editor_pressed"]
+[connection signal="file_selected" from="asks/FileDialog" to="." method="_on_FileDialog_file_selected"]
+[connection signal="popup_hide" from="asks/FileDialog" to="." method="_on_FileDialog_popup_hide"]
+[connection signal="confirmed" from="asks/confirmDel" to="." method="_on_confirmDel_confirmed"]
+[connection signal="pressed" from="animFrameLayer/ask_layer/editbox/ok" to="animFrameLayer" method="_on_ok_pressed"]
+[connection signal="pressed" from="animFrameLayer/ask_layer/editbox/cancel" to="animFrameLayer" method="_on_cancel_pressed"]
+[connection signal="pressed" from="animFrameLayer/ask_bind/editbox/ok" to="." method="_on_bind_ok_pressed"]
+[connection signal="pressed" from="animFrameLayer/ask_bind/editbox/cancel" to="animFrameLayer" method="_on_bind_cancel_pressed"]
+[connection signal="pressed" from="animFrameLayer/ask_rename/editbox/rename" to="animFrameLayer" method="_on_rename_pressed"]
+[connection signal="pressed" from="animFrameLayer/ask_rename/editbox/cancel" to="." method="_on_rename_cancel_pressed"]
 [connection signal="value_changed" from="control_layer/ProgressBar" to="." method="_on_ProgressBar_value_changed"]
-[connection signal="pressed" from="control_layer/tool_bar/play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="control_layer/tool_bar/play_anim" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="control_layer/tool_bar/stop_anim" to="." method="_on_stop_anim_pressed"]
 [connection signal="pressed" from="control_layer/tool_bar/reg_key" to="." method="_on_reg_key_pressed"]
 [connection signal="pressed" from="control_layer/work_mode/model" to="control_layer" method="_on_model_pressed"]
 [connection signal="pressed" from="control_layer/work_mode/anim" to="control_layer" method="_on_anim_pressed"]
@@ -1281,3 +1334,10 @@ script = ExtResource( 22 )
 [connection signal="pressed" from="control_layer/ScrollContainer/tools/edit_mesh" to="." method="_on_add_ske_pressed"]
 [connection signal="pressed" from="ResManagerLayer/ResManager/manager/vbox/tool_bar/del" to="." method="_on_del_pressed"]
 [connection signal="item_rmb_selected" from="ResManagerLayer/ResManager/manager/vbox/p/ske_tree" to="ResManagerLayer/ResManager/manager" method="_on_ske_tree_item_rmb_selected"]
+[connection signal="pressed" from="menuBarLayer/MenuBar/openfile" to="." method="_on_openfile_pressed"]
+[connection signal="pressed" from="menuBarLayer/MenuBar/savefile" to="." method="_on_savefile_pressed"]
+[connection signal="pressed" from="menuBarLayer/MenuBar/import_img" to="." method="_on_import_img_pressed"]
+[connection signal="pressed" from="menuBarLayer/MenuBar/window" to="." method="_on_window_pressed"]
+[connection signal="pressed" from="menuBarLayer/MenuBar/about" to="." method="_on_about_pressed"]
+[connection signal="pressed" from="menuBarLayer/MenuBar/reset_cursor" to="CanvasLayer3/Drag" method="_on_reset_cursor_pressed"]
+[connection signal="pressed" from="menuBarLayer/MenuBar/reset" to="." method="_on_reset_pressed"]

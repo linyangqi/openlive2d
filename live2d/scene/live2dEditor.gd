@@ -38,13 +38,24 @@ func _ready():
 	root.set_text(0,"skeleton")
 	init_window_manager()
 	init_resource_manager()
+	init_animFrameWindow()
+	init_asks()
 func init_window_manager():
-	var window=$CanvasLayer/MenuBar/window
+	var window=$menuBarLayer/MenuBar/window
 	var popup=window.get_popup()
 	popup.connect("index_pressed",self,"window_control",[popup])
-#右侧gui控制 nodes[] 共有4种资源 4个面板容器
+#右侧资源管理器
 func init_resource_manager():
 	ResourceManager.init_gui($ResManagerLayer)
+	pass
+#左侧动画帧编辑器 参数:根节点 询问根节点
+func init_animFrameWindow():
+	AnimFrameWindow.init_gui($animFrameLayer,$asks)
+	pass
+#初始化询问节点
+func init_asks():
+# warning-ignore:return_value_discarded
+	$asks/ask_add_anim/anim_name/add_frame.connect("pressed",AnimFrameWindow,"add_frame")
 	pass
 # warning-ignore:unused_argument
 func _process(delta):
@@ -64,7 +75,7 @@ func _draw():
 		draw_rect(Rect2(get_global_mouse_position(),Vector2(100,100)),Color.green,false,2.0,true)
 func update_fps():
 	var fps=Engine.get_frames_per_second()
-	$CanvasLayer/fps.text="fps:"+str(fps)
+	$HudLayer/fps.text="fps:"+str(fps)
 func _input(event):
 	if event is InputEventMouseButton:
 		if event.is_pressed() and event.button_index==BUTTON_LEFT:
@@ -140,15 +151,15 @@ func _input(event):
 				$Camera2D.zoom.x-=0.1
 				$Camera2D.zoom.y-=0.1
 				print("zoom",$Camera2D.zoom)
-				$CanvasLayer/MenuBar/zoom.text="zoom:"+str($Camera2D.zoom.x)
+				#$CanvasLayer/MenuBar/zoom.text="zoom:"+str($Camera2D.zoom.x)
 			if event.button_index==BUTTON_WHEEL_DOWN and edit_mode!="导入图片" and edit_mode!="打开文件" and edit_mode!="保存文件":
 				print("zoom",$Camera2D.zoom)
-				$CanvasLayer/MenuBar/zoom.text="zoom:"+str($Camera2D.zoom.x)
+				#$CanvasLsayer/MenuBar/zoom.text="zoom:"+str($Camera2D.zoom.x)
 				$Camera2D.zoom.x+=0.1
 				$Camera2D.zoom.y+=0.1
 		pass
 func _on_reset_zoom_pressed():
-	$CanvasLayer/MenuBar/zoom.text="zoom:"+str(1)
+	$menuBarLayer/MenuBar/zoom.text="zoom:"+str(1)
 	$Camera2D.zoom=Vector2(1,1)
 #添加网格顶点
 func _on_add_point_pressed():
@@ -225,22 +236,10 @@ func edit_selected_anim(anim_name):
 func remove_anim(preline:Control):
 	print("删除动画",preline)
 	preline.queue_free()
-	pass
-#关闭对话
-func _on_cancel_pressed():
-	$CanvasLayer2/ask_add_anim.hide()
-	pass 
-#添加动画帧按钮 动画编辑器里的
-func _on_anim_frame_add_pressed():
-	$CanvasLayer2/ask_add_anim.show()
-	$CanvasLayer2/ask_add_anim/anim_name/add_anim.disabled=true
-	$CanvasLayer2/ask_add_anim/anim_name/add_frame.disabled=false
-	pass 
 #添加动画帧 左侧 动画帧编辑器
 func _on_add_frame_pressed():
-	var root=get_node("CanvasLayer")
+	var root=get_node("animFrameLayer")
 	var line_panel=Panel.new()
-	#line_panel.set("custom_styles/panel",Global.tres_button_pressed)
 	line_panel.rect_min_size=Vector2(200,32)
 	root.find_node("anim_vbox").add_child(line_panel)
 	var frame_name=$CanvasLayer2/ask_add_anim/anim_name.text
@@ -256,7 +255,7 @@ func _on_add_frame_pressed():
 	preline.add_child(label)
 	preline.add_child(label_time)
 	preline.add_child(label_rotation)
-	label.connect("pressed",Global.animFrameWindow,"frame_selected",[label.get_parent().get_parent(),label.text])
+	#label.connect("pressed",AnimFrameWindow,"frame_selected",[label.get_parent().get_parent(),label.text])
 	Global.bind_btn_font([label,label_time,label_rotation],Global.font)
 	$CanvasLayer2/ask_add_anim.hide()
 	pass 
@@ -276,12 +275,6 @@ func _on_add_ske_pressed():
 	#$.disabled=false
 	$HudLayer/hbox/control_tip.text="操作提示："+"按下鼠标来添加骨骼"
 	pass # Replace with function body.
-#播放动画按钮
-func _on_play_pressed():
-	update_mode_tip("播放动画")
-	edit_mode="play anim"
-	AnimData.caculate_anim()
-	pass # Replace with function body.
 #导入图片资源
 func _on_import_img_pressed():
 	update_file_state("导入图片")
@@ -296,7 +289,7 @@ func update_file_state(action):
 	pass
 #更新toolbar模式提示
 func update_mode_tip(text:String):
-	$CanvasLayer/MenuBar/edit_mode.text="当前模式:"+text
+	$menuBarLayer/MenuBar/edit_mode.text="当前模式:"+text
 	edit_mode=text
 	print("模式:"+text)
 #更新选中的对象提示
@@ -476,3 +469,12 @@ func _on_ScrollContainer_mouse_entered():
 	can_zoom=false
 	print("不许缩放")
 	pass
+#播放动画按钮
+func _on_play_pressed():
+	update_mode_tip("播放动画")
+	edit_mode="play anim"
+	AnimData.caculate_anim()
+func _on_stop_anim_pressed():
+	update_mode_tip("停止播放动画")
+	edit_mode="stop anim"
+	AnimData.stop_caculate()

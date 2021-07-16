@@ -1,6 +1,7 @@
 extends HBoxContainer
 var is_drag=false
 var offest=Vector2(5,5)
+# warning-ignore:unused_argument
 func _process(delta):
 	if is_drag:
 		self.rect_position=get_global_mouse_position()-offest

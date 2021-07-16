@@ -89,7 +89,8 @@ config/icon="res://live2d/img/openlive2d.png"
 
 Global="*res://live2d/Global.gd"
 ResourceManager="*res://live2d/class/editor/ResourceManager.gd"
-AnimData="*res://live2d/class/AnimData.gd"
+AnimFrameWindow="*res://live2d/class/editor/AnimFrameWindow.gd"
+AnimData="*res://live2d/class/editor_data/AnimData.gd"
 
 [display]
 

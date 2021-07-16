@@ -3,13 +3,11 @@ extends Node
 var font=load("res://live2d/font.tres")
 var icon_show=load("res://live2d/img/eye_open.png")
 var icon_hide=load("res://live2d/img/eye_close.png")
-var anim_data=load("res://live2d/class/AnimData.gd").new()
+#var anim_data=load("res://live2d/class/AnimData.gd").new()
 var style_button_pressed=load("res://live2d/tres/button_pressed.tres")
 var style_item_select=load("res://live2d/tres/item_select.tres")
 #当前动画数据
 var current_anim_data
-#左侧 动画帧编辑器单利
-var animFrameWindow=load("res://live2d/class/AnimFrameWindow.gd").new()
 #拖动代码
 var drag=load("res://live2d/class/drag.gd").new()
 #编辑器数据类
