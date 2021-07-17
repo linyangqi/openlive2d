@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://live2d/font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://live2d/中文字体主题.tres" type="Theme" id=2]
@@ -14,85 +14,35 @@
 [ext_resource path="res://live2d/openlive2d.jpg" type="Texture" id=12]
 [ext_resource path="res://live2d/img/del.png" type="Texture" id=13]
 [ext_resource path="res://live2d/img/菱形关键帧.png" type="Texture" id=14]
+[ext_resource path="res://live2d/class/editor/AnimationTrackEditor.gd" type="Script" id=15]
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.509804, 0.486275, 0.486275, 0.858824 )
 
 [sub_resource type="Animation" id=1]
 resource_name = "新建动画"
 length = 30.047
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:position")
+tracks/0/path = NodePath("animEditor/root_vbox/control_bar/play:expand_icon")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( -19.7 ),
-"transitions": PoolRealArray( 1.7411 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray(  ),
-"transitions": PoolRealArray(  ),
-"update": 0,
-"values": [  ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath(".:rotation_degrees")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( -4.7 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath(".:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
 "times": PoolRealArray(  ),
 "transitions": PoolRealArray(  ),
 "update": 1,
 "values": [  ]
 }
-tracks/4/type = "value"
-tracks/4/path = NodePath("animEditor/root_vbox/control_bar/play:expand_icon")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray(  ),
-"transitions": PoolRealArray(  ),
-"update": 1,
-"values": [  ]
-}
-
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.509804, 0.486275, 0.486275, 0.858824 )
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 6 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-"anims/新建动画" = SubResource( 1 )
-
 [node name="tracks" type="Panel" parent="."]
-margin_left = 13.0
-margin_top = 202.0
-margin_right = 1022.0
-margin_bottom = 502.0
+margin_left = 64.6332
+margin_top = 204.245
+margin_right = 1073.63
+margin_bottom = 504.245
 rect_min_size = Vector2( 300, 300 )
 custom_styles/panel = SubResource( 2 )
 __meta__ = {
@@ -217,10 +167,10 @@ margin_bottom = 29.0
 texture_normal = ExtResource( 13 )
 
 [node name="keys" type="ScrollContainer" parent="tracks"]
-margin_left = 138.668
-margin_top = 133.731
-margin_right = 355.668
-margin_bottom = 209.731
+margin_left = 91.3163
+margin_top = 120.582
+margin_right = 348.316
+margin_bottom = 190.582
 scroll_vertical_enabled = false
 __meta__ = {
 "_edit_use_anchors_": false
@@ -339,6 +289,7 @@ margin_bottom = 16.0
 texture = ExtResource( 14 )
 
 [node name="animEditor" type="Panel" parent="."]
+visible = false
 margin_left = 6.0
 margin_top = 414.0
 margin_right = 1020.0
@@ -386,40 +337,39 @@ hint_tooltip = "从头播放动画"
 theme = ExtResource( 2 )
 icon = ExtResource( 3 )
 
-[node name="current_key" type="LineEdit" parent="animEditor/root_vbox/control_bar"]
+[node name="current_key" type="SpinBox" parent="animEditor/root_vbox/control_bar"]
 margin_left = 96.0
-margin_right = 154.0
+margin_right = 170.0
 margin_bottom = 33.0
 hint_tooltip = "动画位置:秒"
 theme = ExtResource( 2 )
-text = "0"
 align = 1
 
 [node name="anim_edit" type="Button" parent="animEditor/root_vbox/control_bar"]
-margin_left = 158.0
-margin_right = 202.0
+margin_left = 174.0
+margin_right = 218.0
 margin_bottom = 33.0
 custom_fonts/font = ExtResource( 1 )
 text = "动画"
 
 [node name="switch_anim" type="OptionButton" parent="animEditor/root_vbox/control_bar"]
-margin_left = 206.0
-margin_right = 406.0
+margin_left = 222.0
+margin_right = 422.0
 margin_bottom = 33.0
 rect_min_size = Vector2( 200, 0 )
 hint_tooltip = "动画列表"
 theme = ExtResource( 2 )
 
 [node name="alert_new_anim" type="Button" parent="animEditor/root_vbox/control_bar"]
-margin_left = 410.0
-margin_right = 486.0
+margin_left = 426.0
+margin_right = 502.0
 margin_bottom = 33.0
 custom_fonts/font = ExtResource( 1 )
 text = "新建动画"
 
 [node name="play_3" type="Button" parent="animEditor/root_vbox/control_bar"]
-margin_left = 490.0
-margin_right = 550.0
+margin_left = 506.0
+margin_right = 566.0
 margin_bottom = 33.0
 hint_tooltip = "从当前位置播放动画"
 custom_fonts/font = ExtResource( 1 )
@@ -427,8 +377,8 @@ toggle_mode = true
 text = "洋葱皮"
 
 [node name="switch_scale" type="Button" parent="animEditor/root_vbox/control_bar"]
-margin_left = 554.0
-margin_right = 630.0
+margin_left = 570.0
+margin_right = 646.0
 margin_bottom = 33.0
 hint_tooltip = "从当前位置播放动画"
 custom_fonts/font = ExtResource( 1 )
@@ -649,6 +599,65 @@ __meta__ = {
 position = Vector2( 792.894, 73.9734 )
 scale = Vector2( 0.391888, 0.391888 )
 texture = ExtResource( 12 )
+
+[node name="test" type="Control" parent="."]
+margin_left = 195.25
+margin_top = 249.222
+margin_right = 235.25
+margin_bottom = 289.222
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "根据源码 编写动画编辑器"
+}
+
+[node name="MenuButton" type="MenuButton" parent="."]
+margin_left = 195.25
+margin_top = 249.222
+margin_right = 207.25
+margin_bottom = 269.222
+text = "动画"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+"anims/新建动画" = SubResource( 1 )
+
+[node name="Control" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="editorTrackBox" type="VBoxContainer" parent="."]
+margin_left = 386.0
+margin_top = 362.0
+margin_right = 599.0
+margin_bottom = 461.0
+script = ExtResource( 15 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite2" type="Sprite" parent="editorTrackBox"]
+visible = false
+position = Vector2( 57.9828, 15.5563 )
+texture = ExtResource( 12 )
+
+[node name="snap_mode" type="OptionButton" parent="."]
+margin_left = 578.537
+margin_top = 514.629
+margin_right = 607.537
+margin_bottom = 534.629
+theme = ExtResource( 2 )
+custom_fonts/font = ExtResource( 1 )
+text = "秒"
+items = [ "秒", null, false, 1, null, "帧", null, false, 2, null ]
+selected = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="sync_anim_add" from="." to="animEditor" method="_on_Node2D_sync_anim_add"]
 [connection signal="pressed" from="tracks/top_bar/add_track" to="animEditor" method="_on_add_track_pressed"]

@@ -6,9 +6,14 @@ var mode=""
 func sync_data_fromModel_editor():
 
 	pass
+func _ready():
+	test()
+#AnimationTrackEditor
 func test():
-	
+	var track_editor=AnimationTrackEditPlugin
+	print("track_editor",track_editor)
 	pass
+# warning-ignore:unused_argument
 func _process(delta):
 	if mode=="rotate":
 		$Sprite.look_at(get_global_mouse_position())
