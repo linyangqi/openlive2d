@@ -1,0 +1,919 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://live2d/font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://live2d/中文字体主题.tres" type="Theme" id=2]
+[ext_resource path="res://live2d/img/播放.png" type="Texture" id=3]
+[ext_resource path="res://live2d/img/缩放.png" type="Texture" id=4]
+[ext_resource path="res://live2d/img/停止 .png" type="Texture" id=5]
+[ext_resource path="res://live2d/scene/Live2dAnim.gd" type="Script" id=6]
+[ext_resource path="res://live2d/img/时长.png" type="Texture" id=7]
+[ext_resource path="res://live2d/img/循环.png" type="Texture" id=8]
+[ext_resource path="res://live2d/scene/ask_new_anim.gd" type="Script" id=9]
+[ext_resource path="res://live2d/scene/animEditor.gd" type="Script" id=10]
+[ext_resource path="res://live2d/scene/ask_addTrackNode.gd" type="Script" id=11]
+
+[sub_resource type="Animation" id=1]
+resource_name = "新建动画"
+length = 30.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 0,
+"values": [  ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 1,
+"values": [  ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("animEditor/root_vbox/control_bar/play:expand_icon")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 1,
+"values": [  ]
+}
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 6 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+"anims/新建动画" = SubResource( 1 )
+
+[node name="animEditor" type="Panel" parent="."]
+margin_left = 6.0
+margin_top = 451.0
+margin_right = 1020.0
+margin_bottom = 601.0
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="root_vbox" type="VBoxContainer" parent="animEditor"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1179.0
+margin_bottom = 104.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="control_bar" type="HBoxContainer" parent="animEditor/root_vbox"]
+margin_right = 1172.0
+margin_bottom = 33.0
+
+[node name="Button" type="Button" parent="animEditor/root_vbox/control_bar"]
+margin_right = 12.0
+margin_bottom = 33.0
+
+[node name="Button2" type="Button" parent="animEditor/root_vbox/control_bar"]
+margin_left = 16.0
+margin_right = 28.0
+margin_bottom = 33.0
+
+[node name="Button3" type="Button" parent="animEditor/root_vbox/control_bar"]
+margin_left = 32.0
+margin_right = 60.0
+margin_bottom = 33.0
+hint_tooltip = "停止播放"
+icon = ExtResource( 5 )
+
+[node name="play" type="Button" parent="animEditor/root_vbox/control_bar"]
+margin_left = 64.0
+margin_right = 92.0
+margin_bottom = 33.0
+rect_min_size = Vector2( 16, 16 )
+hint_tooltip = "从头播放动画"
+theme = ExtResource( 2 )
+icon = ExtResource( 3 )
+
+[node name="current_key" type="LineEdit" parent="animEditor/root_vbox/control_bar"]
+margin_left = 96.0
+margin_right = 154.0
+margin_bottom = 33.0
+hint_tooltip = "动画位置:秒"
+theme = ExtResource( 2 )
+text = "0"
+align = 1
+
+[node name="anim_edit" type="Button" parent="animEditor/root_vbox/control_bar"]
+margin_left = 158.0
+margin_right = 202.0
+margin_bottom = 33.0
+custom_fonts/font = ExtResource( 1 )
+text = "动画"
+
+[node name="switch_anim" type="OptionButton" parent="animEditor/root_vbox/control_bar"]
+margin_left = 206.0
+margin_right = 406.0
+margin_bottom = 33.0
+rect_min_size = Vector2( 200, 0 )
+hint_tooltip = "动画列表"
+theme = ExtResource( 2 )
+
+[node name="alert_new_anim" type="Button" parent="animEditor/root_vbox/control_bar"]
+margin_left = 410.0
+margin_right = 486.0
+margin_bottom = 33.0
+custom_fonts/font = ExtResource( 1 )
+text = "新建动画"
+
+[node name="play_3" type="Button" parent="animEditor/root_vbox/control_bar"]
+margin_left = 490.0
+margin_right = 550.0
+margin_bottom = 33.0
+hint_tooltip = "从当前位置播放动画"
+custom_fonts/font = ExtResource( 1 )
+toggle_mode = true
+text = "洋葱皮"
+
+[node name="switch_scale" type="Button" parent="animEditor/root_vbox/control_bar"]
+margin_left = 554.0
+margin_right = 630.0
+margin_bottom = 33.0
+hint_tooltip = "从当前位置播放动画"
+custom_fonts/font = ExtResource( 1 )
+toggle_mode = true
+text = "展开面板"
+
+[node name="tip" type="Label" parent="animEditor/root_vbox"]
+margin_top = 37.0
+margin_right = 1172.0
+margin_bottom = 60.0
+custom_fonts/font = ExtResource( 1 )
+text = "没有动画，请新建动画"
+align = 1
+
+[node name="main_view" type="ScrollContainer" parent="animEditor/root_vbox"]
+margin_top = 64.0
+margin_right = 1172.0
+margin_bottom = 144.0
+rect_min_size = Vector2( 80, 80 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "时间线"
+}
+
+[node name="PanelContainer" type="Panel" parent="animEditor/root_vbox/main_view"]
+margin_right = 300.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 300, 100 )
+
+[node name="top_bar" type="HBoxContainer" parent="animEditor/root_vbox/main_view/PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 603.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="add_track" type="Button" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar"]
+margin_right = 76.0
+margin_bottom = 33.0
+custom_fonts/font = ExtResource( 1 )
+text = "添加轨道"
+
+[node name="time_bar" type="HBoxContainer" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar"]
+margin_left = 80.0
+margin_right = 268.0
+margin_bottom = 33.0
+
+[node name="Label" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar"]
+margin_top = 9.0
+margin_right = 8.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label2" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar"]
+margin_left = 12.0
+margin_top = 9.0
+margin_right = 20.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label3" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar"]
+margin_left = 24.0
+margin_top = 9.0
+margin_right = 32.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label4" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar"]
+margin_left = 36.0
+margin_top = 9.0
+margin_right = 44.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label5" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar"]
+margin_left = 48.0
+margin_top = 9.0
+margin_right = 56.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label6" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar"]
+margin_left = 60.0
+margin_top = 9.0
+margin_right = 68.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label7" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar"]
+margin_left = 72.0
+margin_top = 9.0
+margin_right = 80.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label8" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar"]
+margin_left = 84.0
+margin_top = 9.0
+margin_right = 92.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label9" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar"]
+margin_left = 96.0
+margin_top = 9.0
+margin_right = 104.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label10" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar"]
+margin_left = 108.0
+margin_top = 9.0
+margin_right = 116.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label11" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar"]
+margin_left = 120.0
+margin_top = 9.0
+margin_right = 128.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label12" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar"]
+margin_left = 132.0
+margin_top = 9.0
+margin_right = 140.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label13" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar"]
+margin_left = 144.0
+margin_top = 9.0
+margin_right = 152.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label14" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar"]
+margin_left = 156.0
+margin_top = 9.0
+margin_right = 164.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label15" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar"]
+margin_left = 168.0
+margin_top = 9.0
+margin_right = 176.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label16" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar"]
+margin_left = 180.0
+margin_top = 9.0
+margin_right = 188.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="time_bar2" type="HBoxContainer" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar"]
+margin_left = 272.0
+margin_right = 460.0
+margin_bottom = 33.0
+
+[node name="Label" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar2"]
+margin_top = 9.0
+margin_right = 8.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label2" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar2"]
+margin_left = 12.0
+margin_top = 9.0
+margin_right = 20.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label3" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar2"]
+margin_left = 24.0
+margin_top = 9.0
+margin_right = 32.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label4" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar2"]
+margin_left = 36.0
+margin_top = 9.0
+margin_right = 44.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label5" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar2"]
+margin_left = 48.0
+margin_top = 9.0
+margin_right = 56.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label6" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar2"]
+margin_left = 60.0
+margin_top = 9.0
+margin_right = 68.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label7" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar2"]
+margin_left = 72.0
+margin_top = 9.0
+margin_right = 80.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label8" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar2"]
+margin_left = 84.0
+margin_top = 9.0
+margin_right = 92.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label9" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar2"]
+margin_left = 96.0
+margin_top = 9.0
+margin_right = 104.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label10" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar2"]
+margin_left = 108.0
+margin_top = 9.0
+margin_right = 116.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label11" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar2"]
+margin_left = 120.0
+margin_top = 9.0
+margin_right = 128.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label12" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar2"]
+margin_left = 132.0
+margin_top = 9.0
+margin_right = 140.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label13" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar2"]
+margin_left = 144.0
+margin_top = 9.0
+margin_right = 152.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label14" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar2"]
+margin_left = 156.0
+margin_top = 9.0
+margin_right = 164.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label15" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar2"]
+margin_left = 168.0
+margin_top = 9.0
+margin_right = 176.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label16" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar2"]
+margin_left = 180.0
+margin_top = 9.0
+margin_right = 188.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="time_bar3" type="HBoxContainer" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar"]
+margin_left = 464.0
+margin_right = 652.0
+margin_bottom = 33.0
+
+[node name="Label" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar3"]
+margin_top = 9.0
+margin_right = 8.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label2" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar3"]
+margin_left = 12.0
+margin_top = 9.0
+margin_right = 20.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label3" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar3"]
+margin_left = 24.0
+margin_top = 9.0
+margin_right = 32.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label4" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar3"]
+margin_left = 36.0
+margin_top = 9.0
+margin_right = 44.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label5" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar3"]
+margin_left = 48.0
+margin_top = 9.0
+margin_right = 56.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label6" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar3"]
+margin_left = 60.0
+margin_top = 9.0
+margin_right = 68.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label7" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar3"]
+margin_left = 72.0
+margin_top = 9.0
+margin_right = 80.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label8" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar3"]
+margin_left = 84.0
+margin_top = 9.0
+margin_right = 92.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label9" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar3"]
+margin_left = 96.0
+margin_top = 9.0
+margin_right = 104.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label10" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar3"]
+margin_left = 108.0
+margin_top = 9.0
+margin_right = 116.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label11" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar3"]
+margin_left = 120.0
+margin_top = 9.0
+margin_right = 128.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label12" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar3"]
+margin_left = 132.0
+margin_top = 9.0
+margin_right = 140.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label13" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar3"]
+margin_left = 144.0
+margin_top = 9.0
+margin_right = 152.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label14" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar3"]
+margin_left = 156.0
+margin_top = 9.0
+margin_right = 164.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label15" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar3"]
+margin_left = 168.0
+margin_top = 9.0
+margin_right = 176.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label16" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar3"]
+margin_left = 180.0
+margin_top = 9.0
+margin_right = 188.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="time_bar4" type="HBoxContainer" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar"]
+margin_left = 656.0
+margin_right = 844.0
+margin_bottom = 33.0
+
+[node name="Label" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar4"]
+margin_top = 9.0
+margin_right = 8.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label2" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar4"]
+margin_left = 12.0
+margin_top = 9.0
+margin_right = 20.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label3" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar4"]
+margin_left = 24.0
+margin_top = 9.0
+margin_right = 32.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label4" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar4"]
+margin_left = 36.0
+margin_top = 9.0
+margin_right = 44.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label5" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar4"]
+margin_left = 48.0
+margin_top = 9.0
+margin_right = 56.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label6" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar4"]
+margin_left = 60.0
+margin_top = 9.0
+margin_right = 68.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label7" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar4"]
+margin_left = 72.0
+margin_top = 9.0
+margin_right = 80.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label8" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar4"]
+margin_left = 84.0
+margin_top = 9.0
+margin_right = 92.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label9" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar4"]
+margin_left = 96.0
+margin_top = 9.0
+margin_right = 104.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label10" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar4"]
+margin_left = 108.0
+margin_top = 9.0
+margin_right = 116.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label11" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar4"]
+margin_left = 120.0
+margin_top = 9.0
+margin_right = 128.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label12" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar4"]
+margin_left = 132.0
+margin_top = 9.0
+margin_right = 140.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label13" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar4"]
+margin_left = 144.0
+margin_top = 9.0
+margin_right = 152.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label14" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar4"]
+margin_left = 156.0
+margin_top = 9.0
+margin_right = 164.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label15" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar4"]
+margin_left = 168.0
+margin_top = 9.0
+margin_right = 176.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="Label16" type="Label" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar/time_bar4"]
+margin_left = 180.0
+margin_top = 9.0
+margin_right = 188.0
+margin_bottom = 23.0
+text = "0"
+
+[node name="time" type="TextureRect" parent="animEditor/root_vbox/main_view/PanelContainer/top_bar"]
+margin_left = 848.0
+margin_right = 864.0
+margin_bottom = 33.0
+texture = ExtResource( 7 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="animEditor/root_vbox/main_view/PanelContainer"]
+margin_left = 885.959
+margin_top = -4.75677
+margin_right = 997.959
+margin_bottom = 35.2432
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LineEdit" type="LineEdit" parent="animEditor/root_vbox/main_view/PanelContainer/HBoxContainer"]
+margin_right = 80.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 80, 0 )
+custom_fonts/font = ExtResource( 1 )
+placeholder_text = "动画时长"
+caret_blink = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="loop_button" type="Button" parent="animEditor/root_vbox/main_view/PanelContainer/HBoxContainer"]
+margin_left = 84.0
+margin_right = 112.0
+margin_bottom = 40.0
+toggle_mode = true
+icon = ExtResource( 8 )
+
+[node name="down_bar" type="HBoxContainer" parent="animEditor"]
+margin_left = 6.0
+margin_top = 121.0
+margin_right = 1178.0
+margin_bottom = 144.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="animEditor/down_bar"]
+margin_right = 64.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 1 )
+text = "缩放窗口"
+
+[node name="TextureRect" type="TextureRect" parent="animEditor/down_bar"]
+margin_left = 68.0
+margin_right = 84.0
+margin_bottom = 23.0
+hint_tooltip = "缩放"
+theme = ExtResource( 2 )
+texture = ExtResource( 4 )
+
+[node name="HScrollBar" type="HSlider" parent="animEditor/down_bar"]
+margin_left = 88.0
+margin_right = 288.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 200, 0 )
+
+[node name="PopupMenu" type="PopupMenu" parent="animEditor"]
+anchor_left = 0.129191
+anchor_top = 0.82
+anchor_right = -0.0187377
+anchor_bottom = 0.72
+margin_top = -112.0
+margin_right = 244.0
+custom_fonts/font = ExtResource( 1 )
+items = [ "加载", null, 0, false, false, 0, 0, null, "", false, "移除", null, 0, false, false, 1, 0, null, "", false, "重命名为", null, 0, false, false, 2, 0, null, "", false ]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ask_addTrack" type="PopupMenu" parent="animEditor"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 102.0
+margin_top = -112.0
+margin_right = 244.0
+margin_bottom = -15.0
+custom_fonts/font = ExtResource( 1 )
+items = [ "属性轨道", null, 0, false, false, 0, 0, null, "", false, "音频轨道", null, 0, false, false, 1, 0, null, "", false, "动画播放轨道", null, 0, false, false, 2, 0, null, "", false ]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ask_addTrackNode" type="PopupPanel" parent="animEditor"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 177.0
+margin_top = -560.0
+margin_right = 794.0
+margin_bottom = -192.0
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="vbox" type="VBoxContainer" parent="animEditor/ask_addTrackNode"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 613.0
+margin_bottom = 364.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="title" type="Label" parent="animEditor/ask_addTrackNode/vbox"]
+margin_right = 609.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 1 )
+text = "选择要编辑的节点"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemList" type="ItemList" parent="animEditor/ask_addTrackNode/vbox"]
+margin_top = 27.0
+margin_right = 609.0
+margin_bottom = 327.0
+rect_min_size = Vector2( 0, 300 )
+items = [ "第 0 项", null, false, "第 1 项", null, false, "第 2 项", null, false ]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="confirm" type="HBoxContainer" parent="animEditor/ask_addTrackNode/vbox"]
+margin_top = 331.0
+margin_right = 609.0
+margin_bottom = 360.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ok" type="Button" parent="animEditor/ask_addTrackNode/vbox/confirm"]
+margin_left = 258.0
+margin_right = 302.0
+margin_bottom = 29.0
+custom_fonts/font = ExtResource( 1 )
+text = "确认"
+
+[node name="cancel" type="Button" parent="animEditor/ask_addTrackNode/vbox/confirm"]
+margin_left = 306.0
+margin_right = 350.0
+margin_bottom = 29.0
+custom_fonts/font = ExtResource( 1 )
+text = "取消"
+
+[node name="ask_new_anim" type="Panel" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 293.0
+margin_top = 194.0
+margin_right = 769.0
+margin_bottom = 292.0
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="VBoxContainer" parent="ask_new_anim"]
+margin_right = 469.0
+margin_bottom = 93.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="title" type="Label" parent="ask_new_anim/PanelContainer"]
+margin_right = 469.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 1 )
+text = "创建新动画"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="anime_name" type="LineEdit" parent="ask_new_anim/PanelContainer"]
+margin_top = 27.0
+margin_right = 469.0
+margin_bottom = 60.0
+custom_fonts/font = ExtResource( 1 )
+placeholder_text = "请输入动画名称"
+
+[node name="confirm_box" type="HBoxContainer" parent="ask_new_anim/PanelContainer"]
+margin_top = 64.0
+margin_right = 469.0
+margin_bottom = 93.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="new_anim" type="Button" parent="ask_new_anim/PanelContainer/confirm_box"]
+margin_left = 188.0
+margin_right = 232.0
+margin_bottom = 29.0
+custom_fonts/font = ExtResource( 1 )
+text = "确定"
+
+[node name="cancel" type="Button" parent="ask_new_anim/PanelContainer/confirm_box"]
+margin_left = 236.0
+margin_right = 280.0
+margin_bottom = 29.0
+custom_fonts/font = ExtResource( 1 )
+text = "取消"
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PoolVector2Array( 180.923, 475.337 )
+
+[node name="asks" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="sync_anim_add" from="." to="animEditor" method="_on_Node2D_sync_anim_add"]
+[connection signal="pressed" from="animEditor/root_vbox/control_bar/anim_edit" to="animEditor" method="_on_anim_edit_pressed"]
+[connection signal="pressed" from="animEditor/root_vbox/control_bar/alert_new_anim" to="ask_new_anim" method="_on_alert_new_anim_pressed"]
+[connection signal="toggled" from="animEditor/root_vbox/control_bar/switch_scale" to="animEditor" method="_on_switch_scale_toggled"]
+[connection signal="pressed" from="animEditor/root_vbox/main_view/PanelContainer/top_bar/add_track" to="animEditor" method="_on_add_track_pressed"]
+[connection signal="id_pressed" from="animEditor/ask_addTrack" to="animEditor" method="_on_ask_addTrack_id_pressed"]
+[connection signal="item_selected" from="animEditor/ask_addTrackNode/vbox/ItemList" to="animEditor/ask_addTrackNode" method="_on_ItemList_item_selected"]
+[connection signal="pressed" from="animEditor/ask_addTrackNode/vbox/confirm/ok" to="animEditor" method="_on_ok_pressed"]
+[connection signal="pressed" from="animEditor/ask_addTrackNode/vbox/confirm/cancel" to="animEditor/ask_addTrackNode" method="_on_cancel_pressed"]
+[connection signal="add_anim" from="ask_new_anim" to="." method="_on_ask_new_anim_add_anim"]
+[connection signal="pressed" from="ask_new_anim/PanelContainer/confirm_box/new_anim" to="ask_new_anim" method="_on_new_anim_pressed"]
+[connection signal="pressed" from="ask_new_anim/PanelContainer/confirm_box/cancel" to="ask_new_anim" method="_on_cancel_pressed"]

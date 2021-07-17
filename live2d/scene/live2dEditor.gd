@@ -392,7 +392,6 @@ func _on_reg_cancel_pressed():
 func _on_add_key_pressed():
 	var bone_rotation=current_select.rotation_degrees
 	var key_time=float($asks/ask_reg_key/key_time.text)
-
 	AnimData.set_property("rotation")
 	AnimData.reg_key(180,current_select)
 	AnimData.set_reg_key_time(key_time)

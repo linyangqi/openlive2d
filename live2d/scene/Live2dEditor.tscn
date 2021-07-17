@@ -140,6 +140,7 @@ __meta__ = {
 }
 
 [node name="ask_reg_key" type="Panel" parent="asks"]
+visible = false
 margin_left = 228.701
 margin_top = 142.28
 margin_right = 657.701
@@ -999,10 +1000,10 @@ __meta__ = {
 }
 
 [node name="current_tip" type="HBoxContainer" parent="HudLayer"]
-margin_left = 339.659
-margin_top = 60.4105
-margin_right = 608.659
-margin_bottom = 100.41
+margin_left = 281.291
+margin_top = 52.5533
+margin_right = 550.291
+margin_bottom = 92.5528
 __meta__ = {
 "_edit_group_": true,
 "_edit_use_anchors_": false,
@@ -1030,6 +1031,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="track_select" type="OptionButton" parent="HudLayer/current_tip"]
+margin_left = 239.0
+margin_right = 364.0
+margin_bottom = 39.0
+custom_fonts/font = ExtResource( 6 )
+text = "选择动画轨道"
+items = [ "选择动画轨道", null, false, 0, null, "第一轨道", null, false, 1, null ]
+selected = 0
+
 [node name="fps" type="Label" parent="HudLayer"]
 margin_left = 913.241
 margin_top = 53.3369
@@ -1046,6 +1056,7 @@ layer = 0
 script = ExtResource( 24 )
 
 [node name="ResManager" type="HSplitContainer" parent="ResManagerLayer"]
+visible = false
 anchor_left = 0.669
 anchor_top = 0.193
 anchor_right = 1.0
@@ -1060,6 +1071,7 @@ __meta__ = {
 }
 
 [node name="objectPanel" type="Panel" parent="ResManagerLayer/ResManager"]
+visible = false
 margin_right = 200.0
 margin_bottom = 381.0
 custom_styles/panel = ExtResource( 5 )
@@ -1330,25 +1342,24 @@ custom_fonts/font = ExtResource( 6 )
 text = "null,null"
 
 [node name="manager" type="PanelContainer" parent="ResManagerLayer/ResManager"]
-margin_left = 212.0
 margin_right = 516.0
 margin_bottom = 381.0
 
 [node name="vbox" type="VBoxContainer" parent="ResManagerLayer/ResManager/manager"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 297.0
+margin_right = 509.0
 margin_bottom = 374.0
 
 [node name="title" type="HBoxContainer" parent="ResManagerLayer/ResManager/manager/vbox"]
-margin_right = 289.0
+margin_right = 501.0
 margin_bottom = 29.0
 alignment = 1
 
 [node name="tooltip" type="Label" parent="ResManagerLayer/ResManager/manager/vbox/title"]
-margin_left = 56.0
+margin_left = 162.0
 margin_top = 3.0
-margin_right = 136.0
+margin_right = 242.0
 margin_bottom = 26.0
 custom_fonts/font = ExtResource( 6 )
 text = "资源管理器"
@@ -1357,15 +1368,15 @@ __meta__ = {
 }
 
 [node name="hide" type="Button" parent="ResManagerLayer/ResManager/manager/vbox/title"]
-margin_left = 140.0
-margin_right = 232.0
+margin_left = 246.0
+margin_right = 338.0
 margin_bottom = 29.0
 custom_fonts/font = ExtResource( 6 )
 text = "隐藏此窗口"
 
 [node name="tool_bar" type="HBoxContainer" parent="ResManagerLayer/ResManager/manager/vbox"]
 margin_top = 33.0
-margin_right = 289.0
+margin_right = 501.0
 margin_bottom = 62.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1437,7 +1448,7 @@ __meta__ = {
 
 [node name="p" type="Panel" parent="ResManagerLayer/ResManager/manager/vbox"]
 margin_top = 66.0
-margin_right = 289.0
+margin_right = 501.0
 margin_bottom = 66.0
 
 [node name="layer_scroll" type="ScrollContainer" parent="ResManagerLayer/ResManager/manager/vbox/p"]
