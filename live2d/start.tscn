@@ -62,6 +62,9 @@ custom_colors/default_color = Color( 0, 0, 0, 1 )
 bbcode_enabled = true
 bbcode_text = "[wave]loading...[/wave]"
 text = "loading..."
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="label2" type="Label" parent="."]
 margin_left = 9.3371

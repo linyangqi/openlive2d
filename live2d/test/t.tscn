@@ -1,122 +1,146 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://live2d/test/t.gd" type="Script" id=1]
-[ext_resource path="res://live2d/font.tres" type="DynamicFont" id=2]
-[ext_resource path="res://live2d/openlive2d.jpg" type="Texture" id=3]
-
-[sub_resource type="StyleBoxFlat" id=1]
-corner_radius_bottom_left = 20
+[ext_resource path="res://live2d/control/Key.tscn" type="PackedScene" id=2]
+[ext_resource path="res://live2d/test/TimeLine.gd" type="Script" id=4]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
 
-[node name="ColorRect2" type="ColorRect" parent="."]
-margin_left = 732.783
-margin_top = 101.702
-margin_right = 951.783
-margin_bottom = 469.702
-
-[node name="TabContainer" type="TabContainer" parent="."]
-margin_left = 41.0
-margin_top = 36.0
-margin_right = 402.0
-margin_bottom = 421.0
-custom_styles/panel = SubResource( 1 )
-custom_constants/hseparation = 20
-custom_constants/label_valign_bg = 20
-custom_constants/top_margin = 300
+[node name="Clip" type="ColorRect" parent="."]
+margin_left = 101.093
+margin_top = 258.015
+margin_right = 386.093
+margin_bottom = 272.015
+mouse_filter = 2
+color = Color( 0.368627, 0.34902, 0.34902, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Panel" type="Panel" parent="TabContainer"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 24.0
-
-[node name="Panel2" type="Panel" parent="TabContainer"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 24.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Panel2"]
-margin_right = 40.0
-margin_bottom = 40.0
-
-[node name="Button" type="Button" parent="TabContainer/Panel2/VBoxContainer"]
-margin_right = 40.0
-margin_bottom = 20.0
-
-[node name="Button2" type="Button" parent="TabContainer/Panel2/VBoxContainer"]
-margin_top = 24.0
-margin_right = 40.0
-margin_bottom = 44.0
-
-[node name="Button3" type="Button" parent="TabContainer/Panel2/VBoxContainer"]
-margin_top = 48.0
-margin_right = 40.0
-margin_bottom = 68.0
-
-[node name="Panel3" type="Panel" parent="TabContainer"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 24.0
-
-[node name="HSplitContainer" type="HSplitContainer" parent="."]
-margin_left = 520.783
-margin_top = 101.702
-margin_right = 951.783
-margin_bottom = 469.702
-split_offset = 200
+[node name="Clip2" type="ColorRect" parent="."]
+margin_left = 105.392
+margin_top = 207.893
+margin_right = 390.392
+margin_bottom = 221.893
+mouse_filter = 2
+color = Color( 0.368627, 0.34902, 0.34902, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect" type="ColorRect" parent="HSplitContainer"]
-margin_right = 200.0
-margin_bottom = 368.0
+[node name="Key" parent="." instance=ExtResource( 2 )]
 
-[node name="Panel" type="PanelContainer" parent="HSplitContainer"]
-margin_left = 212.0
-margin_right = 431.0
-margin_bottom = 368.0
-__meta__ = {
-"_editor_description_": "锚点学习"
-}
+[node name="Key2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 180.861, 263.529 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer/Panel"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 212.0
-margin_bottom = 361.0
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 111.0
+margin_top = 205.0
+margin_right = 385.0
+margin_bottom = 219.0
+custom_constants/separation = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="HSplitContainer/Panel/VBoxContainer"]
-margin_right = 205.0
-margin_bottom = 23.0
-custom_fonts/font = ExtResource( 2 )
-text = "闪动打算"
+[node name="Label" type="Label" parent="HBoxContainer"]
+margin_right = 8.0
+margin_bottom = 14.0
+text = "0"
+
+[node name="Label2" type="Label" parent="HBoxContainer"]
+margin_left = 8.0
+margin_right = 16.0
+margin_bottom = 14.0
+text = "1"
+
+[node name="Label3" type="Label" parent="HBoxContainer"]
+margin_left = 16.0
+margin_right = 24.0
+margin_bottom = 14.0
+text = "2"
+
+[node name="Label4" type="Label" parent="HBoxContainer"]
+margin_left = 24.0
+margin_right = 32.0
+margin_bottom = 14.0
+text = "3"
+
+[node name="Label5" type="Label" parent="HBoxContainer"]
+margin_left = 32.0
+margin_right = 40.0
+margin_bottom = 14.0
+text = "4"
+
+[node name="Label6" type="Label" parent="HBoxContainer"]
+margin_left = 40.0
+margin_right = 48.0
+margin_bottom = 14.0
+text = "4"
+
+[node name="Label7" type="Label" parent="HBoxContainer"]
+margin_left = 48.0
+margin_right = 56.0
+margin_bottom = 14.0
+text = "4"
+
+[node name="Label8" type="Label" parent="HBoxContainer"]
+margin_left = 56.0
+margin_right = 64.0
+margin_bottom = 14.0
+text = "4"
+
+[node name="Label9" type="Label" parent="HBoxContainer"]
+margin_left = 64.0
+margin_right = 72.0
+margin_bottom = 14.0
+text = "4"
+
+[node name="Label10" type="Label" parent="HBoxContainer"]
+margin_left = 72.0
+margin_right = 80.0
+margin_bottom = 14.0
+text = "4"
+
+[node name="TimeLine" type="Line2D" parent="."]
+position = Vector2( 94, 248 )
+points = PoolVector2Array( 20, -42, 20, 75 )
+width = 2.0
+default_color = Color( 0, 0, 0, 1 )
+script = ExtResource( 4 )
+
+[node name="play" type="Button" parent="."]
+margin_left = 459.356
+margin_top = 215.74
+margin_right = 507.356
+margin_bottom = 235.74
+text = "play"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label3" type="Label" parent="HSplitContainer/Panel/VBoxContainer"]
-margin_top = 27.0
-margin_right = 205.0
-margin_bottom = 50.0
-custom_fonts/font = ExtResource( 2 )
-text = "闪动打算"
+[node name="scale_min" type="Button" parent="."]
+margin_left = 453.182
+margin_top = 277.476
+margin_right = 501.182
+margin_bottom = 297.476
+text = "scale-"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="openlive2d" type="Sprite" parent="."]
-position = Vector2( 105.778, 426.027 )
-texture = ExtResource( 3 )
+[node name="scale_add" type="Button" parent="."]
+margin_left = 390.325
+margin_top = 277.476
+margin_right = 443.325
+margin_bottom = 297.476
+text = "scale+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-position = Vector2( 230.629, 350.659 )
-texture = ExtResource( 3 )
-polygon = PoolVector2Array( 138.771, 140.36, 0, 200, 0, 0, 122.392, 20.6675 )
-uv = PoolVector2Array( 200, 200, 0, 200, 0, 0, 200, 0 )
+[connection signal="gui_input" from="HBoxContainer" to="TimeLine" method="_on_HBoxContainer_gui_input"]
+[connection signal="pressed" from="play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="scale_min" to="." method="_on_scale_min_pressed"]
+[connection signal="pressed" from="scale_add" to="." method="_on_scale_add_pressed"]
