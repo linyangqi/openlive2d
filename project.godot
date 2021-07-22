@@ -87,7 +87,7 @@ _global_script_class_icons={
 [application]
 
 config/name="OpenLive2d editor"
-run/main_scene="res://live2d/start.tscn"
+run/main_scene="res://live2d/scene/Live2dEditor.tscn"
 boot_splash/image="res://live2d/live2d.png"
 config/icon="res://live2d/img/openlive2d.png"
 

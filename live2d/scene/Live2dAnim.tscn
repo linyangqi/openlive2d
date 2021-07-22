@@ -16,23 +16,22 @@
 [ext_resource path="res://live2d/img/菱形关键帧.png" type="Texture" id=14]
 [ext_resource path="res://live2d/class/editor/AnimationTrackEditor.gd" type="Script" id=15]
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.509804, 0.486275, 0.486275, 0.858824 )
 
-[sub_resource type="Animation" id=1]
-resource_name = "新建动画"
+[sub_resource type="Animation" id=2]
 length = 30.047
 tracks/0/type = "value"
-tracks/0/path = NodePath("animEditor/root_vbox/control_bar/play:expand_icon")
+tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray(  ),
-"transitions": PoolRealArray(  ),
-"update": 1,
-"values": [  ]
+"times": PoolRealArray( 1.17193 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
 }
 
 [node name="Node2D" type="Node2D"]
@@ -44,7 +43,7 @@ margin_top = 204.245
 margin_right = 1073.63
 margin_bottom = 504.245
 rect_min_size = Vector2( 300, 300 )
-custom_styles/panel = SubResource( 2 )
+custom_styles/panel = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -109,7 +108,7 @@ __meta__ = {
 
 [node name="LineEdit" type="LineEdit" parent="tracks/time"]
 margin_right = 80.0
-margin_bottom = 40.0
+margin_bottom = 39.0
 rect_min_size = Vector2( 80, 0 )
 custom_fonts/font = ExtResource( 1 )
 placeholder_text = "动画时长"
@@ -121,7 +120,7 @@ __meta__ = {
 [node name="loop_button" type="Button" parent="tracks/time"]
 margin_left = 84.0
 margin_right = 112.0
-margin_bottom = 40.0
+margin_bottom = 39.0
 toggle_mode = true
 icon = ExtResource( 8 )
 
@@ -434,8 +433,8 @@ margin_bottom = 16.0
 rect_min_size = Vector2( 200, 0 )
 
 [node name="PopupMenu" type="PopupMenu" parent="animEditor"]
-anchor_left = 0.129191
-anchor_top = 0.82
+anchor_left = -0.0187377
+anchor_top = 0.72
 anchor_right = -0.0187377
 anchor_bottom = 0.72
 margin_top = -112.0
@@ -621,7 +620,7 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-"anims/新建动画" = SubResource( 1 )
+"anims/新建动画" = SubResource( 2 )
 
 [node name="Control" type="Control" parent="."]
 margin_right = 40.0

@@ -6,6 +6,9 @@
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": "动画编辑器测试场景"
+}
 
 [node name="Clip" type="ColorRect" parent="."]
 margin_left = 101.093
@@ -30,6 +33,7 @@ __meta__ = {
 }
 
 [node name="Key" parent="." instance=ExtResource( 2 )]
+position = Vector2( 113.817, 262.528 )
 
 [node name="Key2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 180.861, 263.529 )
@@ -130,6 +134,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="reg" type="Button" parent="."]
+margin_left = 396.829
+margin_top = 304.462
+margin_right = 446.829
+margin_bottom = 324.462
+text = "reg"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="scale_add" type="Button" parent="."]
 margin_left = 390.325
 margin_top = 277.476
@@ -143,4 +157,5 @@ __meta__ = {
 [connection signal="gui_input" from="HBoxContainer" to="TimeLine" method="_on_HBoxContainer_gui_input"]
 [connection signal="pressed" from="play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="scale_min" to="." method="_on_scale_min_pressed"]
+[connection signal="pressed" from="reg" to="." method="_on_reg_pressed"]
 [connection signal="pressed" from="scale_add" to="." method="_on_scale_add_pressed"]
